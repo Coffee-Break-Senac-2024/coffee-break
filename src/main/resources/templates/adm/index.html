@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet"
+          href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"
+          type="text/css" >
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!--MENU LATERAL-->
+            <div class="col-12 col-sm-2  bg-light">
+                <div class="col-ms-2 text-center p-3">
+                    <img th:src="@{/images/logocoffeebreak.png}"
+                         alt="Logo coffee break"
+                         title="Logo coffee break"
+                         width="150px">
+                </div>
+                <hr>
+                <nav class="nav nav-pills flex-column mb-auto">
+                    <ul class="list-unstyled">
+                        <li class="pb-2">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseHome"
+                                        aria-expanded="false"
+                                        aria-controls="collapseHome">
+                                    Pedidos
+                                    <span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="collapse" id="collapseHome">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Pedidos</li>
+                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar novo pedido</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="pb-2">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFuncionarios"
+                                        aria-expanded="false"
+                                        aria-controls="collapseFuncionarios">
+                                    Funcionários
+                                    <span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="collapse" id="collapseFuncionarios">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Funcionários</li>
+                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar Funcionário</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="pb-2">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseProdutos"
+                                        aria-expanded="false"
+                                        aria-controls="collapseProdutos">
+                                    Produtos
+                                    <span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="collapse" id="collapseProdutos">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Produtos</li>
+                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar Produto</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="pb-2">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseEstoque"
+                                        aria-expanded="false"
+                                        aria-controls="collapseEstoque">
+                                    Estoque
+                                    <span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div class="collapse" id="collapseEstoque">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-start btn btn-light m-1">Listar Produtos</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- CONTEÚDO PRINCIPAL-->
+            <div class="col-12 col-sm-10">
+                <main class="bg-white  p-3">
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                <ol class="breadcrumb mt-2">
+                                    <li class="breadcrumb-item">Pedidos</li>
+                                    <li class="breadcrumb-item" aria-current="page">Lista de Pedidos</li>
+                                </ol>
+                            </nav>
+
+                            <div>
+                                <img th:src="@{/images/user_default.png}"
+                                     alt="Imagem do usuário"
+                                     title="Imagem do usuário"
+                                     width="60px">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span>
+                                    </p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span></p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span></p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span></p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span></p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Café Latte</h5>
+                                    <p class="card-text">Quantidade: 1</p>
+                                    <p class="card-text">Valor: R$ 7,00</p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark">
+                                            Em preparo
+                                        </span>
+                                    </p>
+                                    <p class="card-text">Cliente: Ciclano de Tal</p>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#detalhesPedidoModal">
+                                        Detalhes do Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <!-- RODAPÉ -->
+                <div class="p-3">
+                    <div class="card p-3">
+                        <div class="row">
+                            <div class="col text-start p-0">
+                                <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script>
+                                    Coffee Break. Todos os Direitos Reservados</p>
+                            </div>
+                            <div class="col text-end p-0">
+                                <p>Portal Coffee Break</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js" type="javascript"></script>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>
