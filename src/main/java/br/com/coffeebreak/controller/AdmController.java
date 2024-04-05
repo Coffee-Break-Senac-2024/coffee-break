@@ -11,4 +11,9 @@ public class AdmController {
     public String index(){
         return "/adm/index";
     }
+
+    @RequestMapping("/sobre")
+    public String sobre(){
+        return "/coffeebreak/sobre";
+    }
 }

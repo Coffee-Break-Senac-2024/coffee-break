@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Coffee Break</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/sobre/sobre.css}">
+    <link rel="stylesheet" th:href="@{/css/sobre/responsiveness.css}">
+</head>
+<body>
+<header>
+    <nav class="container header_menu">
+        <div class="header_menu_soon">
+            <a href="#">
+                <img th:src="@{/images/logocoffeebreak.png}"
+                     alt="logo Coffee Break"
+                     title="logo Coffee Break">
+            </a>
+        </div>
+        <div class="header_menu_list">
+            <ul class="header_menu_list_ul">
+                <li class="header_menu_list_ul_item"><a href="#">Cardápio</a></li>
+                <li class="header_menu_list_ul_item"><a href="#">Pedidos</a></li>
+                <li class="header_menu_list_ul_item"><a href="#">Sobre</a></li>
+                <li class="header_menu_list_ul_item">
+                    <a href="#">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+                <li class="header_menu_list_ul_item">
+                    <a href="#">
+                    <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="main_about">
+        <div class="main_about_history">
+            <h2>Coffee Break</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the 1500s, when an
+                printer took a galley of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+        <div class="main_about_img">
+            <img th:src="@{/images/sobre/coffeefeliz.png}"
+                 alt="Xícara com demostrando um rosto feliz"
+                 title="Xícara com demostrando um rosto feliz">
+        </div>
+    </section>
+
+    <section class="main_info">
+        <div class="main_info_img">
+            <img th:src="@{/images/sobre/sensacoes.png}"
+                 alt="4 xícaras contendo café"
+                 title="4 xícaras contendo café">
+        </div>
+        <div class="main_info_description">
+            <h2>Coffee Break - Informações</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the 1500s, when an
+                printer took a galley of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+    </section>
+
+    <section  class="main_passions">
+        <div class="main_passions_info">
+            <h2>Coffee Break - Paixôes</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the 1500s, when an
+                printer took a galley of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+        <div class="main_passions_img">
+            <img th:src="@{/images/sobre/coffeepaixoes.png}"
+                 alt="Desenho de um coração com grãos de café"
+                 title="Desenho de um coração com grãos de café">
+        </div>
+    </section>
+</main>
+
+<footer class="container">
+    <div class="footer_content">
+        <div class="footer_content_soon">
+            <img th:src="@{/images/logocoffeebreakwhite.png}"
+                 alt="logo Coffee Break"
+                 title="logo Coffee Break">
+        </div>
+        <div class="footer_content_info">
+            <p>Copyright &copy;
+             <script>document.write(new Date().getFullYear())</script>
+              Coffee Break. Todos Os Direitos Reservados</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://kit.fontawesome.com/f6b0e6c728.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

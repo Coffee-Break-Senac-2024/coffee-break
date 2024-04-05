@@ -1,0 +1,90 @@
+@media screen and (max-width: 950px) {
+    /* PASSIONS */
+
+    .main_passions h2 {
+        font-size: 1.8em;
+    }
+
+    .main_passions p {
+        font-size: 1.2em;
+    }
+
+    .main_passions_img img {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main_about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5px;
+    }
+
+    .main_about_history h2 {
+        font-size: 1.8em;
+    }
+
+    .main_about_history p {
+        font-size: 1.2em;
+    }
+
+    .main_about_img img {
+        max-width: 200px;
+        margin-top: 20px;
+    }
+
+    /* INFO */
+
+    .main_info_img img {
+        max-width: 300px;
+    }
+    .main_info_description h2 {
+        font-size: 1.6em;
+    }
+
+    .main_info_description p {
+        font-size: 1.2em;
+    }
+
+    /* PASSIONS */
+
+    .main_passions {
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+    }
+
+    .main_passions h2 {
+        font-size: 1.8em;
+    }
+
+    .main_passions p {
+        font-size: 1.2em;
+    }
+
+    .main_passions_img img {
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    /* INFO */
+    .main_info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main_info_img img {
+        max-width: 350px;
+        height: auto;
+    }
+    .main_info_description h2 {
+        font-size: 1.6em;
+    }
+
+    .main_info_description p {
+        font-size: 1.2em;
+    }
+}
