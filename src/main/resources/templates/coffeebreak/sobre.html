@@ -5,38 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Coffee Break</title>
     <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
     <link rel="stylesheet" th:href="@{/css/sobre/sobre.css}">
     <link rel="stylesheet" th:href="@{/css/sobre/responsiveness.css}">
 </head>
 <body>
-<header>
-    <nav class="container header_menu">
-        <div class="header_menu_soon">
-            <a href="#">
-                <img th:src="@{/images/logocoffeebreak.png}"
-                     alt="logo Coffee Break"
-                     title="logo Coffee Break">
-            </a>
-        </div>
-        <div class="header_menu_list">
-            <ul class="header_menu_list_ul">
-                <li class="header_menu_list_ul_item"><a href="#">Cardápio</a></li>
-                <li class="header_menu_list_ul_item"><a href="#">Pedidos</a></li>
-                <li class="header_menu_list_ul_item"><a href="#">Sobre</a></li>
-                <li class="header_menu_list_ul_item">
-                    <a href="#">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                </li>
-                <li class="header_menu_list_ul_item">
-                    <a href="#">
-                    <i class="fa-solid fa-user"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+
+<div th:replace="~{layout/coffeebreak/header :: header}"></div>
 
 <main class="container">
     <section class="main_about">
@@ -94,20 +69,7 @@
     </section>
 </main>
 
-<footer class="container">
-    <div class="footer_content">
-        <div class="footer_content_soon">
-            <img th:src="@{/images/logocoffeebreakwhite.png}"
-                 alt="logo Coffee Break"
-                 title="logo Coffee Break">
-        </div>
-        <div class="footer_content_info">
-            <p>Copyright &copy;
-             <script>document.write(new Date().getFullYear())</script>
-              Coffee Break. Todos Os Direitos Reservados</p>
-        </div>
-    </div>
-</footer>
+<div th:replace="~{layout/coffeebreak/footer :: footer}"></div>
 
 <script src="https://kit.fontawesome.com/f6b0e6c728.js"
         crossorigin="anonymous"></script>

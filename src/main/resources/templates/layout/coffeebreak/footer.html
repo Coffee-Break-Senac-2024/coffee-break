@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<footer th:fragment="footer" class="container">
+    <div class="footer_content">
+        <div class="footer_content_soon">
+            <img th:src="@{/images/logocoffeebreakwhite.png}"
+                 alt="logo Coffee Break"
+                 title="logo Coffee Break">
+        </div>
+        <div class="footer_content_info">
+            <p>Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script>
+                Coffee Break. Todos Os Direitos Reservados</p>
+        </div>
+    </div>
+</footer>

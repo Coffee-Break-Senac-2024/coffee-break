@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<header th:fragment="header">
+    <nav class="container header_menu">
+        <div class="header_menu_soon">
+            <a href="#">
+                <img th:src="@{/images/logocoffeebreak.png}"
+                     alt="logo Coffee Break"
+                     title="logo Coffee Break">
+            </a>
+        </div>
+        <div class="header_menu_list">
+            <ul class="header_menu_list_ul">
+                <li class="header_menu_list_ul_item"><a href="#">Cardápio</a></li>
+                <li class="header_menu_list_ul_item"><a href="#">Pedidos</a></li>
+                <li class="header_menu_list_ul_item"><a href="#">Sobre</a></li>
+                <li class="header_menu_list_ul_item">
+                    <a href="#">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+                <li class="header_menu_list_ul_item">
+                    <a href="#">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
