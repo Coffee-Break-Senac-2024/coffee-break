@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/home/home.css}">
+    <title>Coffee Break</title>
+</head>
+<body>
+    <div th:replace="~{ layout/coffeebreak/header :: header }"></div>
+    
+    <main>
+        <section class="main_welcome">
+            <div class="main_welcome_content">
+                <h2>Descubra o <span class="main_welcome_content_item">Sabor</span> Café</h2>
+                <p>Desfrute dos seus maiores <br> <span class="main_welcome_content_item">desejos</span>
+                    em cada <br>
+                    aroma e gole.</p>
+            </div>
+        </section>
+
+        <section class="main_products_news">
+            <h2>Novidades</h2>
+            <div class="main_products_news_content">
+
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="main_products_news">
+            <h2>Cafés Tradicionais</h2>
+            <div class="main_products_news_content">
+
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+                <article class="product_item">
+                    <header>
+                        <h3>Mocha</h3>
+                    </header>
+
+                    <div class="product_item_content">
+
+                        <div class="product_item_content_img">
+                            <img th:src="@{/images/home/prod-01.png}">
+                        </div>
+
+                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
+
+                        <div class="product_item_content_price">
+                            <p>380ml</p>
+                            <p class="product_item_content_price_item">R$ 12,00</p>
+                        </div>
+
+                        <div class="product_item_content_buttons">
+                            <button class="product_item_content_buttons_decrement">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <p class="product_item_content_buttons_quantity">1</p>
+                            <button class="product_item_content_buttons_increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="product_item_content_buttons_add">Adicionar</button>
+                        </div>
+                        <script src="https://kit.fontawesome.com/f6b0e6c728.js"
+                                crossorigin="anonymous"></script>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+    
+    <div th:replace="~{ layout/coffeebreak/footer :: footer }"></div>
+</body>
+</html>

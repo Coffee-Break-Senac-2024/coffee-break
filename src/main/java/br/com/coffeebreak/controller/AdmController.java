@@ -16,4 +16,9 @@ public class AdmController {
     public String sobre(){
         return "/coffeebreak/sobre";
     }
+
+    @RequestMapping("/home")
+    public String home(){
+        return "/coffeebreak/home";
+    }
 }

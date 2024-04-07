@@ -1,33 +1,41 @@
+/* DEFAULT */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root{
+    --primary:#7A5955;
+    --secondary:#FFF ;
+}
+
 /* HEADER */
 
 .header_menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .header_menu_soon img {
-    max-width: 120px;
-    padding: 5px;
+    max-width: 90px;
+    padding: 10px;
 }
 
 .header_menu_list_ul {
     display: flex;
     justify-content: space-between;
     list-style: none;
+    padding: 10px;
 }
 
 .header_menu_list_ul_item  a {
     margin: 10px;
     text-decoration: none;
-    color: var(--text);
+    color: var(--primary);
     font-size: 1.4em;
 }
 
 .header_menu_list_ul_item  a:hover {
-    color: var(--text-secondary);
-    background-color: var(--text);
+    color: var(--secondary);
+    background-color: var(--primary);
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -46,8 +54,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--text);
-    color: var(--text-secondary);
+    background-color: var(--primary);
+    color: var(--secondary);
 }
 
 .footer_content_soon img {

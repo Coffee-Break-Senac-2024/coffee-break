@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
 /* DEFAULT */
-:root {
-    --text:#422217;
-    --text-secondary:#fff;
+:root{
+    --text:#7A5955;
+    --text-secondary:#FFF ;
 }
+
 
 h2 {
     font-family: "Playfair Display", serif;
@@ -26,9 +25,10 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     margin: 10px;
+    margin-bottom: 100px;
 }
 .main_about_history {
-   padding-right: 50px;
+   flex-basis: 50%;
 }
 .main_about_history h2 {
     font-size: 3em;
@@ -36,8 +36,13 @@ body {
     margin-bottom: 10px;
 }
 
+.main_about {
+    flex-basis: 50%;
+}
+
 .main_about_img img {
     max-width: 450px;
+    margin-right: 10px;
 }
 
 /* INFO */
@@ -48,9 +53,8 @@ body {
     align-items: center;
     background: var(--text);
     color: var(--text-secondary);
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding: 40px 0;
+    margin: 80px 0;
+    padding: 80px 0;
 }
 .main_info_img img {
     max-width: 450px;
@@ -75,6 +79,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 10px;
+    padding: 80px 0;
 }
 
 .main_passions_info {
