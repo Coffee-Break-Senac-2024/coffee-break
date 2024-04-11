@@ -1,11 +1,21 @@
 /* WELCOME */
 
+
 .main_welcome {
-    background-image: url("/images/home/fundoiniciohome.jpeg");
-    height: 80vh;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: right;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    background-color: #7A5955;
+    padding: 20px 0;
+    color:#FFF
+}
+
+.main_welcome .main_welcome_content {
+    flex-basis: 40%;
+}
+
+.main_welcome .main_welcome_content_img {
+    align-items: center;
 }
 
 .main_welcome_content {
@@ -14,10 +24,10 @@
 }
 
 .main_welcome_content h2 {
-    font-size: 3em;
-    margin-top: 50px;
+    font-size: 3.8em;
     font-family: "Playfair Display", serif;
     font-weight: 600;
+    margin-bottom: revert;
 }
 
 .main_welcome_content p {

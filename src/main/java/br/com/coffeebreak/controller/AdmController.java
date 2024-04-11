@@ -4,10 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/adm")
+@RequestMapping("/")
 public class AdmController {
 
     @RequestMapping
+    public String home(){
+        return "/coffeebreak/home";
+    }
+
+    @RequestMapping("/adm")
     public String index(){
         return "/adm/index";
     }
@@ -17,8 +22,4 @@ public class AdmController {
         return "/coffeebreak/sobre";
     }
 
-    @RequestMapping("/home")
-    public String home(){
-        return "/coffeebreak/home";
-    }
 }
