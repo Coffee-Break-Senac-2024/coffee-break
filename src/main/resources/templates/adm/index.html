@@ -5,113 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="stylesheet"
-          href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"
+          th:href="@{webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!--MENU LATERAL-->
-            <div class="col-12 col-sm-2  bg-light">
-                <div class="col-ms-2 text-center p-3">
-                    <img th:src="@{/images/logocoffeebreak.png}"
-                         alt="Logo coffee break"
-                         title="Logo coffee break"
-                         width="150px">
-                </div>
-                <hr>
-                <nav class="nav nav-pills flex-column mb-auto">
-                    <ul class="list-unstyled">
-                        <li class="pb-2">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseHome"
-                                        aria-expanded="false"
-                                        aria-controls="collapseHome">
-                                    Pedidos
-                                    <span>
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="collapse" id="collapseHome">
-                                <ul class="list-group">
-                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Pedidos</li>
-                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar novo pedido</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="pb-2">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFuncionarios"
-                                        aria-expanded="false"
-                                        aria-controls="collapseFuncionarios">
-                                    Funcionários
-                                    <span>
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="collapse" id="collapseFuncionarios">
-                                <ul class="list-group">
-                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Funcionários</li>
-                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar Funcionário</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="pb-2">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseProdutos"
-                                        aria-expanded="false"
-                                        aria-controls="collapseProdutos">
-                                    Produtos
-                                    <span>
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="collapse" id="collapseProdutos">
-                                <ul class="list-group">
-                                    <li class="list-group-item text-start btn btn-light m-1">Lista de Produtos</li>
-                                    <li class="list-group-item text-start btn btn-light m-1">Cadastrar Produto</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="pb-2">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary d-flex justify-content-between align-items-center"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseEstoque"
-                                        aria-expanded="false"
-                                        aria-controls="collapseEstoque">
-                                    Estoque
-                                    <span>
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                    </span>
-                                </button>
-                            </div>
-
-                            <div class="collapse" id="collapseEstoque">
-                                <ul class="list-group">
-                                    <li class="list-group-item text-start btn btn-light m-1">Listar Produtos</li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <div th:replace="~{layout/adm/menu :: menu }"></div>
             <!-- CONTEÚDO PRINCIPAL-->
             <div class="col-12 col-sm-10">
                 <main class="bg-white  p-3">
@@ -276,7 +176,7 @@
         </div>
     </div>
 
-<script th:src="webjars/bootstrap/5.3.3/js/bootstrap.min.js" type="javascript"></script>
+<script th:src="@{webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
 <script src="https://kit.fontawesome.com/f6b0e6c728.js"
         crossorigin="anonymous"></script>
 </body>
