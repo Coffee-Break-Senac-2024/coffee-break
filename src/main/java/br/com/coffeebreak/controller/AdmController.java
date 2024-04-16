@@ -27,4 +27,7 @@ public class AdmController {
     public String login() {
         return "/coffeebreak/login";
     }
+
+    @GetMapping("/create")
+    public String create() {return "/coffeebreak/cadastro";}
 }
