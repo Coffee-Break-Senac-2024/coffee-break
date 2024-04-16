@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class AdmController {
-    
+
     @RequestMapping("/adm")
     public String index(){
         return "/adm/index";
