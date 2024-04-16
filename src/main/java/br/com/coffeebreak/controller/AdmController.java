@@ -5,10 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/adm")
+@RequestMapping("/")
 public class AdmController {
 
     @RequestMapping
+    public String home(){
+        return "/coffeebreak/home";
+    }
+
+    @RequestMapping("/adm")
     public String index(){
         return "/adm/index";
     }
@@ -18,6 +23,7 @@ public class AdmController {
         return "/coffeebreak/sobre";
     }
 
+<<<<<<< HEAD
     @RequestMapping("/home")
     public String home(){
         return "/coffeebreak/home";
@@ -30,4 +36,6 @@ public class AdmController {
 
     @GetMapping("/create")
     public String create() {return "/coffeebreak/cadastro";}
+=======
+>>>>>>> f9671a6c01909ff0f4af3d70cc5a98c26206b169
 }
