@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link th:href="@{/css/cadastro/cadastro.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
+
+            <div>
+
+            <form>
+                <span class="span-title">Nome</span>
+                <input placeholder="Nome" class="input-group"/>
+                <span class="span-title">Celular</span>
+                <input placeholder="Celular" class="input-group"/>
+                <span class="span-title">Endereço</span>
+                <input placeholder="Endereço" class="input-group"/>
+
+                <span class="span-title">CPF</span>
+                <input placeholder="CPF" class="input-group"/>
+                <button>Cadastre-se</button>
+            </form>
+            </div>
+        </div>
+        <div class="img-container">
+            <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break"/>
+        </div>
+    </div>
+
+</body>
+</html>
