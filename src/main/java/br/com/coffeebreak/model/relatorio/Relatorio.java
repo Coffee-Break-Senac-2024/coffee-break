@@ -1,36 +1,28 @@
-package br.com.coffeebreak.model.produto;
+package br.com.coffeebreak.model.relatorio;
 
-import br.com.coffeebreak.model.estoque.Estoque;
+import br.com.coffeebreak.enums.TipoFuncionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "produto")
-public class Produto {
+@Entity(name = "relatorio")
+public class Relatorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     @Column(nullable = false)
     private String nome;
-
     @Column(nullable = false)
-    private Integer quantidadeUtilizada;
-
+    private TipoFuncionario tipoFuncionario;
     @Column(nullable = false)
     private Double preco;
-
-    @OneToMany
-    @JoinColumn(name = "id_produto")
-    private List<Estoque> estoqueList;
-
+    @Column(nullable = false)
+    private Integer qtdPedidosRealizados;
 }
