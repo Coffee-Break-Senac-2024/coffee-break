@@ -51,7 +51,7 @@ body {
     background: none;
     border: 1px solid #7A5955;
     padding: 0px 16px 0px 16px;
-
+    outline: none;
 }
 
 .input-group::placeholder {
