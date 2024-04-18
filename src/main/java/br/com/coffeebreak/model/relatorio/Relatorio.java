@@ -1,6 +1,7 @@
 package br.com.coffeebreak.model.relatorio;
 
 import br.com.coffeebreak.enums.TipoFuncionario;
+import br.com.coffeebreak.enums.TipoRelatorio;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class Relatorio {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
-    private TipoFuncionario tipoFuncionario;
+    private TipoRelatorio tipoRelatorio;
     @Column(nullable = false)
     private Double preco;
     @Column(nullable = false)

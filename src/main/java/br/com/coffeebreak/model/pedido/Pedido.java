@@ -1,7 +1,8 @@
 package br.com.coffeebreak.model.pedido;
 
 import br.com.coffeebreak.enums.TipoPedido;
-import br.com.coffeebreak.model.ItemProduto;
+import br.com.coffeebreak.model.ItemProduto.ItemProduto;
+import br.com.coffeebreak.model.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,10 @@ public class Pedido {
     private String situacao;
 
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemProduto> itemProdutos;

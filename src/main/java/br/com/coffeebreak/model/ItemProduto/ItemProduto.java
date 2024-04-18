@@ -1,4 +1,4 @@
-package br.com.coffeebreak.model;
+package br.com.coffeebreak.model.ItemProduto;
 
 import br.com.coffeebreak.model.cliente.Cliente;
 import br.com.coffeebreak.model.pedido.Pedido;
