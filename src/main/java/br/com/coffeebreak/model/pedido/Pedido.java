@@ -20,7 +20,7 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
 
     private TipoPedido tipoPedido;
 
