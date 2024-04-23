@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee</title>
+    <title>Product - Create</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -63,6 +63,7 @@
                                        required>
                             </div>
 
+
                             <div class="mb-3">
                                 <label for="imagem" class="form-label">Imagem do Produto</label>
                                 <input type="file"
@@ -71,6 +72,19 @@
                                        name="imagem">
                             </div>
 
+                            <div class="mb-3">
+                                <label for="ingredientes" class="form-label">Tipo de Ingredientes</label>
+                                <select class="form-select"
+                                        id="ingredientes"
+                                        name="ingredientes"
+                                        required>
+                                    <option value="">Selecione o tipo</option>
+
+                                    <div th:each="ingrediente : ${ingredientes}">
+                                        <option th:text="${ingrediente}"></option>
+                                    </div>
+                                </select>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                             <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
