@@ -1,7 +1,7 @@
 <header th:fragment="header">
     <nav class="container header_menu">
         <div class="header_menu_soon">
-            <a href="#">
+            <a th:href="@{~/}">
                 <img th:src="@{/images/logocoffeebreak.png}"
                      alt="logo Coffee Break"
                      title="logo Coffee Break">
@@ -9,9 +9,9 @@
         </div>
         <div class="header_menu_list" id="header_menu_list">
             <ul class="header_menu_list_ul">
-                <li class="header_menu_list_ul_item"><a href="#">Cardápio</a></li>
-                <li class="header_menu_list_ul_item"><a href="#">Pedidos</a></li>
-                <li class="header_menu_list_ul_item"><a href="#">Sobre</a></li>
+                <li class="header_menu_list_ul_item"><a href="#cardapio">Cardápio</a></li>
+                <li class="header_menu_list_ul_item"><a th:href="@{~/Pedidos}">Pedidos</a></li>
+                <li class="header_menu_list_ul_item"><a th:href="@{~/sobre}">Sobre</a></li>
                 <li class="header_menu_list_ul_item">
                     <a href="#">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -34,8 +34,8 @@
             <div class="header_menu_mobile_list_nav" id="header_menu_mobile_list_ul">
                 <ul class="header_menu_mobile_list_ul">
                     <li class="header_menu_mobile_list_ul_item"><a href="#">Cardápio</a></li>
-                    <li class="header_menu_mobile_list_ul_item"><a href="#">Pedidos</a></li>
-                    <li class="header_menu_mobile_list_ul_item"><a href="#">Sobre</a></li>
+                    <li class="header_menu_mobile_list_ul_item"><a th:href="@{~/Pedidos}">Pedidos</a></li>
+                    <li class="header_menu_mobile_list_ul_item"><a th:href="@{~/sobre}">Sobre</a></li>
                     <li class="header_menu_mobile_list_ul_item">
                         <a href="#">
                             <i class="fa-solid fa-cart-shopping"></i>

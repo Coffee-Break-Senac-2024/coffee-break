@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
+          type="text/css" >
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{layout/adm/menu :: menu }"></div>
+        <!-- CONTEÚDO PRINCIPAL-->
+        <div class="col-12 col-sm-10">
+            <!-- CONTEÙDO -->
+            <main class="bg-white  p-3">
+                <div class="card p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-2">
+                                <li class="breadcrumb-item">Produtos</li>
+                                <li class="breadcrumb-item" aria-current="page">Cadastrar Produto</li>
+                            </ol>
+                        </nav>
+
+                        <div>
+                            <img th:src="@{/images/user_default.png}"
+                                 alt="Imagem do usuário"
+                                 title="Imagem do usuário"
+                                 width="60px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3">
+                    <div class="col-md-8">
+                        <form method="post" action="/cadastrar-produto" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="nome"
+                                       name="nome"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantidadeUtilizada" class="form-label">Quantidade Utilizada</label>
+                                <input type="number"
+                                       class="form-control"
+                                       id="quantidadeUtilizada"
+                                       name="quantidadeUtilizada"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="preco" class="form-label">Preço</label>
+                                <input type="number"
+                                       step="0.01"
+                                       class="form-control"
+                                       id="preco"
+                                       name="preco"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="imagem" class="form-label">Imagem do Produto</label>
+                                <input type="file"
+                                       class="form-control"
+                                       id="imagem"
+                                       name="imagem">
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+            </main>
+            <!-- RODAPÉ -->
+            <div th:replace="~{layout/adm/footer :: footer }"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

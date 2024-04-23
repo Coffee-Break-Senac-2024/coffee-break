@@ -61,17 +61,21 @@
                 </div>
                 <div class="collapse" id="collapseFuncionarios">
                     <ul class="list-group">
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                   m-1">
-                            Lista de Funcionários
+                                   m-1" th:href="@{/administrator/employees}">
+                                Listar funcionários
+                            </a>
                         </li>
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                   m-1">
-                            Cadastrar Funcionário
+                                   m-1" th:href="@{/administrator/employees/create}">
+                                Cadastrar funcionário
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -96,17 +100,21 @@
                 </div>
                 <div class="collapse" id="collapseProdutos">
                     <ul class="list-group">
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                    m-1">
-                            Lista de Produtos
+                                   m-1" th:href="@{/administrator/products}">
+                                Lista de Produtos
+                            </a>
                         </li>
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                   m-1">
-                            Cadastrar Produto
+                                   m-1" th:href="@{/administrator/products/create}">
+                                Cadastrar Produto
+                            </a>
                         </li>
                     </ul>
                 </div>
