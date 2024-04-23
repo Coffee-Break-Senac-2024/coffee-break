@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +23,12 @@ public class EmployeeController {
                 "Colaborado 1",
                 TipoFuncionario.ATENDENTE,
                 "colab1@gmail.com",
-                "teste"));
+                "teste", LocalDateTime.now(), LocalDateTime.now()));
         funcionarios.add(new Funcionario("2",
                 "Colaborado 2",
                 TipoFuncionario.GERENTE,
                 "colab2@gmail.com",
-                "teste"));
+                "teste", LocalDateTime.now(), LocalDateTime.now()));
 
         mv.addObject("funcionarios", funcionarios);
 

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -31,5 +32,10 @@ public class Funcionario {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private LocalDateTime entrada;
+
+
+    private LocalDateTime saida;
 
 }
