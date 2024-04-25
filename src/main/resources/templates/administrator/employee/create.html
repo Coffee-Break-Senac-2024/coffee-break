@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product - Create</title>
+    <title>Employee - Create</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -11,17 +11,18 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="~{layout/adm/menu :: menu }"></div>
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
         <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
             <main class="bg-white  p-3">
+
                 <div class="card p-3 mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb mt-2">
-                                <li class="breadcrumb-item">Produtos</li>
-                                <li class="breadcrumb-item" aria-current="page">Cadastrar Produto</li>
+                                <li class="breadcrumb-item">Funcionários</li>
+                                <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
                             </ol>
                         </nav>
 
@@ -35,8 +36,8 @@
                 </div>
 
                 <div class="card p-3">
-                    <div class="col-md-8">
-                        <form method="post" action="/cadastrar-produto" enctype="multipart/form-data">
+                    <div class="col-8">
+                        <form method="post" action="/administrator/employee/create">
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text"
@@ -46,54 +47,63 @@
                                        required>
                             </div>
                             <div class="mb-3">
-                                <label for="quantidadeUtilizada" class="form-label">Quantidade Utilizada</label>
-                                <input type="number"
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email"
                                        class="form-control"
-                                       id="quantidadeUtilizada"
-                                       name="quantidadeUtilizada"
+                                       id="email"
+                                       name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endereco" class="form-label">Endereço</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="endereco"
+                                       name="endereco">
+                            </div>
+                            <div class="mb-3">
+                                <label for="dataEntrada" class="form-label">Data de Entrada</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="dataEntrada"
+                                       name="dataEntrada"
                                        required>
                             </div>
                             <div class="mb-3">
-                                <label for="preco" class="form-label">Preço</label>
-                                <input type="number"
-                                       step="0.01"
+                                <label for="dataSaida" class="form-label">Data de Saída</label>
+                                <input type="date"
                                        class="form-control"
-                                       id="preco"
-                                       name="preco"
+                                       id="dataSaida"
+                                       name="dataSaida">
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password"
+                                       class="form-control"
+                                       id="senha"
+                                       name="senha"
                                        required>
                             </div>
-
-
                             <div class="mb-3">
-                                <label for="imagem" class="form-label">Imagem do Produto</label>
-                                <input type="file"
-                                       class="form-control"
-                                       id="imagem"
-                                       name="imagem">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="ingredientes" class="form-label">Tipo de Ingredientes</label>
+                                <label for="tipoFuncionario" class="form-label">Tipo de Funcionário</label>
                                 <select class="form-select"
-                                        id="ingredientes"
-                                        name="ingredientes"
-                                        required>
+                                        id="tipoFuncionario"
+                                        name="tipoFuncionario" required>
                                     <option value="">Selecione o tipo</option>
 
-                                    <div th:each="ingrediente : ${ingredientes}">
-                                        <option th:text="${ingrediente}"></option>
+                                    <div th:each="tipo : ${tipoFuncionarios}">
+                                        <option th:text="${tipo}"></option>
                                     </div>
                                 </select>
                             </div>
-
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
-                            <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
+                            <a class="btn btn-danger" href="/administrator/employee">Cancelar</a>
                         </form>
                     </div>
                 </div>
+
             </main>
             <!-- RODAPÉ -->
-            <div th:replace="~{layout/adm/footer :: footer }"></div>
+            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
 </div>

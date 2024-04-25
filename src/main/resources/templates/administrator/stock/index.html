@@ -11,7 +11,7 @@
 <body>
 <div class="container-fluid">
   <div class="row">
-    <div th:replace="~{layout/adm/menu :: menu }"></div>
+    <div th:replace="~{layout/administrator/menu :: menu }"></div>
     <!-- CONTEÚDO PRINCIPAL-->
     <div class="col-12 col-sm-10">
       <!-- CONTEÙDO -->
@@ -36,10 +36,16 @@
         </div>
 
         <div class="card p-3">
+
+          <div class="alert alert-success" th:if="${success}">
+            <p>Ingrediente excluído com sucesso.</p>
+          </div>
+
           <div class="col-8">
             <table class="table">
               <thead>
                 <tr>
+                  <th scope="col">id</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Quantidade</th>
                   <th scope="col">Ações</th>
@@ -47,15 +53,21 @@
               </thead>
               <tbody>
                 <tr th:each="ingrediente : ${ingredientes}">
+                  <td th:text="${ingrediente.id}">id</td>
                    <td th:text="${ingrediente.nome}">Nome do Produto</td>
                    <td th:text="${ingrediente.quantidade}">Quantidade</td>
                   <td>
-                    <a href="#" class="btn btn-primary">
-                      <i class="fa-solid fa-pen"></i>
-                    </a>
-                    <a href="#" class="btn btn-danger">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
+                    <div class="d-flex justify-content-around">
+                      <a href="#" class="btn btn-primary">
+                        <i class="fa-solid fa-pen"></i>
+                      </a>
+                      <form th:action="@{/administrator/stock/ingredientes/{id}(id=${ingrediente.id})}" method="post">
+                        <input type="hidden" name="id" th:value="${ingrediente.id}" />
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -64,7 +76,7 @@
         </div>
       </main>
       <!-- RODAPÉ -->
-      <div th:replace="~{layout/adm/footer :: footer }"></div>
+      <div th:replace="~{layout/administrator/footer :: footer }"></div>
     </div>
   </div>
 </div>

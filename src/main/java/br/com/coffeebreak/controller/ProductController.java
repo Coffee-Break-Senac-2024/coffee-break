@@ -15,7 +15,7 @@ public class ProductController {
 
     @GetMapping
     public ModelAndView index(){
-        ModelAndView mv = new ModelAndView("adm/product/index");
+        ModelAndView mv = new ModelAndView("administrator/product/index");
 
         List<Produto> produtos = new ArrayList<Produto>();
 
@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping("/create")
     public ModelAndView create(){
-        ModelAndView mv = new ModelAndView("adm/product/create");
+        ModelAndView mv = new ModelAndView("administrator/product/create");
         return mv;
     }
 }

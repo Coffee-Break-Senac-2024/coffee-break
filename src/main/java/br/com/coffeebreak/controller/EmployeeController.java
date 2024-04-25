@@ -17,7 +17,7 @@ public class EmployeeController {
 
     @GetMapping
     public ModelAndView index(){
-        ModelAndView mv = new ModelAndView("adm/employee/index");
+        ModelAndView mv = new ModelAndView("administrator/employee/index");
         List<Funcionario> funcionarios = new ArrayList<>();
         funcionarios.add(new Funcionario("1",
                 "Colaborado 1",
@@ -37,7 +37,7 @@ public class EmployeeController {
 
     @GetMapping("/create")
     public ModelAndView create(){
-        ModelAndView mv = new ModelAndView("adm/employee/create");
+        ModelAndView mv = new ModelAndView("administrator/employee/create");
         List<String> tiposFuncionarios = new ArrayList<>();
 
         tiposFuncionarios.add(String.valueOf(TipoFuncionario.ATENDENTE));
