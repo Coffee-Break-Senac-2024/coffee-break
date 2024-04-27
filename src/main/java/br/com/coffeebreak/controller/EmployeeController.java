@@ -23,12 +23,12 @@ public class EmployeeController {
                 "Colaborado 1",
                 TipoFuncionario.ATENDENTE,
                 "colab1@gmail.com",
-                "teste", LocalDateTime.now(), LocalDateTime.now()));
+                "teste", LocalDateTime.now(), LocalDateTime.now(), null));
         funcionarios.add(new Funcionario("2",
                 "Colaborado 2",
                 TipoFuncionario.GERENTE,
                 "colab2@gmail.com",
-                "teste", LocalDateTime.now(), LocalDateTime.now()));
+                "teste", LocalDateTime.now(), LocalDateTime.now(), null));
 
         mv.addObject("funcionarios", funcionarios);
 
