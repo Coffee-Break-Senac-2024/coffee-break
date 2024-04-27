@@ -34,9 +34,9 @@
                     </div>
                 </div>
 
-                <div class="card p-3">
+                <div class="card p-3 vh-100">
                     <div class="alert alert-danger" th:if="${error}">
-                        <p>Ocorreu um erro ao cadastrar o produto.</p>
+                        <p th:text="${error}"></p>
                     </div>
 
                     <div class="col-md-8">
