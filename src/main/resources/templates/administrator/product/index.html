@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employees</title>
+    <title>Products - List</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -11,7 +11,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="~{layout/adm/menu :: menu }"></div>
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
         <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
@@ -21,8 +21,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb mt-2">
-                                <li class="breadcrumb-item">Funcionários</li>
-                                <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
+                                <li class="breadcrumb-item">Produtos</li>
+                                <li class="breadcrumb-item" aria-current="page">Lista de  Produtos</li>
                             </ol>
                         </nav>
 
@@ -41,32 +41,32 @@
                             <thead>
                             <tr>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Tipo</th>
+                                <th scope="col">Quantidade Utilizada</th>
+                                <th scope="col">Preço</th>
                                 <th scope="col">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="funcionario : ${funcionarios}">
-                                    <td th:text="${funcionario.nome}">Nome do Funcionário</td>
-                                    <td th:text="${funcionario.email}">Email</td>
-                                    <td th:text="${funcionario.tipoFuncionario}">Tipo</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tr th:each="produto : ${produtos}">
+                                <td th:text="${produto.nome}">Nome do Produto</td>
+                                <td th:text="${produto.quantidadeUtilizada}">Quantidade Utilizada</td>
+                                <td th:text="${produto.preco}">Preço</td>
+                                <td>
+                                    <a href="#" class="btn btn-success">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </main>
             <!-- RODAPÉ -->
-            <div th:replace="~{layout/adm/footer :: footer }"></div>
+            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
 </div>

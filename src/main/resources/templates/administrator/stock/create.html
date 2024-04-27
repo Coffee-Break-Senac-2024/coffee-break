@@ -11,7 +11,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="~{layout/adm/menu :: menu }"></div>
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
         <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
@@ -34,24 +34,38 @@
                     </div>
                 </div>
 
-                <div class="card p-3">
+                <div class="card p-3 vh-100">
+                    <div class="alert alert-danger" th:if="${error}">
+                        <p th:text="${error}"></p>
+                    </div>
+
                     <div class="col-md-8">
-                        <form method="post" action="/administrator/stock/create">
+                        <form th:action="@{/administrator/stock/create}" th:object="${estoque}" method="post">
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome do Ingrediente</label>
                                 <input type="text"
                                        class="form-control"
                                        id="nome"
-                                       name="nome"
+                                       th:field="*{name}"
                                        placeholder="Nome do produto">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('name')}"
+                                      th:errors="*{name}">
+                                </span>
                             </div>
                             <div class="mb-3">
                                 <label for="quantidade" class="form-label">Quantidade</label>
                                 <input type="number"
                                        class="form-control"
                                        id="quantidade"
-                                       name="quantidade"
+                                       th:field="*{quantity}"
                                        placeholder="Quantidade">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('quantity')}"
+                                      th:errors="*{quantity}">
+                                </span>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -61,7 +75,7 @@
                 </div>
             </main>
             <!-- RODAPÉ -->
-            <div th:replace="~{layout/adm/footer :: footer }"></div>
+            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
 </div>
