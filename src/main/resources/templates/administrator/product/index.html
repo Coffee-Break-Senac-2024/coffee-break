@@ -35,6 +35,10 @@
                     </div>
                 </div>
 
+                <div class="alert alert-success" th:if="${success}">
+                    <p th:text="${success}"></p>
+                </div>
+
                 <div class="card p-3">
                     <div class="col-8">
                         <table class="table">
