@@ -28,7 +28,7 @@ public class Produto {
     @Column(nullable = false)
     private Double preco;
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name = "id_produto")
     private List<Estoque> estoqueList;
 

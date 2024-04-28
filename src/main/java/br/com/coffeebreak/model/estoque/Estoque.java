@@ -24,5 +24,7 @@ public class Estoque {
     @Column(nullable = false)
     private Integer quantidade;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_produto", insertable = false, updatable = false)
+    private Produto produto;
 }
