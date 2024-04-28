@@ -3,6 +3,7 @@ package br.com.coffeebreak.model.pedido;
 import br.com.coffeebreak.enums.TipoPedido;
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.cliente.Cliente;
+import br.com.coffeebreak.model.funcionario.Funcionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,4 +38,7 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido")
     private List<ItemProduto> itemProdutos;
 
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario")
+    private Funcionario funcionario;
 }

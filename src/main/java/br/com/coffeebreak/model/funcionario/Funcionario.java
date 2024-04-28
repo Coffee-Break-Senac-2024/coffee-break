@@ -1,6 +1,7 @@
 package br.com.coffeebreak.model.funcionario;
 
 import br.com.coffeebreak.enums.TipoFuncionario;
+import br.com.coffeebreak.model.pedido.Pedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -37,5 +39,8 @@ public class Funcionario {
 
 
     private LocalDateTime saida;
+
+    @OneToMany(mappedBy = "funcionario")
+    List<Pedido> pedidos;
 
 }
