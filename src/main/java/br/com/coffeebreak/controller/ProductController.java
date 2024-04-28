@@ -30,7 +30,6 @@ public class ProductController {
 
         List<Produto> produtos = this.produtoService.getAllProducts();
 
-
         mv.addObject("produtos", produtos);
         return mv;
     }
@@ -46,7 +45,7 @@ public class ProductController {
     @PostMapping("/create")
     public ModelAndView createProduct(@ModelAttribute("produto") Produto produto, @RequestParam(name = "ingredientes") List<String> ingredientes, RedirectAttributes redirectAttributes) {
 
-       produto.setEstoqueList(getIngredientsToBeUsed(ingredientes));
+       produto.setEstoqueList(this.produtoService.getIngredientsToBeUsed(ingredientes));
 
         if (this.produtoService.cadastrarProduto(produto)) {
             redirectAttributes.addFlashAttribute("success", "Produto cadastrado com sucesso!");
@@ -58,12 +57,20 @@ public class ProductController {
     }
 
 
-    private List<Estoque> getIngredientsToBeUsed(List<String> ingredientes) {
-        List<Estoque> list = new ArrayList<>();
-        for (String idEstoque : ingredientes) {
-            list.add(this.estoqueService.getIngredientById(idEstoque));
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteProduct(@PathVariable String id, RedirectAttributes redirectAttributes) {
+        boolean isDeleted = this.produtoService.excluirProduto(id);
+
+        if (isDeleted) {
+            redirectAttributes.addFlashAttribute("success", "Produto apagado com sucesso");
+            System.out.println("hello");
+            return new ModelAndView("redirect:/administrator/products");
         }
 
-        return list;
+        redirectAttributes.addFlashAttribute("error", "Não foi possível deletar este produto.");
+        return new ModelAndView("redirect:/administrator/products");
     }
+
+
+
 }
