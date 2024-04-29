@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Coffee Break</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/pedidos/pedidos.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+</head>
+<body>
+
+<div th:replace="~{layout/coffeebreak/header :: header}"></div>
+
+<main class="container1">
+    <div class="buttons-container">
+        <a class="button button-active" th:href="@{/pedidos}">Pedidos</a>
+    	<a class="button" th:href="@{/historicoPedidos}">Últimos Pedidos</a>
+									
+    </div>
+
+    <div class="container1">
+        <div class="inner-content">
+            <div class="order-header">
+                <div class="order-image">
+				    <img src="/images/home/prod-01.png" alt="Mocha">
+				    <p class="product-name">Mocha</p>
+				</div>
+
+                <div class="order-details">
+                    <p class="order-date">Data: 16/02/2024</p>
+                    <p class="order-items">Total de Itens: 7</p>
+                    <p class="order-total">Total do Pedido: R$ 250,00</p>
+                </div>
+                <div class="order-status-container">
+				    <p class="order-status">Status</p>
+				    <span class="status-andamento">
+				        <i class="fa fa-spinner fa-spin"></i>
+				    </span>
+				    <p class="order-andamento">Em andamento</p>
+				</div>
+            </div>
+            <div class="order-actions">
+                <button class="action-btn reorder-btn">Compre de Novo</button>
+                <button class="action-btn1 details-btn">Ver Detalhes</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{layout/coffeebreak/footer :: footer}"></div>
+
+<script src="https://kit.fontawesome.com/f6b0e6c728.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

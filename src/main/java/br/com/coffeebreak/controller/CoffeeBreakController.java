@@ -31,4 +31,14 @@ public class CoffeeBreakController {
         return new ModelAndView("coffeebreak/cadastro");
     }
 
+    @GetMapping("/pedidos")
+    public ModelAndView pedidos() {
+        return new ModelAndView("coffeebreak/pedidos");
+    }
+
+    @GetMapping("/historicoPedidos")
+    public ModelAndView historicoPedidos() {
+        return new ModelAndView("coffeebreak/historicoPedidos");
+    }
+
 }
