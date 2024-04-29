@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee - Create</title>
+    <title>Funcionário - Atualizar</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -22,7 +22,7 @@
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb mt-2">
                                 <li class="breadcrumb-item">Funcionários</li>
-                                <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
+                                <li class="breadcrumb-item" aria-current="page">Atualizar funcionário</li>
                             </ol>
                         </nav>
 
@@ -40,8 +40,9 @@
                         <p th:text="${error}"></p>
                     </div>
                     <div class="col-8">
-                        <form th:action="@{/administrator/employees/create}"
-                              th:object="${funcionario}"  method="post" >
+                        <form th:action="@{/administrator/employees/update/{id}(id=${funcionario.id})}"
+                              th:object="${funcionario}"
+                              method="post" >
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text"
@@ -60,7 +61,8 @@
                                 <input type="email"
                                        class="form-control"
                                        id="email"
-                                       name="email">
+                                       th:field="*{email}"
+                                       th:value="${funcionario.email}">
 
                                 <span class="text-danger"
                                       th:if="${#fields.hasErrors('email')}"
@@ -73,7 +75,8 @@
                                 <input type="datetime-local"
                                        class="form-control"
                                        id="entrada"
-                                       name="entrada">
+                                       th:field="*{entrada}"
+                                       th:value="*{entrada}">
 
                                 <span class="text-danger"
                                       th:if="${#fields.hasErrors('entrada')}"
@@ -86,7 +89,8 @@
                                 <input type="password"
                                        class="form-control"
                                        id="senha"
-                                       name="senha">
+                                       th:field="*{senha}"
+                                       th:value="${funcionario.senha}">
 
                                 <span class="text-danger"
                                       th:if="${#fields.hasErrors('senha')}"
@@ -97,7 +101,8 @@
                                 <label for="tipoFuncionario" class="form-label">Tipo de Funcionário</label>
                                 <select class="form-select"
                                         id="tipoFuncionario"
-                                        name="tipoFuncionario">
+                                        th:field="*{tipoFuncionario}"
+                                        th:value="${funcionario.tipoFuncionario}">
                                     <option value="">Selecione o tipo</option>
 
                                     <div th:each="tipo : ${tiposFuncionario}">
