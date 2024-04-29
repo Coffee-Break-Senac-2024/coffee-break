@@ -16,7 +16,6 @@
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
             <main class="bg-white  p-3">
-
                 <div class="card p-3 mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -34,7 +33,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card p-3">
                     <div class="alert alert-warning" th:if="${error}">
                         <p th:text="${error}"></p>
@@ -97,16 +95,16 @@
                                       th:errors="*{senha}">
                                 </span>
                             </div>
+
                             <div class="mb-3">
                                 <label for="tipoFuncionario" class="form-label">Tipo de Funcionário</label>
                                 <select class="form-select"
                                         id="tipoFuncionario"
-                                        th:field="*{tipoFuncionario}"
-                                        th:value="${funcionario.tipoFuncionario}">
+                                        th:field="*{tipoFuncionario}">
                                     <option value="">Selecione o tipo</option>
 
                                     <div th:each="tipo : ${tiposFuncionario}">
-                                        <option th:text="${tipo}"></option>
+                                        <option th:value="${tipo}"th:text="${tipo}"></option>
                                     </div>
                                 </select>
 
@@ -124,7 +122,6 @@
                         </form>
                     </div>
                 </div>
-
             </main>
             <!-- RODAPÉ -->
             <div th:replace="~{layout/administrator/footer :: footer }"></div>

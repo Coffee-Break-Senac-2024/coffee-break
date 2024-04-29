@@ -1,9 +1,10 @@
 package br.com.coffeebreak.controller;
 
-import br.com.coffeebreak.dto.FuncionarioDTO;
-import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.service.FuncionarioService;
+import br.com.coffeebreak.service.constant.Messagem;
+import br.com.coffeebreak.service.exception.EmailCadastradoException;
+import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,86 +24,87 @@ public class FuncionarioController {
     private FuncionarioService service;
 
     @GetMapping
-    public ModelAndView index(ModelAndView mv){
-       mv.setViewName("administrator/employee/index");
-       List<Funcionario> funcionarios = service.getFuncionarios();
-        mv.addObject("funcionarios",funcionarios);
+    public ModelAndView index(ModelAndView mv) {
+        mv.setViewName("administrator/employee/index");
+        List<Funcionario> funcionarios = service.getFuncionarios();
+        mv.addObject("funcionarios", funcionarios);
         return mv;
     }
 
     @GetMapping("/create")
-    public ModelAndView create(){
+    public ModelAndView create() {
         ModelAndView mv = new ModelAndView("administrator/employee/create");
-        mv.addObject("funcionario", new FuncionarioDTO());
-        mv.addObject("tiposFuncionario", tiposFuncionario());
+        mv.addObject("funcionario", new Funcionario());
+        mv.addObject("tiposFuncionario", service.tiposFuncionario());
         return mv;
     }
 
     @PostMapping("/create")
     public String create(
-            @Valid @ModelAttribute("funcionario") FuncionarioDTO funcionarioDTO,
+            @Valid @ModelAttribute("funcionario") Funcionario funcionario,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model){
+            Model model) {
 
-        model.addAttribute("tiposFuncionario", tiposFuncionario());
+        model.addAttribute("tiposFuncionario", service.tiposFuncionario());
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "administrator/employee/create";
         }
 
-        boolean saved = service.insert(funcionarioDTO);
-
-        if (saved){
-            redirectAttributes.addFlashAttribute("success", "Funcionário cadastrado com sucesso!");
-            return "redirect:/administrator/employees";
+        try {
+            service.insert(funcionario);
+        } catch (EmailCadastradoException e) {
+            bindingResult.rejectValue("email", e.getMessage(), e.getMessage());
+            return "administrator/employee/create";
         }
-
-        model.addAttribute("error", "Email já cadastrado");
-        return "administrator/employee/create";
-    }
-
-    @PostMapping("/delete/{id}")
-    public String delete(@RequestParam String id, RedirectAttributes redirectAttributes){
-        boolean saved = service.deletarPorId(id);
-
-        if (saved){
-            redirectAttributes.addFlashAttribute("success", "Funcionário deletado com sucesso!");
-            return "redirect:/administrator/employees";
-        }
-        redirectAttributes.addFlashAttribute("error", "Error ao tentar deletar funcionário");
+        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_CRIADO_SUCESSO);
         return "redirect:/administrator/employees";
     }
 
-    @GetMapping("/update/{id}")
-    public String atualizarFuncionario(
-            @PathVariable String id,
-            Model model){
+    @PostMapping("/delete/{id}")
+    public ModelAndView delete(@RequestParam String id, RedirectAttributes redirectAttributes) {
+           ModelAndView mv = new ModelAndView("redirect:/administrator/employees");
 
-        FuncionarioDTO funcionario = service.getFuncionarioPorID(id);
-        model.addAttribute("funcionario", funcionario);
-        return "administrator/employee/update";
+           try {
+                service.deletarPorId(id);
+            } catch (FuncionarioIdNaoEncontradoException e) {
+                redirectAttributes.addFlashAttribute("error", Messagem.FUNCIOANARIO_CRIADO_ERROR);
+                return mv;
+            }
+        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_DELETADO_SUCESSO);
+        return mv;
+    }
+
+
+    @GetMapping("/update/{id}")
+    public ModelAndView atualizarFuncionario(@PathVariable String id) {
+        ModelAndView mv = new ModelAndView("administrator/employee/update");
+        Funcionario funcionario = service.getFuncionarioPorID(id);
+        mv.addObject("funcionario", funcionario);
+        mv.addObject("tiposFuncionario", service.tiposFuncionario());
+        return mv;
     }
 
     @PostMapping("/update/{id}")
     public String atualizarFuncionario(
-            @PathVariable String id,
-           @Valid @ModelAttribute("funcionario") FuncionarioDTO funcionario,
+            @Valid @ModelAttribute("funcionario") Funcionario funcionario,
             BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
             Model model) {
-        if (bindingResult.hasErrors()){
+
+        model.addAttribute("tiposFuncionario", service.tiposFuncionario());
+
+        if (bindingResult.hasErrors()) {
             return "administrator/employee/update";
         }
-       boolean saved = service.atualizarFuncionario(funcionario);
-        model.addAttribute("sucess", "Funcionário cadastrado com sucesso!");
-        return "redirect:/administrator/employees";
-    }
 
-    private List<String> tiposFuncionario(){
-        List<String> tiposFuncionario = new ArrayList<>();
-        for (TipoFuncionario tipo : TipoFuncionario.values()){
-            tiposFuncionario.add(tipo.name());
+        try {
+            service.atualizarFuncionario(funcionario);
+        } catch (FuncionarioIdNaoEncontradoException e) {
+            bindingResult.rejectValue("id", e.getMessage(), e.getMessage());
         }
-        return tiposFuncionario;
+        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_UPDATE_SUCESSO);
+        return "redirect:/administrator/employees";
     }
 }

@@ -1,92 +1,88 @@
 package br.com.coffeebreak.service;
 
-import br.com.coffeebreak.dto.FuncionarioDTO;
+import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.repositories.FuncionarioRepository;
-import jakarta.transaction.Transactional;
+import br.com.coffeebreak.service.exception.EmailCadastradoException;
+import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FuncionarioService {
     @Autowired
     private FuncionarioRepository repository;
 
-    @Transactional
+    /**
+     * Retorna uma lista de  funcionarios.
+     * @Return List Funcionario
+     */
+    @Transactional(readOnly = true)
     public List<Funcionario> getFuncionarios() {
         return repository.findAll();
     }
 
-    public FuncionarioDTO getFuncionarioPorID(String id){
-        Funcionario funcionario = repository.getReferenceById(id);
-        System.out.println(copiarFuncParaDto(funcionario, new FuncionarioDTO()));
-
-        return copiarFuncParaDto(funcionario, new FuncionarioDTO());
-    }
-
-    @Transactional
-    public boolean atualizarFuncionario(FuncionarioDTO funcionarioDto) {
-        Funcionario funcionario = new Funcionario();
-        copiarFuncDtoParaFunc(funcionarioDto, funcionario);
-        repository.save(funcionario);
-        return true;
-    }
-
-    @Transactional
-    public boolean insert(FuncionarioDTO funcionarioDto) {
-        Funcionario funcionario = new Funcionario();
-        copiarFuncDtoParaFunc(funcionarioDto, funcionario);
-
-        if (repository.existsByEmail(funcionario.getEmail())){
-               return false;
-            }
-
-        try {
-            repository.save(funcionario);
-            return true;
-        } catch (DataIntegrityViolationException e) {
-            return false;
-        }
-    }
-
-    @Transactional
-    public boolean deletarPorId(String id){
-
-        if (repository.existsById(id)){
-            repository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
     /**
-    * Copia os dados do FuncionarioDTO para Funcionario
-    * @void
-    */
-    private void copiarFuncDtoParaFunc(FuncionarioDTO funcionarioDto, Funcionario funcionario) {
-        funcionario.setNome(funcionarioDto.getNome());
-        funcionario.setTipoFuncionario(funcionarioDto.getTipoFuncionario());
-        funcionario.setEmail(funcionarioDto.getEmail());
-        funcionario.setSenha(funcionarioDto.getSenha());
-        funcionario.setEntrada(funcionarioDto.getEntrada());
-    }
-
-    /**
-     * Copia os dados do Funcionario  para FuncionarioDTO
-     * @void
+     * Retorna um funcionarios por id.
+     * @Return Funcionario
      */
-    private FuncionarioDTO copiarFuncParaDto(Funcionario funcionario, FuncionarioDTO funcionarioDTO){
-        funcionarioDTO.setId(funcionario.getId());
-        funcionarioDTO.setNome(funcionario.getNome());
-        funcionarioDTO.setTipoFuncionario(funcionario.getTipoFuncionario());
-        funcionarioDTO.setEmail(funcionario.getEmail());
-        funcionarioDTO.setSenha(funcionario.getSenha());
-        funcionarioDTO.setEntrada(funcionario.getEntrada());
-        funcionarioDTO.setSaida(funcionario.getSaida());
+    @Transactional(readOnly = true)
+    public Funcionario getFuncionarioPorID(String id) {
+        if (repository.existsById(id)) {
+            return repository.getReferenceById(id);
+        }
+        return null;
+    }
 
-        return funcionarioDTO;
+    /**
+     * Atualiza funcionario no banco de daoos.
+     * @Return void
+     */
+    @Transactional
+    public void atualizarFuncionario(Funcionario funcionario) {
+        repository.save(funcionario);
+    }
+
+    /**
+     * Verifica se o email não existe e salva o funcionario no banco de dados.
+     * @Return void
+     */
+    @Transactional
+    public void insert(Funcionario funcionario) {
+        Optional<Funcionario> funcionarioOptional = repository.findByEmail(funcionario.getEmail());
+
+        if (funcionarioOptional.isPresent()){
+            throw new EmailCadastradoException("Email já cadastrado");
+        }
+        repository.save(funcionario);
+    }
+
+    /**
+     * Deleta um funcionario por id.
+     * @Return void
+     */
+    @Transactional
+    public void deletarPorId(String id){
+        if (!repository.existsById(id)){
+           throw new FuncionarioIdNaoEncontradoException("ID do funcionário não encontrado!");
+        }
+        repository.deleteById(id);
+    }
+
+    /**
+     * Retorna uma lista de tipos de funcionário.
+     * @Return List TipoFuncionario
+     */
+    public List<String> tiposFuncionario() {
+        List<String> tiposFuncionario = new ArrayList<>();
+        for (TipoFuncionario tipo : TipoFuncionario.values()) {
+            tiposFuncionario.add(tipo.name());
+        }
+        return tiposFuncionario;
     }
 }
