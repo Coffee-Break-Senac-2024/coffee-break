@@ -7,6 +7,7 @@
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -59,7 +60,7 @@
                                     <a href="#" class="btn btn-success">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <a href="#" class="btn btn-danger">
+                                    <a th:href="@{/administrator/products/delete/{id}(id=${produto.id})}"  class="btn btn-danger" th:id="${produto.id}">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
