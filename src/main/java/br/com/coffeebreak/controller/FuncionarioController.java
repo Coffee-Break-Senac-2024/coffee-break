@@ -29,7 +29,7 @@ public class FuncionarioController {
     @GetMapping
     public ModelAndView index(ModelAndView mv, @PageableDefault(size = 3) Pageable pageable) {
         mv.setViewName("administrator/employee/index");
-        Page<Funcionario> funcionarios = service.getFuncionarios(pageable);
+        Page<Funcionario> funcionarios = service.getFuncionariosPage(pageable);
         mv.addObject("pagina", funcionarios);
         return mv;
     }
@@ -82,14 +82,14 @@ public class FuncionarioController {
 
     @GetMapping("/update/{id}")
     public ModelAndView atualizarFuncionario(@PathVariable String id) {
-        ModelAndView mv = new ModelAndView("administrator/employee/update");
+        ModelAndView mv = new ModelAndView("administrator/employee/create");
         Funcionario funcionario = service.getFuncionarioPorID(id);
         mv.addObject("funcionario", funcionario);
         mv.addObject("tiposFuncionario", service.tiposFuncionario());
         return mv;
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update")
     public String atualizarFuncionario(
             @Valid @ModelAttribute("funcionario") Funcionario funcionario,
             BindingResult bindingResult,
@@ -99,7 +99,7 @@ public class FuncionarioController {
         model.addAttribute("tiposFuncionario", service.tiposFuncionario());
 
         if (bindingResult.hasErrors()) {
-            return "administrator/employee/update";
+            return "administrator/employee/create";
         }
 
         try {

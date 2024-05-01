@@ -52,7 +52,7 @@
                                        id="nome"
                                        th:field="*{nome}"
                                        th:value="${nome}"
-                                       placeholder="Nome do produto">
+                                       placeholder="Nome do ingrediente">
 
                                 <span class="text-danger"
                                       th:if="${#fields.hasErrors('nome')}"
@@ -75,7 +75,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
-                            <a class="btn btn-danger" href="/administrator/stock/ingredientes">Cancelar</a>
+                            <a class="btn btn-danger" th:href="@{/administrator/stock/ingredientes}">Cancelar</a>
                         </form>
                     </div>
                 </div>

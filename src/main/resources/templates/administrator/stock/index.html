@@ -33,10 +33,10 @@
                     </div>
                 </div>
 
-                <div class="card p-3 vh-100">
+                <div class="card p-3">
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">
-                            <a class="btn btn-primary" th:href="@{/stock/ingredientes/create}">Cadastrar Ingrediente</a>
+                            <a class="btn btn-primary" th:href="@{/administrator/stock/create}">Cadastrar Ingrediente</a>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="ingrediente : ${ingredientes}">
+                            <tr th:each="ingrediente : ${pagina.content}">
                                 <td th:text="${ingrediente.nome}">Nome do Produto</td>
                                 <td th:text="${ingrediente.quantidade}">Quantidade</td>
                                 <td>
@@ -84,6 +84,25 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-12 text-center" th:if="${not #lists.isEmpty(pagina.content)}">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li th:class="${pagina.first} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number - 1})}"> < </a>
+                                </li>
+                                <th:block th:each="p : ${#numbers.sequence(0, pagina.totalPages - 1)}"
+                                          th:with="paginaAtual=${pagina.number}">
+                                    <li th:class="${paginaAtual == p} ? 'active'">
+                                        <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${p})}">[[${p + 1}]]</a>
+                                    </li>
+                                </th:block>
+
+                                <li th:class="${pagina.last} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number + 1})}"> > </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </main>

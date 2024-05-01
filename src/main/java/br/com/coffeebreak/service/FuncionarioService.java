@@ -26,7 +26,7 @@ public class FuncionarioService {
      * @Return Page Funcionario
      */
     @Transactional(readOnly = true)
-    public Page<Funcionario> getFuncionarios(Pageable pageable) {
+    public Page<Funcionario> getFuncionariosPage(Pageable pageable) {
         return repository.findAll(pageable);
     }
 

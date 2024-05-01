@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employees</title>
+    <title>Funcionários</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -52,6 +52,7 @@
                     <div class="alert alert-success" th:if="${error}">
                         <p th:text="${error}"></p>
                     </div>
+
                     <div class="col-12">
                         <table class="table">
                             <thead>
@@ -104,6 +105,7 @@
                                 <li th:class="${pagina.first} ? disabled">
                                     <a class="page-link" th:href="@{/administrator/employees(page=${pagina.number - 1})}"> < </a>
                                 </li>
+
                                 <th:block th:each="p : ${#numbers.sequence(0, pagina.totalPages - 1)}"
                                           th:with="paginaAtual=${pagina.number}">
                                     <li th:class="${paginaAtual == p} ? 'active'">

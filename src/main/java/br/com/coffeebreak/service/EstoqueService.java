@@ -4,6 +4,8 @@ import br.com.coffeebreak.model.estoque.Estoque;
 import br.com.coffeebreak.repositories.EstoqueRepository;
 import br.com.coffeebreak.service.exception.NomeCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,11 @@ public class EstoqueService {
            throw new NomeCadastradoException("Um Ingrediente já foi cadastrado com esse nome!.");
         }
         repository.save(estoque);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Estoque> getIngredientesPage(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)

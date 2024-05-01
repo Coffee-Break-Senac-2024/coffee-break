@@ -6,126 +6,130 @@
     <title>Employee - Create</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
-          type="text/css" >
+          type="text/css">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div th:replace="~{layout/administrator/menu :: menu }"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
         <!-- CONTEÚDO PRINCIPAL-->
-            <div class="col-12 col-sm-10">
-                <!-- CONTEÙDO -->
-                <main class="bg-white  p-3">
-                    <div class="card p-3 mb-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                                <ol class="breadcrumb mt-2">
-                                    <li class="breadcrumb-item">Funcionários</li>
-                                    <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
-                                </ol>
-                            </nav>
+        <div class="col-12 col-sm-10">
+            <!-- CONTEÙDO -->
+            <main class="bg-white  p-3">
+                <div class="card p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-2">
+                                <li class="breadcrumb-item">Funcionários</li>
+                                <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
+                            </ol>
+                        </nav>
+
+                        <div>
+                            <img th:src="@{/images/user_default.png}"
+                                 alt="Imagem do usuário"
+                                 title="Imagem do usuário"
+                                 width="60px">
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-3">
+                    <div class="alert alert-warning" th:if="${error}">
+                        <p th:text="${error}"></p>
+                    </div>
+                    <div class="col-8">
+                        <form th:action="${funcionario.getId() == null ? '/administrator/employees/create' : '/administrator/employees/update'}"
+                              th:object="${funcionario}"
+                              method="post">
+
+                            <input type="hidden" name="id" th:if="${funcionario.id != null}"
+                                   th:value="${funcionario.id}">
+
+                            <div class="form-group mb-3" th:classappend="${#fields.hasErrors('nome')} ? validation">
+                                <label for="nome" class="control-label">Nome</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="nome"
+                                       th:field="*{nome}"
+                                       th:value="${funcionario.nome}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('nome')}"
+                                      th:errors="*{nome}">
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email"
+                                       class="form-control"
+                                       id="email"
+                                       th:field="*{email}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('email')}"
+                                      th:errors="*{email}">
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="entrada" class="form-label">Data de Entrada</label>
+                                <input type="datetime-local"
+                                       class="form-control"
+                                       id="entrada"
+                                       th:field="*{entrada}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('entrada')}"
+                                      th:errors="*{entrada}">
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password"
+                                       class="form-control"
+                                       id="senha"
+                                       th:field="*{senha}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('senha')}"
+                                      th:errors="*{senha}">
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipoFuncionario" class="form-label">Tipo de Funcionário</label>
+                                <select class="form-select"
+                                        id="tipoFuncionario"
+                                        th:field="*{tipoFuncionario}">
+                                    <option value="">Selecione o tipo</option>
+
+                                    <div th:each="tipo : ${tiposFuncionario}">
+                                        <option th:value="${tipo}" th:text="${tipo}"></option>
+                                    </div>
+                                </select>
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('tipoFuncionario')}"
+                                      th:errors="*{tipoFuncionario}">
+                                    </span>
+                            </div>
 
                             <div>
-                                <img th:src="@{/images/user_default.png}"
-                                     alt="Imagem do usuário"
-                                     title="Imagem do usuário"
-                                     width="60px">
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <a class="btn btn-danger" th:href="@{/administrator/employees}">Cancelar</a>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="card p-3">
-                        <div class="alert alert-warning" th:if="${error}">
-                            <p th:text="${error}"></p>
-                        </div>
-                        <div class="col-8">
-                            <form th:action="@{/administrator/employees/create}"
-                                  th:object="${funcionario}"
-                                  method="post">
-                                <div class="form-group mb-3" th:classappend="${#fields.hasErrors('nome')} ? validation">
-                                    <label for="nome" class="control-label">Nome</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           id="nome"
-                                           th:field="*{nome}"
-                                           th:value="${funcionario.nome}">
-
-                                    <span class="text-danger"
-                                          th:if="${#fields.hasErrors('nome')}"
-                                          th:errors="*{nome}">
-                                </span>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email"
-                                           class="form-control"
-                                           id="email"
-                                           th:field="*{email}">
-
-                                    <span class="text-danger"
-                                          th:if="${#fields.hasErrors('email')}"
-                                          th:errors="*{email}">
-                                </span>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="entrada" class="form-label">Data de Entrada</label>
-                                    <input type="datetime-local"
-                                           class="form-control"
-                                           id="entrada"
-                                           th:field="*{entrada}">
-
-                                    <span class="text-danger"
-                                          th:if="${#fields.hasErrors('entrada')}"
-                                          th:errors="*{entrada}">
-                                </span>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="senha" class="form-label">Senha</label>
-                                    <input type="password"
-                                           class="form-control"
-                                           id="senha"
-                                           th:field="*{senha}">
-
-                                    <span class="text-danger"
-                                          th:if="${#fields.hasErrors('senha')}"
-                                          th:errors="*{senha}">
-                                </span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tipoFuncionario" class="form-label">Tipo de Funcionário</label>
-                                    <select class="form-select"
-                                            id="tipoFuncionario"
-                                            th:field="*{tipoFuncionario}">
-                                        <option value="">Selecione o tipo</option>
-
-                                        <div th:each="tipo : ${tiposFuncionario}">
-                                            <option th:value="${tipo}" th:text="${tipo}"></option>
-                                        </div>
-                                    </select>
-
-                                    <span class="text-danger"
-                                          th:if="${#fields.hasErrors('tipoFuncionario')}"
-                                          th:errors="*{tipoFuncionario}">
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
-                                    <a class="btn btn-danger" th:href="@{/administrator/employees}">Cancelar</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </main>
-                <!-- RODAPÉ -->
-                <div th:replace="~{layout/administrator/footer :: footer }"></div>
-            </div>
+                </div>
+            </main>
+            <!-- RODAPÉ -->
+            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
+</div>
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
 <script src="https://kit.fontawesome.com/f6b0e6c728.js"
-            crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </body>
 </html>
