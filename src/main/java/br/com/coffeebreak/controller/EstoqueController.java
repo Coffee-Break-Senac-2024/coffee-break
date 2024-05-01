@@ -1,9 +1,9 @@
 package br.com.coffeebreak.controller;
 
-import br.com.coffeebreak.dto.EstoqueDTO;
 import br.com.coffeebreak.model.estoque.Estoque;
-import br.com.coffeebreak.repositories.EstoqueRepository;
 import br.com.coffeebreak.service.EstoqueService;
+import br.com.coffeebreak.service.constant.Mensagem;
+import br.com.coffeebreak.service.exception.NomeCadastradoException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,61 +20,95 @@ import java.util.List;
 public class EstoqueController {
 
     @Autowired
-    private EstoqueRepository estoqueRepository;
-    @Autowired
     private EstoqueService service;
 
     @GetMapping("/create")
     public ModelAndView index(Model model){
         ModelAndView mv = new ModelAndView("administrator/stock/create");
-        model.addAttribute("estoque", new EstoqueDTO());
+        model.addAttribute("estoque", new Estoque());
         return mv;
     }
 
     @PostMapping("/create")
     public String create(
-            @Valid @ModelAttribute("estoque")
-            EstoqueDTO estoque,
+            @Valid @ModelAttribute("estoque") Estoque estoque,
             BindingResult result,
-            RedirectAttributes rd)
-    {
+            RedirectAttributes rd) {
+
         if (result.hasErrors()) {
             return "administrator/stock/create";
         }
 
-        boolean saved = service.insert(estoque);
-
-        if(saved) {
-            rd.addFlashAttribute("success", "Ingrediente cadastrado com sucesso!");
-            return "redirect:/administrator/stock/ingredientes";
-        } else {
-            rd.addFlashAttribute("error", "Erro ao cadastrar ingrediente: ");
+        try {
+            service.insert(estoque);
+        }catch (NomeCadastradoException e){
+            result.rejectValue("nome", e.getMessage(), e.getMessage());
             return "/administrator/stock/create";
         }
+        rd.addFlashAttribute("success", Mensagem.ESTOQUE_CRIADO_SUCESSO);
+        return "redirect:/administrator/stock/ingredientes";
     }
 
     @GetMapping("/ingredientes")
     public ModelAndView listarEstoque() {
         ModelAndView mv = new ModelAndView("administrator/stock/index");
-        List<Estoque> ingredientes = this.estoqueRepository.findAll();
+        List<Estoque> ingredientes = service.getAllIngredientes();
         mv.addObject("ingredientes", ingredientes);
         return mv;
     }
 
+
+    @GetMapping("ingredientes/update")
+    public ModelAndView updateEstoque(
+            @RequestParam("id") String id,
+            Estoque estoque,
+            RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView("administrator/stock/create");
+
+        try {
+            estoque = service.getIngredientById(id);
+        }catch (IllegalArgumentException e){
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/administrator/stock/ingredientes");
+        }
+        mv.addObject("estoque", estoque);
+        return mv;
+    }
+
+    @PostMapping("ingredientes/update")
+    public ModelAndView updateEstoque(
+            @Valid @ModelAttribute("estoque") Estoque estoque,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+
+        ModelAndView mv = new ModelAndView("administrator/stock/create");
+        if (result.hasErrors()) {
+            return mv;
+        }
+
+        try {
+            service.update(estoque);
+        }catch (RuntimeException e){
+            result.rejectValue("estoque", e.getMessage(), e.getMessage());
+            return mv;
+        }
+        redirectAttributes.addFlashAttribute("success", Mensagem.ESTOQUE_UPDATE_SUCESSO);
+        mv.setViewName("redirect:/administrator/stock/ingredientes");
+        return mv;
+    }
+
     @PostMapping("/ingredientes/{id}")
-    public String excluirEstoque(
+    public ModelAndView excluirEstoque(
             @RequestParam("id") String id,
             RedirectAttributes redirectAttributes) {
 
         try {
-            this.estoqueRepository.deleteById(id);
-            redirectAttributes.addFlashAttribute("success", "Excluído com sucesso");
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error ao tentar excluír");
+            service.delete(id);
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/administrator/stock/ingredientes");
         }
-
-        return "redirect:/administrator/stock/ingredientes";
+        redirectAttributes.addFlashAttribute("success", Mensagem.ESTOQUE_DELETADO_SUCESSO);
+        return new ModelAndView("redirect:/administrator/stock/ingredientes");
     }
-
 }

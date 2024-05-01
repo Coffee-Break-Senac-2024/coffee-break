@@ -36,13 +36,23 @@
                 </div>
 
                 <div class="card p-3">
+                    <div class="mb-3">
+                        <div class="d-flex flex-row-reverse">
+                            <a class="btn btn-primary" th:href="@{/administrator/employees/create}">Cadastrar funcionário</a>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h2 class="h2 text-black-50">Lista de Funcionários</h2>
+                    </div>
+
                     <div class="alert alert-success" th:if="${success}">
                         <p th:text="${success}"></p>
                     </div>
                     <div class="alert alert-success" th:if="${error}">
                         <p th:text="${error}"></p>
                     </div>
-                    <div class="col-8">
+                    <div class="col-12">
                         <table class="table">
                             <thead>
                             <tr>
@@ -54,14 +64,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="funcionario : ${funcionarios}">
+                                <tr th:each="funcionario : ${pagina.content}">
                                     <td th:text="${funcionario.nome}"></td>
                                     <td th:text="${funcionario.email}"></td>
                                     <td th:text="${funcionario.entrada.toLocalDate()}"></td>
                                     <td th:text="${funcionario.tipoFuncionario}"></td>
                                     <td>
-                                        <div class="d-flex justify-content-around">
-                                            <div>
+                                        <div class="d-flex flex-row">
+                                            <div class="ms-0">
                                                 <form th:action="@{/administrator/employees/update/{id}(id=${funcionario.id})}"
                                                       method="get">
                                                     <button class="btn btn-primary" type="submit" >
@@ -70,7 +80,7 @@
                                                 </form>
                                             </div>
 
-                                            <div>
+                                            <div class="ms-1">
                                                 <form th:action="@{/administrator/employees/delete/{id}(id=${funcionario.id})}"
                                                       method="post">
                                                     <input type="hidden" name="id"  th:value="${funcionario.id}">
@@ -82,8 +92,30 @@
                                         </div>
                                     </td>
                                 </tr>
+                            <tr th:if="${#lists.isEmpty(pagina.content)}">
+                                <td>Nenhum registro disponível</td>
+                            </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-12 text-center" th:if="${not #lists.isEmpty(pagina.content)}">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li th:class="${pagina.first} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/employees(page=${pagina.number - 1})}"> < </a>
+                                </li>
+                                <th:block th:each="p : ${#numbers.sequence(0, pagina.totalPages - 1)}"
+                                          th:with="paginaAtual=${pagina.number}">
+                                    <li th:class="${paginaAtual == p} ? 'active'">
+                                        <a class="page-link" th:href="@{/administrator/employees(page=${p})}">[[${p + 1}]]</a>
+                                    </li>
+                                </th:block>
+
+                                <li th:class="${pagina.last} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/employees(page=${pagina.number + 1})}"> > </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </main>

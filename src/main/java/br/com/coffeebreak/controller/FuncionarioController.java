@@ -2,11 +2,14 @@ package br.com.coffeebreak.controller;
 
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.service.FuncionarioService;
-import br.com.coffeebreak.service.constant.Messagem;
+import br.com.coffeebreak.service.constant.Mensagem;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,10 +27,10 @@ public class FuncionarioController {
     private FuncionarioService service;
 
     @GetMapping
-    public ModelAndView index(ModelAndView mv) {
+    public ModelAndView index(ModelAndView mv, @PageableDefault(size = 3) Pageable pageable) {
         mv.setViewName("administrator/employee/index");
-        List<Funcionario> funcionarios = service.getFuncionarios();
-        mv.addObject("funcionarios", funcionarios);
+        Page<Funcionario> funcionarios = service.getFuncionarios(pageable);
+        mv.addObject("pagina", funcionarios);
         return mv;
     }
 
@@ -58,7 +61,7 @@ public class FuncionarioController {
             bindingResult.rejectValue("email", e.getMessage(), e.getMessage());
             return "administrator/employee/create";
         }
-        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_CRIADO_SUCESSO);
+        redirectAttributes.addFlashAttribute("success", Mensagem.FUNCIOANARIO_CRIADO_SUCESSO);
         return "redirect:/administrator/employees";
     }
 
@@ -69,10 +72,10 @@ public class FuncionarioController {
            try {
                 service.deletarPorId(id);
             } catch (FuncionarioIdNaoEncontradoException e) {
-                redirectAttributes.addFlashAttribute("error", Messagem.FUNCIOANARIO_CRIADO_ERROR);
+                redirectAttributes.addFlashAttribute("error", Mensagem.FUNCIOANARIO_CRIADO_ERROR);
                 return mv;
             }
-        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_DELETADO_SUCESSO);
+        redirectAttributes.addFlashAttribute("success", Mensagem.FUNCIOANARIO_DELETADO_SUCESSO);
         return mv;
     }
 
@@ -104,7 +107,7 @@ public class FuncionarioController {
         } catch (FuncionarioIdNaoEncontradoException e) {
             bindingResult.rejectValue("id", e.getMessage(), e.getMessage());
         }
-        redirectAttributes.addFlashAttribute("success", Messagem.FUNCIOANARIO_UPDATE_SUCESSO);
+        redirectAttributes.addFlashAttribute("success", Mensagem.FUNCIOANARIO_UPDATE_SUCESSO);
         return "redirect:/administrator/employees";
     }
 }

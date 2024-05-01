@@ -35,23 +35,28 @@
                 </div>
 
                 <div class="card p-3 vh-100">
-                    <div class="alert alert-danger" th:if="${error}">
-                        <p th:text="${error}"></p>
+                    <div class="alert alert-danger" th:if="${nome}">
+                        <p th:text="${nome}"></p>
                     </div>
 
                     <div class="col-md-8">
-                        <form th:action="@{/administrator/stock/create}" th:object="${estoque}" method="post">
+                        <form th:action="${estoque.getId() == null ? '/administrator/stock/create' : '/administrator/stock/ingredientes/update'}"
+                              th:object="${estoque}"
+                              method="post">
+                            <input type="hidden" name="id" th:if="${estoque.id != null}" th:value="${estoque.id}">
+
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome do Ingrediente</label>
                                 <input type="text"
                                        class="form-control"
                                        id="nome"
-                                       th:field="*{name}"
+                                       th:field="*{nome}"
+                                       th:value="${nome}"
                                        placeholder="Nome do produto">
 
                                 <span class="text-danger"
-                                      th:if="${#fields.hasErrors('name')}"
-                                      th:errors="*{name}">
+                                      th:if="${#fields.hasErrors('nome')}"
+                                      th:errors="*{nome}">
                                 </span>
                             </div>
                             <div class="mb-3">
@@ -59,17 +64,18 @@
                                 <input type="number"
                                        class="form-control"
                                        id="quantidade"
-                                       th:field="*{quantity}"
+                                       th:field="*{quantidade}"
+                                       th:value="${nome}"
                                        placeholder="Quantidade">
 
                                 <span class="text-danger"
-                                      th:if="${#fields.hasErrors('quantity')}"
-                                      th:errors="*{quantity}">
+                                      th:if="${#fields.hasErrors('quantidade')}"
+                                      th:errors="*{quantidade}">
                                 </span>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
-                            <a class="btn btn-danger" href="/administrator/stock/index">Cancelar</a>
+                            <a class="btn btn-danger" href="/administrator/stock/ingredientes">Cancelar</a>
                         </form>
                     </div>
                 </div>

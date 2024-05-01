@@ -1,91 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stock - List</title>
-  <link rel="stylesheet"
-        th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
-        type="text/css" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock - List</title>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
+          type="text/css">
 </head>
 <body>
 <div class="container-fluid">
-  <div class="row">
-    <div th:replace="~{layout/administrator/menu :: menu }"></div>
-    <!-- CONTEÚDO PRINCIPAL-->
-    <div class="col-12 col-sm-10">
-      <!-- CONTEÙDO -->
-      <main class="bg-white  p-3">
-
-        <div class="card p-3 mb-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-              <ol class="breadcrumb mt-2">
-                <li class="breadcrumb-item">Estoque</li>
-                <li class="breadcrumb-item" aria-current="page">Lista de  Ingredientes</li>
-              </ol>
-            </nav>
-
-            <div>
-              <img th:src="@{/images/user_default.png}"
-                   alt="Imagem do usuário"
-                   title="Imagem do usuário"
-                   width="60px">
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 vh-100">
-          <div class="col-8">
-            <table class="table">
-              <div class="alert alert-success" th:if="${success}">
-                <p th:text="${success}"></p>
-              </div>
-
-              <div class="alert alert-success" th:if="${error}">
-                <p>Ingrediente cadastrado com sucesso.</p>
-              </div>
-
-              <thead>
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Quantidade</th>
-                  <th scope="col">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="ingrediente : ${ingredientes}">
-                  <td th:text="${ingrediente.id}">id</td>
-                   <td th:text="${ingrediente.nome}">Nome do Produto</td>
-                   <td th:text="${ingrediente.quantidade}">Quantidade</td>
-                  <td>
-                    <div class="d-flex justify-content-around">
-                      <a href="#" class="btn btn-primary">
-                        <i class="fa-solid fa-pen"></i>
-                      </a>
-                      <form th:action="@{/administrator/stock/ingredientes/{id}(id=${ingrediente.id})}" method="post">
-                        <input type="hidden" name="id" th:value="${ingrediente.id}" />
-                        <button type="submit" class="btn btn-danger">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                      </form>
+    <div class="row">
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
+        <!-- CONTEÚDO PRINCIPAL-->
+        <div class="col-12 col-sm-10">
+            <!-- CONTEÙDO -->
+            <main class="bg-white  p-3">
+                <div class="card p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-2">
+                                <li class="breadcrumb-item">Estoque</li>
+                                <li class="breadcrumb-item" aria-current="page">Lista de Ingredientes</li>
+                            </ol>
+                        </nav>
+                        <div>
+                            <img th:src="@{/images/user_default.png}"
+                                 alt="Imagem do usuário"
+                                 title="Imagem do usuário"
+                                 width="60px">
+                        </div>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-      <!-- RODAPÉ -->
-      <div th:replace="~{layout/administrator/footer :: footer }"></div>
-    </div>
-  </div>
-</div>
+                </div>
 
+                <div class="card p-3 vh-100">
+                    <div class="mb-3">
+                        <div class="d-flex flex-row-reverse">
+                            <a class="btn btn-primary" th:href="@{/stock/ingredientes/create}">Cadastrar Ingrediente</a>
+                        </div>
+                    </div>
+
+                   <div class="mb-3">
+                       <h2 class="h2 text-black-50">Lista de Ingredientes</h2>
+                   </div>
+
+                    <div class="col-12">
+                        <table class="table">
+                            <div class="alert alert-success" role="alert" th:if="${success}">
+                                <p th:text="${success}"></p>
+                            </div>
+                            <div class="alert alert-danger" role="alert" th:if="${error}">
+                                <p th:text="${error}"></p>
+                            </div>
+                            <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ingrediente : ${ingredientes}">
+                                <td th:text="${ingrediente.nome}">Nome do Produto</td>
+                                <td th:text="${ingrediente.quantidade}">Quantidade</td>
+                                <td>
+                                    <div class="d-flex flex-row">
+                                       <div class="ms-0">
+                                           <a class="btn btn-primary" th:href="@{/administrator/stock/ingredientes/update(id=${ingrediente.id})}">
+                                               <i class="fa-solid fa-pen"></i>
+                                           </a>
+                                       </div>
+                                        <div class="ms-1">
+                                          <form th:action="@{/administrator/stock/ingredientes/{id}(id=${ingrediente.id})}"
+                                                method="post">
+                                            <input type="hidden" name="id" th:value="${ingrediente.id}"/>
+                                            <button type="submit" class="btn btn-danger">
+                                              <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                          </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+            <!-- RODAPÉ -->
+            <div th:replace="~{layout/administrator/footer :: footer }"></div>
+        </div>
+    </div>
+</div>
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js"
-        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
 </body>
 </html>
