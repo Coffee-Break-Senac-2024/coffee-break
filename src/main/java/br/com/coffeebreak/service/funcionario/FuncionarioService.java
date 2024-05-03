@@ -1,4 +1,4 @@
-package br.com.coffeebreak.service;
+package br.com.coffeebreak.service.funcionario;
 
 import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;

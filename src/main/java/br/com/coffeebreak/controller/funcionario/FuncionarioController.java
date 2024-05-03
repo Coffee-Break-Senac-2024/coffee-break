@@ -1,7 +1,7 @@
-package br.com.coffeebreak.controller;
+package br.com.coffeebreak.controller.funcionario;
 
 import br.com.coffeebreak.model.funcionario.Funcionario;
-import br.com.coffeebreak.service.FuncionarioService;
+import br.com.coffeebreak.service.funcionario.FuncionarioService;
 import br.com.coffeebreak.service.constant.Mensagem;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
@@ -16,8 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/administrator/employees")

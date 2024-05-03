@@ -1,4 +1,4 @@
-package br.com.coffeebreak.service;
+package br.com.coffeebreak.service.stock;
 
 import br.com.coffeebreak.model.estoque.Estoque;
 import br.com.coffeebreak.repositories.EstoqueRepository;

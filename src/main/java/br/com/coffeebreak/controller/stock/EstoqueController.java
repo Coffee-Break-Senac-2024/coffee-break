@@ -1,7 +1,7 @@
-package br.com.coffeebreak.controller;
+package br.com.coffeebreak.controller.stock;
 
 import br.com.coffeebreak.model.estoque.Estoque;
-import br.com.coffeebreak.service.EstoqueService;
+import br.com.coffeebreak.service.stock.EstoqueService;
 import br.com.coffeebreak.service.constant.Mensagem;
 import br.com.coffeebreak.service.exception.NomeCadastradoException;
 import jakarta.validation.Valid;
