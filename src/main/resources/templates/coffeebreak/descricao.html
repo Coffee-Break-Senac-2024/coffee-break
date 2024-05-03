@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/descricao/descricao.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+
+    <title>Descrição</title>
+</head>
+<body>
+
+<div th:replace="~{ layout/coffeebreak/header :: header }"></div>
+
+<main class="descricao_container">
+<div class="back">
+<a href="/">
+    <img th:src="@{images/descricao/Back_button.png}" class = "back_button_image" alt="botão de voltar pra pagina inicial">
+</a>
+</div>
+<div class="product">
+
+    <img th:src="@{images/home/prod-01.png}" alt="Imagem de um café Mocha">
+
+
+
+<div class="product_description">
+    <h1>Mocha</h1>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris elementum, lorem non pulvinar
+        ultricies, nunc sem aliquet ex, quis mollis leo leo sed ligula. In mattis ullamcorper magna,
+        vitae consequat dolor lobortis non. Pellentesque interdum diam a nisl euismod, porttitor ullamcorper
+        purus bibendum. </p>
+    <h2>R$ 12,00</h2>
+    <button type="submit" value="carrinho">
+        Adicionar ao carrinho
+    </button>
+</div>
+
+
+
+</div>
+</main>
+
+</body>
+</html>
