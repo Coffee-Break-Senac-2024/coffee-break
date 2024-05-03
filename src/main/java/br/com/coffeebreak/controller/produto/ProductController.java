@@ -106,7 +106,6 @@ public class ProductController {
     @PostMapping("/update")
     public ModelAndView updateProduct(@ModelAttribute("produto") Produto produto, RedirectAttributes redirectAttributes, @RequestParam(name = "ingredientes") List<String> ingredientes, @RequestParam(name = "file") MultipartFile arquivo) {
         ModelAndView mv = new ModelAndView("/administrator/product/create");
-        System.out.println(produto.getId());
         produto.setEstoqueList(this.produtoService.getIngredientsToBeUsed(ingredientes));
 
         try {
@@ -123,9 +122,9 @@ public class ProductController {
         }
 
         try {
-            System.out.println("o erro e no update");
+
             this.produtoService.update(produto);
-            System.out.println("Chegou aqui");
+
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Não foi possivel realizar a atualização");
             System.out.println("Esta dando erro");
