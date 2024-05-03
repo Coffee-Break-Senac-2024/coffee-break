@@ -57,7 +57,7 @@
                                 <td th:text="${produto.quantidadeUtilizada}">Quantidade Utilizada</td>
                                 <td th:text="${produto.preco}">Preço</td>
                                 <td>
-                                    <a href="#" class="btn btn-success">
+                                    <a class="btn btn-success" th:href="@{/administrator/products/update(id=${produto.id})}">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                     <a th:href="@{/administrator/products/delete/{id}(id=${produto.id})}"  class="btn btn-danger" th:id="${produto.id}">

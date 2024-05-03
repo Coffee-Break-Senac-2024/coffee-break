@@ -38,13 +38,19 @@
 
                 <div class="card p-3">
                     <div class="col-md-8">
-                        <form method="post" action="/administrator/products/create" enctype="multipart/form-data" th:object="${produto}">
+                        <form method="post"
+                              th:action="${produto.getId() == null ? '/administrator/products/create' : '/administrator/products/update' }"
+                              enctype="multipart/form-data"
+                              th:object="${produto}">
+
+                            <input type="hidden" th:value="${produto.id}" th:field="*{id}"/>
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text"
                                        class="form-control"
                                        id="nome"
-                                       th:field="${produto.nome}"
+                                       th:field="*{nome}"
+                                       th:value="${produto.nome}"
                                        required>
                             </div>
                             <div class="mb-3">
@@ -52,7 +58,8 @@
                                 <input type="number"
                                        class="form-control"
                                        id="quantidadeUtilizada"
-                                       th:field="${produto.quantidadeUtilizada}"
+                                       th:field="*{quantidadeUtilizada}"
+                                       th:value="${produto.quantidadeUtilizada}"
                                        required>
                             </div>
                             <div class="mb-3">
@@ -61,7 +68,8 @@
                                        step="0.01"
                                        class="form-control"
                                        id="preco"
-                                      th:field="${produto.preco}"
+                                      th:field="*{preco}"
+                                       th:value="${produto.preco}"
                                        required>
                             </div>
 
@@ -71,7 +79,8 @@
                                 <input type="file"
                                        class="form-control"
                                        id="imagem"
-                                       name="imagem">
+                                       name="file"
+                                >
                             </div>
 
                             <div class="mb-3">
@@ -84,12 +93,14 @@
 
                                     <option th:each="ingrediente : ${ingredientes}"
                                             th:value="${ingrediente.id}"
-                                            th:text="${ingrediente.nome}">
+                                            th:text="${ingrediente.nome}"
+                                            th:selected="${produto.estoqueList != null && produto.estoqueList.contains(ingrediente)}"
+                                    >
                                     </option>
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-success">Cadastrar</button>
                             <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
                         </form>
                     </div>

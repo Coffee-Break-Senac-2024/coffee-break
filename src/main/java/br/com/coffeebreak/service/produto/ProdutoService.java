@@ -1,8 +1,9 @@
-package br.com.coffeebreak.service;
+package br.com.coffeebreak.service.produto;
 
 import br.com.coffeebreak.model.estoque.Estoque;
 import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.repositories.ProdutoRepository;
+import br.com.coffeebreak.service.stock.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,14 @@ public class ProdutoService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void update(Produto produto) {
+        if (produto.getId() == null) {
+            throw new RuntimeException("Product nao encontrado.");
+        }
+
+        this.produtoRepository.save(produto);
     }
 
     public boolean excluirProduto(String idProduto) {

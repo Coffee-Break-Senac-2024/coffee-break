@@ -28,6 +28,9 @@ public class Produto {
     @Column(nullable = false)
     private Double preco;
 
+    @Column(nullable = false)
+    private String nomeImagem;
+
     @OneToMany()
     @JoinColumn(name = "id_produto")
     private List<Estoque> estoqueList;
