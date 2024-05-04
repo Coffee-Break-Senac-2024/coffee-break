@@ -16,12 +16,12 @@
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
             <main class="bg-white  p-3">
-                <div class="card p-3 mb-3">
+                <div class="card mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-2">
+                            <ol class="breadcrumb mt-2 p-2">
                                 <li class="breadcrumb-item">Estoque</li>
-                                <li class="breadcrumb-item" aria-current="page">Cadastrar Produto-Estoque</li>
+                                <li class="breadcrumb-item" aria-current="page">Cadastrar Ingrediente</li>
                             </ol>
                         </nav>
 
@@ -35,6 +35,11 @@
                 </div>
 
                 <div class="card p-3 vh-100">
+
+                    <div class="mb-3">
+                        <h2 class="h3 text-black-50">Cadastrar Ingrediente</h2>
+                    </div>
+
                     <div class="alert alert-danger" th:if="${nome}">
                         <p th:text="${nome}"></p>
                     </div>
@@ -79,9 +84,9 @@
                         </form>
                     </div>
                 </div>
+                <!-- RODAPÉ -->
+                <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
-            <!-- RODAPÉ -->
-            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
 </div>

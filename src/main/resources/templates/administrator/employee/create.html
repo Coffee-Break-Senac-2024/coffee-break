@@ -16,10 +16,10 @@
         <div class="col-12 col-sm-10">
             <!-- CONTEÙDO -->
             <main class="bg-white  p-3">
-                <div class="card p-3 mb-3">
+                <div class="card mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-2">
+                            <ol class="breadcrumb mt-2 p-2">
                                 <li class="breadcrumb-item">Funcionários</li>
                                 <li class="breadcrumb-item" aria-current="page">Cadastrar funcionário</li>
                             </ol>
@@ -34,9 +34,15 @@
                     </div>
                 </div>
                 <div class="card p-3">
+
+                    <div class="mb-3">
+                        <h2 class="h3 text-black-50">Cadastrar Funcionário</h2>
+                    </div>
+
                     <div class="alert alert-warning" th:if="${error}">
                         <p th:text="${error}"></p>
                     </div>
+
                     <div class="col-8">
                         <form th:action="${funcionario.getId() == null ? '/administrator/employees/create' : '/administrator/employees/update'}"
                               th:object="${funcionario}"
@@ -122,9 +128,9 @@
                         </form>
                     </div>
                 </div>
+                <!-- RODAPÉ -->
+                <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
-            <!-- RODAPÉ -->
-            <div th:replace="~{layout/administrator/footer :: footer }"></div>
         </div>
     </div>
 </div>
