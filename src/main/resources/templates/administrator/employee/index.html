@@ -38,12 +38,31 @@
                 <div class="card p-3 vh-100">
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">
-                            <a class="btn btn-primary" th:href="@{/administrator/employees/create}">Cadastrar funcionário</a>
+                            <a class="btn btn-primary"
+                               th:href="@{/administrator/employees/create}">
+                                Cadastrar funcionário
+                            </a>
                         </div>
 
                         <div class="mb-3">
                             <h2 class="h2 text-black-50">Lista de Funcionários</h2>
                         </div>
+
+                        <form class="row g-3 col-4" th:action="@{/administrator/employees}">
+                            <div class="col-auto">
+                                <input id="buscar-nome"
+                                       type="search"
+                                       name="nome"
+                                       class="form-control"
+                                       placeholder="Buscar por nome"
+                                       aria-label="Buscar por nome">
+                            </div>
+                            <div class="col-auto">
+                                <button id="search-button" class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="alert alert-success" th:if="${success}">

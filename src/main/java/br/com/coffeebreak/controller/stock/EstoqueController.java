@@ -52,9 +52,19 @@ public class EstoqueController {
     }
 
     @GetMapping("/ingredientes")
-    public ModelAndView listarEstoque(@PageableDefault(size = 5) Pageable pageable) {
+    public ModelAndView listarEstoque(
+            @RequestParam(required = false) String nome,
+            @PageableDefault(size = 5) Pageable pageable) {
         ModelAndView mv = new ModelAndView("administrator/stock/index");
-        Page<Estoque> ingredientes = service.getIngredientesPage(pageable);
+
+        Page<Estoque> ingredientes;
+
+        if (nome != null && !nome.isEmpty()) {
+            ingredientes = service.getIngredientesPage(nome, pageable);
+        } else {
+            ingredientes = service.getIngredientesPage(pageable);
+        }
+
         mv.addObject("pagina", ingredientes);
         return mv;
     }

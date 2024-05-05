@@ -21,7 +21,6 @@ public class ProdutoService {
 
     public boolean cadastrarProduto(Produto produto) {
         try {
-
             this.produtoRepository.save(produto);
             return true;
 

@@ -43,6 +43,22 @@
                         <div class="mb-3">
                             <h2 class="h2 text-black-50">Lista de Ingredientes</h2>
                         </div>
+
+                        <form class="row g-3 col-4" th:action="@{/administrator/stock/ingredientes}">
+                            <div class="col-auto">
+                                <input id="buscar-nome"
+                                       type="search"
+                                       name="nome"
+                                       class="form-control"
+                                       placeholder="Buscar por nome"
+                                       aria-label="Buscar por nome">
+                            </div>
+                            <div class="col-auto">
+                                <button id="search-button" class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="col-12">
@@ -82,6 +98,9 @@
                                         </div>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(pagina.content)}">
+                                <td>Nenhum Registro disponível</td>
                             </tr>
                             </tbody>
                         </table>

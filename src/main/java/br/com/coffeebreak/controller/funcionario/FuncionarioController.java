@@ -25,9 +25,18 @@ public class FuncionarioController {
     private FuncionarioService service;
 
     @GetMapping
-    public ModelAndView index(ModelAndView mv, @PageableDefault(size = 3) Pageable pageable) {
-        mv.setViewName("administrator/employee/index");
-        Page<Funcionario> funcionarios = service.getFuncionariosPage(pageable);
+    public ModelAndView index(
+            @RequestParam(required = false) String nome,
+            @PageableDefault(size = 3) Pageable pageable) {
+        ModelAndView mv = new ModelAndView("administrator/employee/index");
+
+        Page<Funcionario> funcionarios;
+        if (nome != null && !nome.isEmpty()) {
+           funcionarios = service.getFuncionariosPage(nome, pageable);
+        }else{
+            funcionarios = service.getFuncionariosPage(pageable);
+        }
+
         mv.addObject("pagina", funcionarios);
         return mv;
     }

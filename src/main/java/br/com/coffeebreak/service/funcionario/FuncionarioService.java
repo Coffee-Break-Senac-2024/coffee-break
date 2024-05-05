@@ -7,7 +7,6 @@ import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,15 @@ public class FuncionarioService {
     @Transactional(readOnly = true)
     public Page<Funcionario> getFuncionariosPage(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    /**
+     * Retorna uma paginação de funcionarios por nome.
+     * @Return Page Funcionario
+     */
+    @Transactional(readOnly = true)
+    public Page<Funcionario> getFuncionariosPage(String nome, Pageable pageable) {
+        return repository.findAllByNomeIgnoreCase(nome, pageable);
     }
 
     /**
