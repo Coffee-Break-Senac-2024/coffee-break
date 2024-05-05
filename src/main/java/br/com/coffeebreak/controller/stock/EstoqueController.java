@@ -109,11 +109,11 @@ public class EstoqueController {
         return mv;
     }
 
-    @PostMapping("/ingredientes/{id}")
+    @PostMapping("/ingredientes/deletar/{id}")
     public ModelAndView excluirEstoque(
-            @RequestParam("id") String id,
+            @PathVariable("id") String id,
             RedirectAttributes redirectAttributes) {
-
+        System.out.println("Cheguei " + id);
         try {
             service.delete(id);
         } catch (IllegalArgumentException e) {

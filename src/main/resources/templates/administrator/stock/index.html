@@ -81,21 +81,19 @@
                                 <td th:text="${ingrediente.nome}">Nome do Produto</td>
                                 <td th:text="${ingrediente.quantidade}">Quantidade</td>
                                 <td>
-                                    <div class="d-flex flex-row">
-                                       <div class="ms-0">
-                                           <a class="btn btn-primary" th:href="@{/administrator/stock/ingredientes/update(id=${ingrediente.id})}">
-                                               <i class="fa-solid fa-pen"></i>
-                                           </a>
-                                       </div>
-                                        <div class="ms-1">
-                                          <form th:action="@{/administrator/stock/ingredientes/{id}(id=${ingrediente.id})}"
-                                                method="post">
-                                            <input type="hidden" name="id" th:value="${ingrediente.id}"/>
-                                            <button type="submit" class="btn btn-danger">
-                                              <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                          </form>
-                                        </div>
+                                    <div class="d-flex justify-content-start">
+                                        <a class="btn btn-primary" th:href="@{/administrator/stock/ingredientes/update(id=${ingrediente.id})}">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button"
+                                                class="deletar btn btn-danger mx-1"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                th:attr="data-id=''+${ingrediente.id},
+                                                         data-nome=''+${ingrediente.nome},
+                                                         data-url='/administrator/stock/ingredientes/deletar/'">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -131,7 +129,8 @@
         </div>
     </div>
 </div>
-<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
+
+<div th:replace="~{layout/fragmentos/modal :: modal ('ingrediente')}"></div>
+<div th:replace="~{layout/fragmentos/scripts :: scripts}"></div>
 </body>
 </html>

@@ -73,7 +73,7 @@ public class FuncionarioController {
     }
 
     @PostMapping("/delete/{id}")
-    public ModelAndView delete(@RequestParam String id, RedirectAttributes redirectAttributes) {
+    public ModelAndView delete(@PathVariable String id, RedirectAttributes redirectAttributes) {
            ModelAndView mv = new ModelAndView("redirect:/administrator/employees");
 
            try {
