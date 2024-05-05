@@ -107,7 +107,7 @@
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li th:class="${pagina.first} ? disabled">
-                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number - 1})}"> < </a>
+                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number - 1})}"> &laquo; </a>
                                 </li>
                                 <th:block th:each="p : ${#numbers.sequence(0, pagina.totalPages - 1)}"
                                           th:with="paginaAtual=${pagina.number}">
@@ -117,7 +117,7 @@
                                 </th:block>
 
                                 <li th:class="${pagina.last} ? disabled">
-                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number + 1})}"> > </a>
+                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number + 1})}"> &raquo; </a>
                                 </li>
                             </ul>
                         </nav>
@@ -129,7 +129,6 @@
         </div>
     </div>
 </div>
-
 <div th:replace="~{layout/fragmentos/modal :: modal ('ingrediente')}"></div>
 <div th:replace="~{layout/fragmentos/scripts :: scripts}"></div>
 </body>

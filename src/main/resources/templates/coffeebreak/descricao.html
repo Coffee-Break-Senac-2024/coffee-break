@@ -2,45 +2,44 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
     <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
     <link rel="stylesheet" th:href="@{/css/descricao/descricao.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
-
     <title>Descrição</title>
 </head>
 <body>
-
 <div th:replace="~{ layout/coffeebreak/header :: header }"></div>
-
-<main class="descricao_container">
-<div class="back">
-<a href="/">
-    <img th:src="@{images/descricao/Back_button.png}" class = "back_button_image" alt="botão de voltar pra pagina inicial">
-</a>
-</div>
-<div class="product">
-
-    <img th:src="@{images/home/prod-01.png}" alt="Imagem de um café Mocha">
-
-
-
-<div class="product_description">
-    <h1>Mocha</h1>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris elementum, lorem non pulvinar
-        ultricies, nunc sem aliquet ex, quis mollis leo leo sed ligula. In mattis ullamcorper magna,
-        vitae consequat dolor lobortis non. Pellentesque interdum diam a nisl euismod, porttitor ullamcorper
-        purus bibendum. </p>
-    <h2>R$ 12,00</h2>
-    <button type="submit" value="carrinho">
-        Adicionar ao carrinho
-    </button>
-</div>
-
-
-
-</div>
+<main class="main_description">
+    <div class="main_description_title">
+        <h1>Descrição</h1>
+        <div class="main_description_title_return btn-style">
+            <a th:href="@{/}"> <i class="fa-solid fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+    <div class="main_description_content">
+        <div class="main_description_content_img">
+            <img th:src="@{images/home/prod-01.png}"
+                 title="Imagem de um café Mocha"
+                 alt="Imagem de um café Mocha">
+        </div>
+        <div class="main_description_content_info">
+            <h2>Mocha</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris elementum, lorem non pulvinar
+                ultricies, nunc sem aliquet ex, quis mollis leo leo sed ligula. In mattis ullamcorper magna,
+                vitae consequat dolor lobortis non. Pellentesque interdum diam a nisl euismod, porttitor ullamcorper
+                purus bibendum. </p>
+            <div class="main_description_content_info_price">
+                <p>R$ 12,00</p>
+            </div>
+            <div class="btn-style">
+                <a href="">Adicionar ao carinho</a>
+            </div>
+        </div>
+    </div>
 </main>
-
+<div th:replace="~{ layout/coffeebreak/footer :: footer }"></div>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js"
+        crossorigin="anonymous"></script>
 </body>
 </html>
