@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Coffee Break</title>
-    <link rel="stylesheet" th:href="@{/css/reset.css}">
-    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <th:block th:replace="~{ layout/fragmentos/coffebreak/links :: links }"></th:block>
     <link rel="stylesheet" th:href="@{/css/pedidos/pedidos.css}">
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
 </head>
 <body>
 
@@ -17,7 +15,7 @@
     <div class="buttons-container">
         <a class="button button-active" th:href="@{/pedidos}">Pedidos</a>
     	<a class="button" th:href="@{/historicoPedidos}">Últimos Pedidos</a>
-									
+
     </div>
 
     <div class="container1">
@@ -50,8 +48,6 @@
 </main>
 
 <div th:replace="~{layout/coffeebreak/footer :: footer}"></div>
-
-<script src="https://kit.fontawesome.com/f6b0e6c728.js"
-        crossorigin="anonymous"></script>
+<div th:replace="~{layout/fragmentos/coffebreak/scripts :: scripts}"></div>
 </body>
 </html>

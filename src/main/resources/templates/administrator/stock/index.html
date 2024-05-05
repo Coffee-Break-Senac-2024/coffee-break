@@ -37,7 +37,8 @@
 
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">
-                            <a class="btn btn-primary" th:href="@{/administrator/stock/create}">Cadastrar Ingrediente</a>
+                            <a class="btn btn-primary" th:href="@{/administrator/stock/create}">Cadastrar
+                                Ingrediente</a>
                         </div>
 
                         <div class="mb-3">
@@ -82,7 +83,8 @@
                                 <td th:text="${ingrediente.quantidade}">Quantidade</td>
                                 <td>
                                     <div class="d-flex justify-content-start">
-                                        <a class="btn btn-primary" th:href="@{/administrator/stock/ingredientes/update(id=${ingrediente.id})}">
+                                        <a class="btn btn-primary"
+                                           th:href="@{/administrator/stock/ingredientes/update(id=${ingrediente.id})}">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
                                         <button type="button"
@@ -107,17 +109,22 @@
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li th:class="${pagina.first} ? disabled">
-                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number - 1})}"> &laquo; </a>
+                                    <a class="page-link"
+                                       th:href="@{/administrator/stock/ingredientes(page=${pagina.number - 1})}">
+                                        &laquo; </a>
                                 </li>
                                 <th:block th:each="p : ${#numbers.sequence(0, pagina.totalPages - 1)}"
                                           th:with="paginaAtual=${pagina.number}">
                                     <li th:class="${paginaAtual == p} ? 'active'">
-                                        <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${p})}">[[${p + 1}]]</a>
+                                        <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${p})}">[[${p
+                                            + 1}]]</a>
                                     </li>
                                 </th:block>
 
                                 <li th:class="${pagina.last} ? disabled">
-                                    <a class="page-link" th:href="@{/administrator/stock/ingredientes(page=${pagina.number + 1})}"> &raquo; </a>
+                                    <a class="page-link"
+                                       th:href="@{/administrator/stock/ingredientes(page=${pagina.number + 1})}">
+                                        &raquo; </a>
                                 </li>
                             </ul>
                         </nav>
@@ -129,7 +136,7 @@
         </div>
     </div>
 </div>
-<div th:replace="~{layout/fragmentos/modal :: modal ('ingrediente')}"></div>
-<div th:replace="~{layout/fragmentos/scripts :: scripts}"></div>
+<div th:replace="~{layout/fragmentos/administrator/modal :: modal ('ingrediente')}"></div>
+<div th:replace="~{layout/fragmentos/administrator/scripts :: scripts}"></div>
 </body>
 </html>
