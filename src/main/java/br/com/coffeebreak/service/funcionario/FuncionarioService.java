@@ -1,24 +1,41 @@
 package br.com.coffeebreak.service.funcionario;
 
+import br.com.coffeebreak.dto.TokenDTO;
 import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.repositories.FuncionarioRepository;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
+import br.com.coffeebreak.strategy.authentication.AtendenteStrategy;
+import br.com.coffeebreak.strategy.authentication.GerenteStrategy;
+import br.com.coffeebreak.strategy.authentication.LoginStrategy;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FuncionarioService {
+
     @Autowired
     private FuncionarioRepository repository;
+
+    @Value("${gerente.security.token.secret}")
+    private String gerenteKey;
+
+    @Value("${atendente.security.token.secret}")
+    private String atendenteKey;
+
 
     /**
      * Retorna uma paginação de funcionarios.
@@ -27,6 +44,17 @@ public class FuncionarioService {
     @Transactional(readOnly = true)
     public Page<Funcionario> getFuncionariosPage(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public TokenDTO authenticate(LoginStrategy loginStrategy, Funcionario funcionario) {
+
+        if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
+            loginStrategy = new GerenteStrategy();
+            return loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+        } else {
+            loginStrategy = new AtendenteStrategy();
+            return loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+        }
     }
 
     /**
