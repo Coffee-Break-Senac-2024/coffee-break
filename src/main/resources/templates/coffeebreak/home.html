@@ -30,186 +30,24 @@
 
         <section class="main_products_news">
             <h2>Novidades</h2>
-            <div class="main_products_news_content">
+            <div th:each="produto : ${produtos}" class="main_products_news_content">
 
                 <article class="product_item">
                     <header>
-                        <h3>Mocha</h3>
+                        <h3 th:text="*{produto.nome}"></h3>
                     </header>
 
                     <div class="product_item_content">
 
                         <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
+                            <img th:src="@{'/images/produtos/' + ${produto.nomeImagem}}"
                                  alt="Xícara de café"
                                  title="Xícara de café">
                         </div>
 
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
                         <div class="product_item_content_price">
                             <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
+                            <p th:text="*{produto.preco}" class="product_item_content_price_item"></p>
                         </div>
 
                         <div class="product_item_content_buttons">
@@ -229,122 +67,24 @@
 
         <section class="main_products_news" id="cardapio">
             <h2>Cafés Tradicionais</h2>
-            <div class="main_products_news_content">
+            <div th:each="produto : ${produtos}" class="main_products_news_content">
 
                 <article class="product_item">
                     <header>
-                        <h3>Mocha</h3>
+                        <h3 th:text="*{produto.nome}"></h3>
                     </header>
 
                     <div class="product_item_content">
 
                         <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
+                            <img th:src="@{'/images/produtos/' + ${produto.nomeImagem}}"
                                  alt="Xícara de café"
                                  title="Xícara de café">
                         </div>
 
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
                         <div class="product_item_content_price">
                             <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="product_item">
-                    <header>
-                        <h3>Mocha</h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{/images/home/prod-01.png}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <p>Espresso, Leite vaporizado e ganache de chocolate.</p>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p class="product_item_content_price_item">R$ 12,00</p>
+                            <p th:text="*{produto.preco}" class="product_item_content_price_item"></p>
                         </div>
 
                         <div class="product_item_content_buttons">
