@@ -46,8 +46,10 @@
                         </div>
 
                         <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p th:text="*{produto.preco}" class="product_item_content_price_item"></p>
+                            <p th:text="*{produto.descricao}"></p>
+                            <p class="product_item_content_price_item">
+                                R$ <span th:text="*{produto.preco}" ></span>
+                            </p>
                         </div>
 
                         <div class="product_item_content_buttons">
