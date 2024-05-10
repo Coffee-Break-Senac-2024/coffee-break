@@ -72,11 +72,15 @@ public class EstoqueService {
      */
     @Transactional
     public void update(Estoque estoque) {
-        if (estoque.getId() == null){
-            throw new RuntimeException("Não foi possível atualizar.");
-        }
-        repository.save(estoque);
+        repository
+                .findById(estoque.getId())
+                .ifPresent(estoqueUpdate -> {
+                    estoqueUpdate.setNome(estoque.getNome());
+                    estoqueUpdate.setQuantidade(estoque.getQuantidade());
+                    repository.save(estoqueUpdate);
+                });
     }
+
     /**
      * Deleta um Estoque por ID
      * @Return void

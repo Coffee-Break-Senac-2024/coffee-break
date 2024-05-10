@@ -52,11 +52,22 @@ public class FuncionarioService {
 
     /**
      * Atualiza funcionario no banco de daoos.
+     *
      * @Return void
      */
     @Transactional
     public void atualizarFuncionario(Funcionario funcionario) {
-        repository.save(funcionario);
+        repository
+                .findById(funcionario.getId())
+                .ifPresent(funcionarioUpdated -> {
+                    funcionarioUpdated.setNome(funcionario.getNome());
+                    funcionarioUpdated.setEmail(funcionario.getEmail());
+                    funcionarioUpdated.setSenha(funcionario.getSenha());
+                    funcionarioUpdated.setTipoFuncionario(funcionario.getTipoFuncionario());
+                    funcionarioUpdated.setEntrada(funcionario.getEntrada());
+
+                    repository.save(funcionarioUpdated);
+                });
     }
 
     /**
