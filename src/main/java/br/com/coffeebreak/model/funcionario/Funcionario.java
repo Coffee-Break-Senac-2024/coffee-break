@@ -2,6 +2,7 @@ package br.com.coffeebreak.model.funcionario;
 
 import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.pedido.Pedido;
+import br.com.coffeebreak.service.constant.Mensagem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,24 +27,24 @@ public class Funcionario {
     private String id;
 
     @Column(nullable = false)
-    @NotEmpty(message = "O campo nome é obrigatótio.")
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_NOME)
     private String nome;
 
     @Column(nullable = false)
-    @NotNull(message = "O campo tipo de funcinário é obrigatótio.")
+    @NotNull(message = Mensagem.FORMULARIO_VALIDACAO_TIPO_FUNCIONARIO)
     private TipoFuncionario tipoFuncionario;
 
     @Column(unique = true, nullable = false)
-    @Email(message = "O campo email é obrigatótio.")
+    @Email(message = Mensagem.FORMULARIO_VALIDACAO_EMAIL)
     private String email;
 
     @Column(nullable = false)
-    @NotEmpty(message = "O campo nome é obrigatótio")
-    @Size(max = 14, min = 8, message = "O campo senha dever ter no minímo 8 e maxímo 14 caracteres.")
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_SENHA)
+    @Size(max = 14, min = 8, message = Mensagem.FORMULARIO_VALIDACAO_SENHA_TAMANHO)
     private String senha;
 
     @Column(nullable = false)
-    @NotNull(message = "A data não pode ser nula.")
+    @NotNull(message = Mensagem.FORMULARIO_VALIDACAO_DATA)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime entrada;
 

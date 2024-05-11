@@ -1,6 +1,7 @@
 package br.com.coffeebreak.model.estoque;
 
 import br.com.coffeebreak.model.produto.Produto;
+import br.com.coffeebreak.service.constant.Mensagem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -20,14 +21,14 @@ public class Estoque {
     private String id;
 
     @Column(nullable = false)
-    @NotEmpty(message = "O nome é obrigatório.")
-    @Size(max = 20, message = "O limite de caracteres é 20.")
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_NOME)
+    @Size(max = 20, message = Mensagem.FORMULARIO_VALIDACAO_LIMITE_CARACTER)
     private String nome;
 
     @Column(nullable = false)
-    @NotNull(message = "A quantidade é obrigatória.")
-    @Min(value = 1, message = "A quantidade deve ser maior que zero.")
-    @Max(value = 100, message = "A quantidade deve ser menor que 100.")
+    @NotNull(message = Mensagem.FORMULARIO_VALIDACAO_QUANTIDADE)
+    @Min(value = 1, message = Mensagem.FORMULARIO_VALIDACAO_QUANTIDADE_MENOR)
+    @Max(value = 100, message = Mensagem.FORMULARIO_VALIDACAO_QUANTIDADE_MAIOR)
     private Integer quantidade;
 
     @ManyToOne(cascade = CascadeType.ALL)
