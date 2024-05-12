@@ -4,6 +4,9 @@ import br.com.coffeebreak.controller.produto.ProductController;
 import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +22,9 @@ public class CoffeeBreakController {
     private ProdutoService service;
 
     @GetMapping
-    public ModelAndView home(){
+    public ModelAndView home(@PageableDefault(size = 8) Pageable pageable){
         ModelAndView mv = new ModelAndView("coffeebreak/home");
-        List<Produto> produtos = service.getAllProducts();
+        Page<Produto> produtos = service.getAllProducts(pageable);
         mv.addObject("produtos", produtos);
         return mv;
     }

@@ -54,10 +54,8 @@
 
 .main_products_news_content {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 10px;
-    margin: 20px 0;
+    justify-content: space-between;
 }
 
 /* PRODUCTS NEWS CARD ITEM */
@@ -98,6 +96,8 @@
 }
 
 .product_item_content_price .product_item_content_price_item {
+    display: flex;
+    align-items: end;
     color: #000;
     font-size: 1.4em;
     font-weight: bold;
@@ -134,4 +134,41 @@
     border: none;
     padding: 5px;
     border-radius: 10px;
+}
+
+/* Paginacao */
+
+.paginacao {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.paginacao .pagination {
+    display: inline-block;
+}
+
+.paginacao .pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.paginacao .pagination li.disabled {
+    pointer-events: none;
+}
+
+.paginacao .pagination li.active a {
+    background-color: #7A5955;
+    color: #28AA63;
+    border-color: #7A5955;
+}
+
+.paginacao .pagination li a {
+    color: #7A5955;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+
+.paginacao .pagination li a:hover {
+    background-color: #f2f2f2;
 }

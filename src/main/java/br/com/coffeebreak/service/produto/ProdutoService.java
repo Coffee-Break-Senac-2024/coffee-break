@@ -5,6 +5,8 @@ import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.repositories.ProdutoRepository;
 import br.com.coffeebreak.service.stock.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,6 +50,10 @@ public class ProdutoService {
 
     public List<Produto> getAllProducts() {
         return this.produtoRepository.findAll();
+    }
+
+    public Page<Produto> getAllProducts(Pageable pageable) {
+        return produtoRepository.findAll(pageable);
     }
 
 

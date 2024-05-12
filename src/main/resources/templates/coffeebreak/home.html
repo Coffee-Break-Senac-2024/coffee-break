@@ -30,85 +30,87 @@
 
         <section class="main_products_news">
             <h2>Novidades</h2>
-            <div th:each="produto : ${produtos}" class="main_products_news_content">
+            <div  class="main_products_news_content">
+                <div th:each="produto : ${produtos.content}">
+                    <article class="product_item">
+                        <header>
+                            <h3 th:text="*{produto.nome}"></h3>
+                        </header>
 
-                <article class="product_item">
-                    <header>
-                        <h3 th:text="*{produto.nome}"></h3>
-                    </header>
+                        <div class="product_item_content">
 
-                    <div class="product_item_content">
+                            <div class="product_item_content_img">
+                                <img th:src="@{'/images/produtos/' + ${produto.nomeImagem}}"
+                                     alt="Xícara de café"
+                                     title="Xícara de café">
+                            </div>
 
-                        <div class="product_item_content_img">
-                            <img th:src="@{'/images/produtos/' + ${produto.nomeImagem}}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
+                            <div class="product_item_content_price">
+                                <p th:text="*{produto.descricao}"></p>
+                                <p class="product_item_content_price_item">
+                                    R$ <span th:text="*{produto.preco}" ></span>
+                                </p>
+                            </div>
+
+                            <div class="product_item_content_buttons">
+                                <button class="product_item_content_buttons_decrement" onclick="decrementarQuantidade(this)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <p class="product_item_content_buttons_quantity">1</p>
+                                <button class="product_item_content_buttons_increase" onclick="incrementarQuantidade(this)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                                <button class="product_item_content_buttons_add">Adicionar</button>
+                            </div>
+
                         </div>
+                    </article>
+                </div>
+            </div>
+            <div class="paginacao">
+                <nav aria-label="Pagination">
+                    <ul class="pagination">
+                        <li th:class="${produtos.first} ? disabled">
+                            <a class="page-link" th:href="@{/(page=${produtos.number - 1})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
 
-                        <div class="product_item_content_price">
-                            <p th:text="*{produto.descricao}"></p>
-                            <p class="product_item_content_price_item">
-                                R$ <span th:text="*{produto.preco}" ></span>
-                            </p>
-                        </div>
+                        <th:block th:each="p : ${#numbers.sequence(0, produtos.totalPages - 1)}"
+                                  th:with="produtosAtual=${produtos.number}">
+                            <li th:class="${produtosAtual == p} ? 'active'">
+                                <a class="page-link" th:href="@{/(page=${p})}" th:text="${p + 1}"></a>
+                            </li>
+                        </th:block>
 
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
+                        <li th:class="${produtos.last} ? disabled">
+                            <a class="page-link" th:href="@{/(page=${produtos.number + 1})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </section>
-
-        <section class="main_products_news" id="cardapio">
-            <h2>Cafés Tradicionais</h2>
-            <div th:each="produto : ${produtos}" class="main_products_news_content">
-
-                <article class="product_item">
-                    <header>
-                        <h3 th:text="*{produto.nome}"></h3>
-                    </header>
-
-                    <div class="product_item_content">
-
-                        <div class="product_item_content_img">
-                            <img th:src="@{'/images/produtos/' + ${produto.nomeImagem}}"
-                                 alt="Xícara de café"
-                                 title="Xícara de café">
-                        </div>
-
-                        <div class="product_item_content_price">
-                            <p>380ml</p>
-                            <p th:text="*{produto.preco}" class="product_item_content_price_item"></p>
-                        </div>
-
-                        <div class="product_item_content_buttons">
-                            <button class="product_item_content_buttons_decrement">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <p class="product_item_content_buttons_quantity">1</p>
-                            <button class="product_item_content_buttons_increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <button class="product_item_content_buttons_add">Adicionar</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
     </main>
-    
+    <script>
+        function incrementarQuantidade(button) {
+            var quantityElement = button.parentElement.querySelector('.product_item_content_buttons_quantity');
+            var currentQuantity = parseInt(quantityElement.textContent);
+            quantityElement.textContent = currentQuantity + 1;
+        }
+
+        function decrementarQuantidade(button) {
+            var quantityElement = button.parentElement.querySelector('.product_item_content_buttons_quantity');
+            var currentQuantity = parseInt(quantityElement.textContent);
+            if (currentQuantity > 1) {
+                quantityElement.textContent = currentQuantity - 1;
+            }
+        }
+    </script>
+
     <div th:replace="~{ layout/coffeebreak/footer :: footer }"></div>
-    <script th:src="@{/js/menu.js}"></script>
-    <script src="https://kit.fontawesome.com/f6b0e6c728.js"
-            crossorigin="anonymous"></script>
+<script th:src="@{/js/menu.js}"></script>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
 </body>
 </html>
