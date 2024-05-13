@@ -1,12 +1,13 @@
 package br.com.coffeebreak.model.ItemProduto;
 
-import br.com.coffeebreak.model.cliente.Cliente;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
 import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.UUID;
-
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "item_produto")
 public class ItemProduto {
 
@@ -25,4 +26,10 @@ public class ItemProduto {
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 
+    public ItemProduto(Pedido pedido, Produto produto, Integer quantidade, Double precoProduto) {
+        this.setPedido(pedido);
+        this.setProduto(produto);
+        this.quantidade = quantidade;
+        this.precoProduto = precoProduto;
+    }
 }

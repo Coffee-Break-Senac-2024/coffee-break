@@ -41,4 +41,5 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
+
 }
