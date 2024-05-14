@@ -15,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .form-container span {
@@ -23,8 +24,9 @@ body {
     display: inline-block;
 }
 
-#title {
-    font-size: 40px;
+.title {
+    font-size: 20px;
+    margin-top: 16px;
 }
 
 
@@ -36,12 +38,13 @@ body {
     border-radius: 8px;
     text-indent: 16px;
     margin-top: 20px;
+    background: none;
 }
 
 .form-container img {
     width: 150px;
     height: 150px;
-    margin-top: 150px;
+    margin-top: 30px;
     margin-bottom: 50px;
 }
 .form {

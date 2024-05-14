@@ -72,6 +72,7 @@
 			<version>3.2.5</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
@@ -81,6 +82,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.1.2.RELEASE</version>
 		</dependency>
 	</dependencies>
 

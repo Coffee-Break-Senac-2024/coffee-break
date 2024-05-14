@@ -1,25 +1,22 @@
 package br.com.coffeebreak.service.funcionario;
 
-import br.com.coffeebreak.dto.TokenDTO;
 import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.repositories.FuncionarioRepository;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
-import br.com.coffeebreak.strategy.authentication.AtendenteStrategy;
-import br.com.coffeebreak.strategy.authentication.GerenteStrategy;
-import br.com.coffeebreak.strategy.authentication.LoginStrategy;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+import br.com.coffeebreak.service.funcionario.strategy.AdminStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.AtendenteStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.GerenteStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.LoginStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,12 +27,14 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository repository;
 
-    @Value("${gerente.security.token.secret}")
-    private String gerenteKey;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @Value("${atendente.security.token.secret}")
-    private String atendenteKey;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private AuthFuncionarioService authFuncionarioService;
 
     /**
      * Retorna uma paginação de funcionarios.
@@ -46,14 +45,20 @@ public class FuncionarioService {
         return repository.findAll(pageable);
     }
 
-    public TokenDTO authenticate(LoginStrategy loginStrategy, Funcionario funcionario) {
+    public void authenticate(Funcionario funcionario, String senha) {
+        LoginStrategy loginStrategy;
 
-        if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
+        if (funcionario.getTipoFuncionario().equals(TipoFuncionario.ADMIN)) {
+            loginStrategy = new AdminStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            System.out.println("Chegou aqui no strategy");
+            loginStrategy.login(funcionario.getEmail(), senha);
+        }
+        else if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
             loginStrategy = new GerenteStrategy();
-            return loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+            loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
         } else {
             loginStrategy = new AtendenteStrategy();
-            return loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+            loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
         }
     }
 
@@ -98,6 +103,11 @@ public class FuncionarioService {
         if (funcionarioOptional.isPresent()){
             throw new EmailCadastradoException("Email já cadastrado");
         }
+
+        String passwordEncoded = passwordEncoder.encode(funcionario.getSenha());
+
+        funcionario.setSenha(passwordEncoded);
+
         repository.save(funcionario);
     }
 
@@ -123,5 +133,9 @@ public class FuncionarioService {
             tiposFuncionario.add(tipo.name());
         }
         return tiposFuncionario;
+    }
+
+    public Funcionario getFuncionarioByEmail(String email) {
+        return repository.findByEmail(email).orElse(null);
     }
 }

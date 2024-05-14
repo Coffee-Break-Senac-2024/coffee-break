@@ -1,5 +1,6 @@
 package br.com.coffeebreak.controller;
 
+import br.com.coffeebreak.dto.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,9 @@ public class CoffeeBreakController {
 
     @GetMapping("/login")
     public ModelAndView login() {
-        return new ModelAndView("coffeebreak/login");
+        ModelAndView mv = new ModelAndView("coffeebreak/login");
+        mv.addObject("user", new UserDTO());
+        return mv;
     }
 
     @GetMapping("/create")

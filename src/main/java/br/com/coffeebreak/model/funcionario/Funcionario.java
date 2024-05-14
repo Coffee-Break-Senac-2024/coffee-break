@@ -9,8 +9,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -19,7 +23,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "funcionarios")
-public class Funcionario {
+public class Funcionario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,6 +35,7 @@ public class Funcionario {
 
     @Column(nullable = false)
     @NotNull(message = "O campo tipo de funcinário é obrigatótio.")
+    @Enumerated(EnumType.STRING)
     private TipoFuncionario tipoFuncionario;
 
     @Column(unique = true, nullable = false)
@@ -39,12 +44,9 @@ public class Funcionario {
 
     @Column(nullable = false)
     @NotEmpty(message = "O campo nome é obrigatótio")
-    @Size(max = 14, min = 8, message = "O campo senha dever ter no minímo 8 e maxímo 14 caracteres.")
     private String senha;
 
     @Column(nullable = false)
-    @NotNull(message = "A data não pode ser nula.")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime entrada;
 
 
@@ -53,4 +55,45 @@ public class Funcionario {
     @OneToMany(mappedBy = "funcionario")
     List<Pedido> pedidos;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.tipoFuncionario.equals(TipoFuncionario.ADMIN)) {
+            return List.of(new SimpleGrantedAuthority("ADMIN"));
+        } else if (this.tipoFuncionario.equals(TipoFuncionario.ATENDENTE)) {
+            return List.of(new SimpleGrantedAuthority("ATENDENTE"));
+        }
+        else {
+            return List.of(new SimpleGrantedAuthority("GERENTE"));
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

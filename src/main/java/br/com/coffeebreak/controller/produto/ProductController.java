@@ -4,6 +4,7 @@ import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.service.stock.EstoqueService;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,7 @@ public class ProductController {
     private static String caminhoImagens = "D:\\images/";
 
     @GetMapping
+    @Secured("ADMIN")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView("administrator/product/index");
 
