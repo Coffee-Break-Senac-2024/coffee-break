@@ -1,0 +1,101 @@
+h1 {
+    font-size: 2.4em;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.main_products {
+    max-width: 1024px;
+    margin: 0 auto;
+    border: solid 3px #28AA63;
+    border-radius: 5px;
+
+}
+
+.main_products_content {
+    padding: 10px;
+}
+
+.main_products_content article {
+    display: flex;
+    border: solid 3px #28AA63;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 5px;
+
+}
+
+.main_products_content article header {
+    text-align: center;
+    flex-basis: 30%;
+}
+
+.main_products_content article header h2 {
+    font-size: 1.6em;
+    color: #7A5955;
+}
+
+.main_products_content article header img {
+    max-width: 80px;
+    border-radius: 100%;
+}
+
+.main_products_content article p {
+    color: #7A5955;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+}
+
+.main_products_content article p span {
+    color: #090300;
+    font-weight: bold;
+}
+
+.main_products_finish {
+    background-color: #524f4a;
+    padding: 40px 20px;
+    margin-top: 10px;
+}
+
+.main_products_finish p, a{
+    color:white;
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
+.main_products_finish_actions {
+    text-align: end;
+}
+
+.main_products_finish_actions_cancelled {
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.4em;
+}
+
+.main_products_finish_actions_active {
+    background-color: #28AA63;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.4em;
+}
+
+.not_products {
+    font-size: 1.6em;
+    text-align: center;
+    height: 100vh;
+}
+
+.btn-remover {
+    background-color: red;
+    font-size: 1.3em;
+    color: #F7EFE1;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-remover:hover {
+    background-color: #550404;
+    cursor: pointer;
+}

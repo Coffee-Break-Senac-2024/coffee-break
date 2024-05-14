@@ -26,7 +26,7 @@ public class ProductController {
     @Autowired
     private EstoqueService estoqueService;
 
-    private static String caminhoImagens = "D:\\images/";
+    private static String caminhoImagens = "src/main/resources/static/images/produtos/";
 
     @GetMapping
     @Secured("ADMIN")
@@ -138,8 +138,4 @@ public class ProductController {
         return mv;
 
     }
-
-
-
-
 }

@@ -36,11 +36,11 @@
                     </div>
                 </div>
 
-                <div class="card p-3 vh-100">
+                <div class="card p-3 mb-3">
                     <div class="mb-3">
                         <h2 class="h3 text-black-50">Cadastrar Produto</h2>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 mb-5">
                         <form method="post"
                               th:action="${produto.getId() == null ? '/administrator/products/create' : '/administrator/products/update' }"
                               enctype="multipart/form-data"
@@ -54,6 +54,15 @@
                                        id="nome"
                                        th:field="*{nome}"
                                        th:value="${produto.nome}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="descricao"
+                                       th:field="*{descricao}"
+                                       th:value="${produto.descricao}"
                                        required>
                             </div>
                             <div class="mb-3">
@@ -82,8 +91,7 @@
                                 <input type="file"
                                        class="form-control"
                                        id="imagem"
-                                       name="file"
-                                >
+                                       name="file">
                             </div>
 
                             <div class="mb-3">
@@ -102,9 +110,10 @@
                                     </option>
                                 </select>
                             </div>
-
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
-                            <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
+                            </div>
                         </form>
                     </div>
                 </div>

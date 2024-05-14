@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens do Carrinho</title>
+    <th:block th:replace="~{ layout/fragmentos/coffebreak/links :: links }"></th:block>
+    <link rel="stylesheet" th:href="@{/css/carrinho/carrinho.css}">
+</head>
+<body>
+<div th:replace="~{ layout/coffeebreak/header :: header }"></div>
+
+<h1>Carrinho de Compras</h1>
+<main>
+    <div class="main_products">
+        <div  class="main_products_content">
+            <div th:each="item : ${pedidos}">
+                <article>
+                    <header>
+                        <img th:src="@{'/images/produtos/' + ${item.produto.nomeImagem}}"
+                             alt="Xícara de café"
+                             title="Xícara de café">
+                        <h2 th:text="${item.produto.nome}"></h2>
+                    </header>
+                    <div>
+                        <p class="main_products_content_quantity">Quantidade: <span th:text="${item.quantidade}"></span></p>
+                        <p class="main_products_content_price">Preço Unitário: R$ <span th:text="${item.produto.preco}"></span></p>
+                        <p class="main_products_content_total_price">Total: R$ <span th:text="${item.produto.preco * item.quantidade}"></span></p>
+                        <form id="#formularioExcluir" th:action="@{/meu-carrinho/remover/{id}}" method="post">
+                            <input type="hidden" th:name="id" th:value="${item.id}">
+                            <button class="btn-remover" type="submit">Remover</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+            <div  th:if="${pedidos.isEmpty()}" class="not_products">
+                <p>Nenhum produto selecionado</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main_products_finish">
+        <p>Items: <span th:text="*{items}"></span></p>
+        <p th:if="${pedidos != null}">Preço Total:R$ <span th:text="*{precoTotal}"></span></p>
+
+        <div class="main_products_finish_actions">
+            <a class="main_products_finish_actions_cancelled" href="">Cancelar Pedido</a>
+            <a class="main_products_finish_actions_active" href="">Finalizar Pedido</a>
+        </div>
+    </div>
+</main>
+<div th:replace="~{ layout/coffeebreak/footer :: footer }"></div>
+<div th:replace="~{ layout/fragmentos/coffebreak/scripts :: scripts }"></div>
+</body>
+</html>
