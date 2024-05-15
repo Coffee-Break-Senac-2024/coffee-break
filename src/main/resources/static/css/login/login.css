@@ -65,6 +65,11 @@ body {
 
 
 }
+.form a{
+    font-size: 20px;
+    color: #28AA63;
+    margin-top: 10px;
+}
 
 .form-container button {
     width: 390px;
