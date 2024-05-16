@@ -23,7 +23,7 @@ body {
     display: inline-block;
 }
 
-#title {
+.title {
     font-size: 40px;
 }
 

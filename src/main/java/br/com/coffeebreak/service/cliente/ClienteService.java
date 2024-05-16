@@ -2,11 +2,14 @@ package br.com.coffeebreak.service.cliente;
 
 import br.com.coffeebreak.model.cliente.Cliente;
 import br.com.coffeebreak.repositories.ClienteRepository;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -17,17 +20,23 @@ public class ClienteService{
     @Transactional
     public void insertCliente(Cliente cliente){
        Optional<Cliente> clienteOP = clienteRepository.findByCpf(cliente.getCpf());
-       if(clienteOP.isPresent()){
+       if(clienteOP.isPresent()) {
            System.out.println("CLiente já cadastrado");
-               return;
+           return;
        }
-       if(clienteOP.isEmpty()){
-            System.out.println("Não pode ser nulo");
-            return;
-        }
+
+
        clienteRepository.save(cliente);
 
     }
+
+    @Transactional
+    public boolean getCliente(String email){
+        Optional<Cliente> clienteOP = clienteRepository.findByEmail(email);
+        return clienteOP.isPresent();
+
+    }
+
 
 
 

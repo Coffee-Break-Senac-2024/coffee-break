@@ -40,7 +40,7 @@ public class ClienteController {
             clienteService.insertCliente(cliente);
         } catch (Exception e){
             System.out.println(e);
-          //  return new ModelAndView("redirect:/cadastro");
+          return new ModelAndView("redirect:/cadastro");
         }
 
 
@@ -51,6 +51,14 @@ public class ClienteController {
         return new ModelAndView("redirect:/login");
     }
 
+    @GetMapping("/logar")
+    public ModelAndView logar (@Valid  @ModelAttribute("email") String email
+    ){
 
+        if(clienteService.getCliente(email)){
+            return new ModelAndView("redirect:/");
+        }
+        return new ModelAndView("redirect:/login");
+    }
 
 }
