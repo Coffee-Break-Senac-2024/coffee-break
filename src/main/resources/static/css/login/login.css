@@ -23,7 +23,7 @@ body {
     display: inline-block;
 }
 
-#title {
+.title {
     font-size: 40px;
 }
 
@@ -64,6 +64,11 @@ body {
     color: #28AA63;
 
 
+}
+.form a{
+    font-size: 20px;
+    color: #28AA63;
+    margin-top: 10px;
 }
 
 .form-container button {
