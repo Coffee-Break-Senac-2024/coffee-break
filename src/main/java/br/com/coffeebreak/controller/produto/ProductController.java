@@ -5,6 +5,7 @@ import br.com.coffeebreak.service.stock.EstoqueService;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,7 @@ public class ProductController {
     private static String caminhoImagens = "src/main/resources/static/images/produtos/";
 
     @GetMapping
-    @Secured("ADMIN")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView("administrator/product/index");
 
@@ -40,6 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView create(){
         ModelAndView mv = new ModelAndView("administrator/product/create");
         mv.addObject("ingredientes", this.estoqueService.getAllIngredientes());
@@ -48,6 +50,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView createProduct(@ModelAttribute("produto") Produto produto, @RequestParam(name = "ingredientes") List<String> ingredientes, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile arquivo) {
         System.out.println("entrou aqui por aquele motivo");
        produto.setEstoqueList(this.produtoService.getIngredientsToBeUsed(ingredientes));
@@ -76,6 +79,7 @@ public class ProductController {
 
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView deleteProduct(@PathVariable String id, RedirectAttributes redirectAttributes) {
         boolean isDeleted = this.produtoService.excluirProduto(id);
 
@@ -90,6 +94,7 @@ public class ProductController {
     }
 
     @GetMapping("/update")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView updateProduct(@RequestParam("id") String id, Produto produto, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView("administrator/product/create");
         try {
@@ -106,6 +111,7 @@ public class ProductController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView updateProduct(@ModelAttribute("produto") Produto produto, RedirectAttributes redirectAttributes, @RequestParam(name = "ingredientes") List<String> ingredientes, @RequestParam(name = "file") MultipartFile arquivo) {
         ModelAndView mv = new ModelAndView("/administrator/product/create");
         produto.setEstoqueList(this.produtoService.getIngredientsToBeUsed(ingredientes));

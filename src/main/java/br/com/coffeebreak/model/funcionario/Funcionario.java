@@ -46,7 +46,6 @@ public class Funcionario implements UserDetails {
 
     @Column(nullable = false)
     @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_SENHA)
-    @Size(max = 14, min = 8, message = Mensagem.FORMULARIO_VALIDACAO_SENHA_TAMANHO)
     private String senha;
 
     @Column(nullable = false)

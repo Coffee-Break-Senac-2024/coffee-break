@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 @Controller()
 @RequestMapping("/")
@@ -42,11 +41,6 @@ public class CoffeeBreakController {
         return mv;
     }
 
-    @GetMapping("/create")
-    public ModelAndView create() {
-        return new ModelAndView("coffeebreak/cadastro");
-    }
-
     @GetMapping("/pedidos")
     public ModelAndView pedidos() {
         return new ModelAndView("coffeebreak/pedidos");
@@ -55,6 +49,11 @@ public class CoffeeBreakController {
     @GetMapping("/historicoPedidos")
     public ModelAndView historicoPedidos() {
         return new ModelAndView("coffeebreak/historicoPedidos");
+    }
+
+    @GetMapping("/descricao")
+    public ModelAndView desc (){
+        return new ModelAndView("coffeebreak/descricao");
     }
 
 }

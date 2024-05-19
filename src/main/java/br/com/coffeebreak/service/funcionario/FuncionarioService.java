@@ -54,11 +54,11 @@ public class FuncionarioService {
             loginStrategy.login(funcionario.getEmail(), senha);
         }
         else if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
-            loginStrategy = new GerenteStrategy();
-            loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+            loginStrategy = new GerenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy.login(funcionario.getEmail(), senha);
         } else {
-            loginStrategy = new AtendenteStrategy();
-            loginStrategy.login(funcionario.getEmail(), funcionario.getSenha());
+            loginStrategy = new AtendenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy.login(funcionario.getEmail(), senha);
         }
     }
 

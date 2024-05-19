@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -39,7 +38,7 @@ public class Pedido {
     private List<ItemProduto> itemProdutos;
 
     @ManyToOne
-    @JoinColumn(name = "id_funcionario")
+    @JoinColumn(name = "id_funcionario", nullable = true)
     private Funcionario funcionario;
 
 }

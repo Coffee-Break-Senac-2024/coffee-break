@@ -25,8 +25,12 @@ body {
 }
 
 .title {
+<<<<<<< HEAD
     font-size: 20px;
     margin-top: 16px;
+=======
+    font-size: 40px;
+>>>>>>> b41b2dd54ddd582842491f28ffb082201e43b970
 }
 
 
@@ -67,6 +71,11 @@ body {
     color: #28AA63;
 
 
+}
+.form a{
+    font-size: 20px;
+    color: #28AA63;
+    margin-top: 10px;
 }
 
 .form-container button {

@@ -13,6 +13,7 @@
            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
 
             <div class="form">
+
             <span class="title">Email</span>
             <input type="text" placeholder="Email" th:field="*{email}"
             th:value="${user.email}"
@@ -25,9 +26,10 @@
             th:value="${user.senha}"
                      name="senha"
             />
+
             <div>
                 <span>ou</span>
-                <span>cadastre-se</span>
+                <a th:href="@{/cadastro}"> cadastre-se</a>
             </div>
                 <form>
                 <button type="submit">Entrar</button>

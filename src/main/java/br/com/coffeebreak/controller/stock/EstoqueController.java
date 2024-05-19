@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,7 @@ public class EstoqueController {
     private EstoqueService service;
 
     @GetMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView index(Model model){
         ModelAndView mv = new ModelAndView("administrator/stock/create");
         model.addAttribute("estoque", new Estoque());
@@ -32,6 +35,7 @@ public class EstoqueController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public String create(
             @Valid @ModelAttribute("estoque") Estoque estoque,
             BindingResult result,
@@ -52,6 +56,7 @@ public class EstoqueController {
     }
 
     @GetMapping("/ingredientes")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView listarEstoque(
             @RequestParam(required = false) String nome,
             @PageableDefault(size = 5) Pageable pageable) {
@@ -71,6 +76,7 @@ public class EstoqueController {
 
 
     @GetMapping("ingredientes/update")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView updateEstoque(
             @RequestParam("id") String id,
             Estoque estoque,
@@ -88,6 +94,7 @@ public class EstoqueController {
     }
 
     @PostMapping("ingredientes/update")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView updateEstoque(
             @Valid @ModelAttribute("estoque") Estoque estoque,
             BindingResult result,
@@ -110,6 +117,7 @@ public class EstoqueController {
     }
 
     @PostMapping("/ingredientes/deletar/{id}")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView excluirEstoque(
             @PathVariable("id") String id,
             RedirectAttributes redirectAttributes) {
