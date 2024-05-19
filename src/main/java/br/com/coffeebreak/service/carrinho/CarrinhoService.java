@@ -3,6 +3,7 @@ package br.com.coffeebreak.service.carrinho;
 import br.com.coffeebreak.enums.SituacaoPedido;
 import br.com.coffeebreak.enums.TipoPedido;
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
+import br.com.coffeebreak.model.cliente.Cliente;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.repositories.ClienteRepository;
@@ -88,7 +89,8 @@ public class CarrinhoService {
     public Pedido salvarPedido(){
         pedido.setCreatedAt(LocalDateTime.now());
         pedido.setTipoPedido(TipoPedido.ENTREGA);
-        pedido.setCliente(clienteRepository.findClienteByNomeIgnoreCase("testeCliente"));
+        Cliente cliente = clienteRepository.findClienteByEmailIgnoreCase("clienteteste@gmail.com");
+        pedido.setCliente(cliente);
         pedido.setSituacao(SituacaoPedido.EM_ANDAMENTO.toString());
         pedido.setFuncionario(null);
         pedido.setPrecoTotal(calcularTotalCarrinho());

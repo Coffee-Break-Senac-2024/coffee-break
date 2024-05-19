@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
-import java.lang.ref.Cleaner;
 import java.util.Optional;
 
 public interface ClienteRepository extends JpaRepository<Cliente,String> {
@@ -16,6 +15,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,String> {
     @Query(value="SELECT c FROM cliente c WHERE c.email = ?1")
     Optional<Cliente> findByEmail(String email);
 
-    Cliente findClienteByNomeIgnoreCase(String nomoe);
+    Cliente findClienteByEmailIgnoreCase(String email);
 
 }

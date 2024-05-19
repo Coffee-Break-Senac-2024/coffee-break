@@ -34,127 +34,49 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span>
-                                    </p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
+                        <div class="d-flex justify-content-start">
+                            <th:block th:each="pedido : ${pedidos}">
+                                <div class="card me-2 mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pedido</h5>
+                                        <p class="card-text">
+                                            Itens: <span th:text="*{pedido.getItemProdutos().size()}"></span></p>
+                                        <p class="card-text"></p>
+                                        <p class="card-text">Status:
+                                            <span class="badge bg-warning text-dark" th:text="*{pedido.getSituacao()}"></span>
+                                        </p>
+                                        <p class="card-text">Cliente:
+                                            <span th:text="*{pedido.getCliente().getNome()}"></span>
+                                        </p>
+
+                                        <div class="collapse" th:id="${pedido.getId()}">
+                                            <th:block th:each="items : ${pedido.getItemProdutos()}">
+                                                <div class="d-flex justify-content-around align-items-center">
+                                                    <p class="text-uppercase fw-bold" th:text="${items.getProduto().getNome()}"></p>
+                                                    <p class="fs-4 text-primary fw-bold" th:text="*{items.getQuantidade()}"></p>
+                                                </div>
+                                            </th:block>
+                                        </div>
+
+                                        <p>Preço Total: R$<span th:text="*{pedido.getPrecoTotal()}"></span></p>
+                                        <div class="d-flex justify-content-start">
+                                            <button class="btn btn-primary  me-1"
+                                                    type="button"
+                                                    th:data-bs-toggle="collapse"
+                                                    th:data-bs-target="'#'+${pedido.getId()}"
+                                                    aria-expanded="false"
+                                                    th:aria-controls="${pedido.getId()}">
+                                                Detalhes
+                                            </button>
+
+                                            <form th:action="@{/administrator/finalizar-pedido}" method="post">
+                                                <input type="hidden" th:value="${pedido.getId()}" name="id">
+                                                <button class="btn btn-success" type="submit">Finalizar Pedido</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span></p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span></p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span></p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span></p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Café Latte</h5>
-                                    <p class="card-text">Quantidade: 1</p>
-                                    <p class="card-text">Valor: R$ 7,00</p>
-                                    <p class="card-text">Status:
-                                        <span class="badge bg-warning text-dark">
-                                            Em preparo
-                                        </span>
-                                    </p>
-                                    <p class="card-text">Cliente: Ciclano de Tal</p>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#detalhesPedidoModal">
-                                        Detalhes do Pedido
-                                    </button>
-                                </div>
-                            </div>
+                            </th:block>
                         </div>
                     </div>
                 </main>
