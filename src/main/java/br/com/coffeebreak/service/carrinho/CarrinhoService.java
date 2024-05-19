@@ -1,14 +1,21 @@
 package br.com.coffeebreak.service.carrinho;
 
+import br.com.coffeebreak.enums.SituacaoPedido;
+import br.com.coffeebreak.enums.TipoPedido;
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
+import br.com.coffeebreak.repositories.ClienteRepository;
+import br.com.coffeebreak.service.itemproduto.ItemProdutoService;
+import br.com.coffeebreak.service.pedido.PedidoService;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class CarrinhoService {
@@ -16,9 +23,22 @@ public class CarrinhoService {
     @Autowired
     ProdutoService produtoService;
 
-    private Pedido pedido = new Pedido();
+    @Autowired
+    PedidoService pedidoService;
+
+    @Autowired
+    ItemProdutoService itemProdutoService;
+
+    @Autowired
+    ClienteRepository clienteRepository;
+
+    private Pedido pedido;
     private int quantidadeCarrinho = 1;
-    private int items = 0;
+
+    public CarrinhoService (){
+        this.pedido = new Pedido();
+    }
+
 
     public void adicionarItem(String produtoId, int quantidade, double preco) {
         Produto produto = produtoService.getProductById(produtoId);
@@ -65,6 +85,22 @@ public class CarrinhoService {
         return  quantidadeCarrinho;
     }
 
+    public Pedido salvarPedido(){
+        pedido.setCreatedAt(LocalDateTime.now());
+        pedido.setTipoPedido(TipoPedido.ENTREGA);
+        pedido.setCliente(clienteRepository.findClienteByNomeIgnoreCase("testeCliente"));
+        pedido.setSituacao(SituacaoPedido.EM_ANDAMENTO.toString());
+        pedido.setFuncionario(null);
+        pedido.setPrecoTotal(calcularTotalCarrinho());
+        pedidoService.salvarPedido(pedido);
+        salvarItemProdutos(pedido.getItemProdutos());
+
+
+        Pedido pedidoSalvo = this.pedido;
+        this.pedido = new Pedido();
+        return pedidoSalvo;
+    }
+
     private boolean validarItemCarrinho(Produto produto){
         for (ItemProduto item : pedido.getItemProdutos()) {
             if (item.getProduto().getId().equals(produto.getId())) {
@@ -84,5 +120,10 @@ public class CarrinhoService {
         return null;
     }
 
-
+    private void salvarItemProdutos(List<ItemProduto> lista){
+        for(ItemProduto  item : pedido.getItemProdutos()){
+            item.setPedido(pedido);
+            itemProdutoService.salvar(item);
+        }
+    }
 }

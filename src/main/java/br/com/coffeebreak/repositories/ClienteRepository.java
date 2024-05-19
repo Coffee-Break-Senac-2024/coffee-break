@@ -16,4 +16,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,String> {
     @Query(value="SELECT c FROM cliente c WHERE c.email = ?1")
     Optional<Cliente> findByEmail(String email);
 
+    Cliente findClienteByNomeIgnoreCase(String nomoe);
+
 }

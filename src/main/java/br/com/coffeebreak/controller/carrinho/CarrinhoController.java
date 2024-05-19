@@ -2,6 +2,7 @@ package br.com.coffeebreak.controller.carrinho;
 
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.service.carrinho.CarrinhoService;
+import br.com.coffeebreak.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ public class CarrinhoController {
 
     @Autowired
     CarrinhoService service;
+
+    @Autowired
+    PedidoService pedidoService;
 
     @PostMapping("/meu-carrinho")
     public String index(@RequestParam("produtoId") String id, @RequestParam("quantidade") int quantidade,
@@ -39,6 +43,12 @@ public class CarrinhoController {
         System.out.println("id " + id);
         service.removerItem(id);
         return "redirect:/meu-carrinho";
+    }
+
+    @PostMapping("/meu-carrinho/salvar")
+    public String salvar() {
+        service.salvarPedido();
+        return "redirect:/pedidos";
     }
 
 }

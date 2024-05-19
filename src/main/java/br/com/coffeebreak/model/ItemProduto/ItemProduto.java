@@ -19,7 +19,7 @@ public class ItemProduto {
 
     private Double precoProduto;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
     @ManyToOne

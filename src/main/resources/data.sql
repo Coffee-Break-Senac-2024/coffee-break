@@ -51,3 +51,8 @@ VALUES
     (RANDOM_UUID(), 'Cacau em po', 90, NULL),
     (RANDOM_UUID(), 'Chantilly', 95, NULL),
     (RANDOM_UUID(), 'Creme de avela', 65, NULL);
+
+
+INSERT INTO cliente (id, cpf, email, endereco, nome, senha, telefone)
+VALUES
+(UUID(), '12345678909', 'clienteteste@gmail.com', 'endereco teste', 'clienteTeste', '12345678', '12345678');
