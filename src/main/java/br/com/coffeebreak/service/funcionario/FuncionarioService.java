@@ -3,6 +3,7 @@ package br.com.coffeebreak.service.funcionario;
 import br.com.coffeebreak.enums.TipoFuncionario;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.repositories.FuncionarioRepository;
+import br.com.coffeebreak.service.auth.AuthService;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
 import br.com.coffeebreak.service.funcionario.strategy.AdminStrategy;
@@ -34,7 +35,7 @@ public class FuncionarioService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AuthFuncionarioService authFuncionarioService;
+    private AuthService authService;
 
     /**
      * Retorna uma paginação de funcionarios.
@@ -49,15 +50,15 @@ public class FuncionarioService {
         LoginStrategy loginStrategy;
 
         if (funcionario.getTipoFuncionario().equals(TipoFuncionario.ADMIN)) {
-            loginStrategy = new AdminStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy = new AdminStrategy(passwordEncoder, authenticationManager, authService);
             System.out.println("Chegou aqui no strategy");
             loginStrategy.login(funcionario.getEmail(), senha);
         }
         else if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
-            loginStrategy = new GerenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy = new GerenteStrategy(passwordEncoder, authenticationManager, authService);
             loginStrategy.login(funcionario.getEmail(), senha);
         } else {
-            loginStrategy = new AtendenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy = new AtendenteStrategy(passwordEncoder, authenticationManager, authService);
             loginStrategy.login(funcionario.getEmail(), senha);
         }
     }

@@ -1,12 +1,10 @@
 package br.com.coffeebreak.service.funcionario.strategy;
 
 
-import br.com.coffeebreak.model.funcionario.Funcionario;
-import br.com.coffeebreak.repositories.FuncionarioRepository;
-import br.com.coffeebreak.service.funcionario.AuthFuncionarioService;
-import br.com.coffeebreak.service.funcionario.FuncionarioService;
+import br.com.coffeebreak.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,15 +24,16 @@ public class AdminStrategy implements LoginStrategy {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
+    @Qualifier("authenticationManager")
     private final AuthenticationManager authenticationManager;
 
 
 
-    private final AuthFuncionarioService authFuncionarioService;
+    private final AuthService authService;
 
     @Override
     public void login(String email, String password) {
-        UserDetails funcionario = this.authFuncionarioService.loadUserByUsername(email);
+        UserDetails funcionario = this.authService.loadUserByUsername(email);
 
         if (funcionario ==  null) {
             throw new RuntimeException("Email/Senha errados.");
