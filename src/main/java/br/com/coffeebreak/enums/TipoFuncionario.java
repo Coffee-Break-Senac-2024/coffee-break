@@ -1,5 +1,17 @@
 package br.com.coffeebreak.enums;
 
 public enum TipoFuncionario {
-    ATENDENTE, GERENTE;
+    ADMIN("ADMIN"),
+    ATENDENTE("ATENDENTE"),
+    GERENTE("GERENTE");
+
+    private final String valor;
+
+    TipoFuncionario(String valor) {
+        this.valor = valor;
+    }
+
+    public String getValor() {
+        return valor;
+    }
 }

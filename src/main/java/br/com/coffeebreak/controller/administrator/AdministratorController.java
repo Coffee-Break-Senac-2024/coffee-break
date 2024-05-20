@@ -1,5 +1,8 @@
 package br.com.coffeebreak.controller.administrator;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import br.com.coffeebreak.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ public class AdministratorController {
     @Autowired
     private PedidoService service;
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('GERENTE') || hasAuthority('ATENDENTE')")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView("/administrator/index");
         mv.addObject("pedidos", service.getPedidos());
@@ -27,6 +31,7 @@ public class AdministratorController {
         System.out.println("ID: " + id);
         service.FinalizarPedido(id);
         return new ModelAndView("redirect:/administrator");
+
     }
 
 }

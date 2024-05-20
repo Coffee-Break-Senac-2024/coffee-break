@@ -7,20 +7,35 @@
 </head>
 <body>
     <div class="container">
+
         <div class="form-container">
+            <form action="/auth/" method="post" th:object="${user}">
            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
 
             <div class="form">
-            <span id="title">Email</span>
-            <input type="text" placeholder="CPF"/>
+
+            <span class="title">Email</span>
+            <input type="text" placeholder="Email" th:field="*{email}"
+            th:value="${user.email}"
+                   name="email"
+            />
+
+            <span class="title">Senha</span>
+            <input type="password" placeholder="Senha"
+            th:field="*{senha}"
+            th:value="${user.senha}"
+                     name="senha"
+            />
+
             <div>
                 <span>ou</span>
                 <a th:href="@{/cadastro}"> cadastre-se</a>
             </div>
                 <form>
-                <button>Entrar</button>
+                <button type="submit">Entrar</button>
                 </form>
             </div>
+        </form>
         </div>
 
         <div class="img-container">

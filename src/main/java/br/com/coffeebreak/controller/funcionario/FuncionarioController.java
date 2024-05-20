@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class FuncionarioController {
     private FuncionarioService service;
 
     @GetMapping
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView index(
             @RequestParam(required = false) String nome,
             @PageableDefault(size = 3) Pageable pageable) {
@@ -42,6 +44,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView create() {
         ModelAndView mv = new ModelAndView("administrator/employee/create");
         mv.addObject("funcionario", new Funcionario());
@@ -50,6 +53,7 @@ public class FuncionarioController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public String create(
             @Valid @ModelAttribute("funcionario") Funcionario funcionario,
             BindingResult bindingResult,
@@ -73,6 +77,7 @@ public class FuncionarioController {
     }
 
     @PostMapping("/delete/{id}")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView delete(@PathVariable String id, RedirectAttributes redirectAttributes) {
            ModelAndView mv = new ModelAndView("redirect:/administrator/employees");
 
@@ -88,6 +93,7 @@ public class FuncionarioController {
 
 
     @GetMapping("/update/{id}")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView atualizarFuncionario(@PathVariable String id) {
         ModelAndView mv = new ModelAndView("administrator/employee/create");
         Funcionario funcionario = service.getFuncionarioPorID(id);
@@ -97,6 +103,7 @@ public class FuncionarioController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("!hasAuthority('ATENDENTE')")
     public String atualizarFuncionario(
             @Valid @ModelAttribute("funcionario") Funcionario funcionario,
             BindingResult bindingResult,

@@ -5,9 +5,15 @@ import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.repositories.FuncionarioRepository;
 import br.com.coffeebreak.service.exception.EmailCadastradoException;
 import br.com.coffeebreak.service.exception.FuncionarioIdNaoEncontradoException;
+import br.com.coffeebreak.service.funcionario.strategy.AdminStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.AtendenteStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.GerenteStrategy;
+import br.com.coffeebreak.service.funcionario.strategy.LoginStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +23,18 @@ import java.util.Optional;
 
 @Service
 public class FuncionarioService {
+
     @Autowired
     private FuncionarioRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private AuthFuncionarioService authFuncionarioService;
 
     /**
      * Retorna uma paginação de funcionarios.
@@ -27,6 +43,23 @@ public class FuncionarioService {
     @Transactional(readOnly = true)
     public Page<Funcionario> getFuncionariosPage(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public void authenticate(Funcionario funcionario, String senha) {
+        LoginStrategy loginStrategy;
+
+        if (funcionario.getTipoFuncionario().equals(TipoFuncionario.ADMIN)) {
+            loginStrategy = new AdminStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            System.out.println("Chegou aqui no strategy");
+            loginStrategy.login(funcionario.getEmail(), senha);
+        }
+        else if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {
+            loginStrategy = new GerenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy.login(funcionario.getEmail(), senha);
+        } else {
+            loginStrategy = new AtendenteStrategy(passwordEncoder, authenticationManager, authFuncionarioService);
+            loginStrategy.login(funcionario.getEmail(), senha);
+        }
     }
 
     /**
@@ -81,6 +114,11 @@ public class FuncionarioService {
         if (funcionarioOptional.isPresent()){
             throw new EmailCadastradoException("Email já cadastrado");
         }
+
+        String passwordEncoded = passwordEncoder.encode(funcionario.getSenha());
+
+        funcionario.setSenha(passwordEncoded);
+
         repository.save(funcionario);
     }
 
@@ -106,5 +144,9 @@ public class FuncionarioService {
             tiposFuncionario.add(tipo.name());
         }
         return tiposFuncionario;
+    }
+
+    public Funcionario getFuncionarioByEmail(String email) {
+        return repository.findByEmail(email).orElse(null);
     }
 }

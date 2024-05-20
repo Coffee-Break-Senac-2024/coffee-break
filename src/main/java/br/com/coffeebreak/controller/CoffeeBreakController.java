@@ -1,5 +1,6 @@
 package br.com.coffeebreak.controller;
 
+import br.com.coffeebreak.dto.UserDTO;
 import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class CoffeeBreakController {
 
     @GetMapping("/login")
     public ModelAndView login() {
-        return new ModelAndView("coffeebreak/login");
+        ModelAndView mv = new ModelAndView("coffeebreak/login");
+        mv.addObject("user", new UserDTO());
+        return mv;
     }
 
     @GetMapping("/pedidos")
