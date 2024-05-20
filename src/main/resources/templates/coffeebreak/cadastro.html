@@ -11,7 +11,6 @@
             <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
 
             <div>
-
             <form th:action="@{/cadastro/create}" th:object="${cliente}" method="post" class="mt-3">
                 <input type="hidden" name="id" th:if="${cliente.id != null}"
                        th:value="${cliente.id}">
@@ -53,7 +52,12 @@
                        th:field="*{cpf}"
                        th:value="${cliente.cpf}">
                 <button type="submit">Cadastre-se</button>
+
+
             </form>
+                <div th:if="${errorCliente}">
+                    <span th:text="${errorCliente}"></span>
+                </div>
             </div>
         </div>
         <div class="img-container">
