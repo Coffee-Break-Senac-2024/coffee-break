@@ -72,7 +72,7 @@ public class Cliente implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.senha;
     }
 
     @Override
