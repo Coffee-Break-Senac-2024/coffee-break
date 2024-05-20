@@ -2,13 +2,13 @@ package br.com.coffeebreak.controller;
 
 import br.com.coffeebreak.dto.UserDTO;
 import br.com.coffeebreak.model.funcionario.Funcionario;
-import br.com.coffeebreak.service.funcionario.AuthFuncionarioService;
+import br.com.coffeebreak.service.cliente.ClienteService;
+import br.com.coffeebreak.service.auth.AuthService;
 import br.com.coffeebreak.service.funcionario.FuncionarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @Autowired
-    private AuthFuncionarioService authFuncionarioService;
+    private AuthService authService;
 
     @Autowired
     private FuncionarioService funcionarioService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     private SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
@@ -34,7 +37,7 @@ public class LoginController {
     public String login(@ModelAttribute("user") UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
 
         if (this.funcionarioService.getFuncionarioByEmail(userDTO.getEmail()) != null) {
-            UserDetails userDetails = authFuncionarioService.loadUserByUsername(userDTO.getEmail());
+            UserDetails userDetails = authService.loadUserByUsername(userDTO.getEmail());
             Funcionario funcionario = (Funcionario) userDetails;
             System.out.println(funcionario.getEmail());
             funcionarioService.authenticate(funcionario, userDTO.getSenha());
@@ -48,7 +51,14 @@ public class LoginController {
             return "redirect:/administrator";
         }
         else {
-            return "redirect:/login";
+           this.clienteService.login(userDTO.getEmail(), userDTO.getSenha());
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            System.out.println(auth.getAuthorities());
+
+            securityContextRepository.saveContext(SecurityContextHolder.getContext(), request, response);
+
+            return "redirect:/";
         }
     }
 }
