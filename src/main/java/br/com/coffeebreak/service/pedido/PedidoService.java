@@ -21,7 +21,7 @@ public class PedidoService {
 
     @Transactional
     public List<Pedido> getPedidos(){
-        return repository.getPedidos();
+        return repository.findAll();
     }
 
     @Transactional

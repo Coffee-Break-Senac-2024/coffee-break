@@ -37,7 +37,8 @@ a {
     flex-grow: 1; 
     border-radius: 10px; 
     padding: 40px; 
-    color: white; 
+    color: white;
+    margin-bottom: 5px;
 }
 
 .container1 {
