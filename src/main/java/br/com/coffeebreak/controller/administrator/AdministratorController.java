@@ -1,5 +1,6 @@
 package br.com.coffeebreak.controller.administrator;
 
+import br.com.coffeebreak.model.pedido.Pedido;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController {
@@ -22,7 +25,8 @@ public class AdministratorController {
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('GERENTE') || hasAuthority('ATENDENTE')")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView("/administrator/index");
-        mv.addObject("pedidos", service.getPedidos());
+        List<Pedido> pedidos = service.getPedidos();
+        mv.addObject("pedidos", pedidos);
         return mv;
     }
 
