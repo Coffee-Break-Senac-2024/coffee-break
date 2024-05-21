@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Não Encontrada</title>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
+          type="text/css">
 </head>
-<body>
-    <span>ERRO!!!</span>
+<body class="d-flex align-items-center justify-content-center bg-light" style="height: 100vh; margin: 0;">
+<div class="error-page">
+    <div class="text-center">
+        <h1 class="display-1 text-danger">403</h1>
+        <h2>Acesso Negado</h2>
+        <p class="lead">Você não tem permissão para acessar essa página.</p>
+        <a th:href="@{/}" class="btn btn-primary mt-3">Voltar para a Página Inicial</a>
+    </div>
+</div>
 </body>
 </html>
