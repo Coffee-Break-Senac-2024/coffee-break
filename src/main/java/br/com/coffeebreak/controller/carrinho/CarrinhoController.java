@@ -4,6 +4,7 @@ import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.service.carrinho.CarrinhoService;
 import br.com.coffeebreak.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,7 +48,12 @@ public class CarrinhoController {
 
     @PostMapping("/meu-carrinho/salvar")
     public String salvar() {
-        service.salvarPedido();
+
+        try {
+            service.salvarPedido();
+        } catch (UsernameNotFoundException e){
+            return "redirect:/login";
+        }
         return "redirect:/pedidos";
     }
 
