@@ -19,11 +19,14 @@ public class Relatorio {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Column(nullable = false)
-    private String nome;
+    private String produto;
     @Column(nullable = false)
     private TipoRelatorio tipoRelatorio;
     @Column(nullable = false)
     private Double preco;
     @Column(nullable = false)
     private Integer qtdPedidosRealizados;
+
+
+
 }

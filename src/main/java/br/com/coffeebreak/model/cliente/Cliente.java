@@ -35,7 +35,7 @@ public class Cliente implements UserDetails {
     @NotBlank
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @Email
     @NotBlank
     private String email;
@@ -44,7 +44,7 @@ public class Cliente implements UserDetails {
     @NotBlank
     private String senha;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank
     private String cpf;
     @Column(nullable = false)
