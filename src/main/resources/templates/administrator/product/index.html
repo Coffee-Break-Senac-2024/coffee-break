@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - List</title>
-    <link rel="stylesheet"
-          th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
-          type="text/css" >
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" type="text/css">
+    <!-- Incluir CSS para DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Incluir JS para DataTables -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -15,7 +18,7 @@
         <div th:replace="~{layout/administrator/menu :: menu }"></div>
         <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
-            <!-- CONTEÙDO -->
+            <!-- CONTEÚDO -->
             <main class="bg-white  p-3">
 
                 <div class="card mb-3">
@@ -23,15 +26,12 @@
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb mt-2 p-2">
                                 <li class="breadcrumb-item">Produtos</li>
-                                <li class="breadcrumb-item" aria-current="page">Lista de  Produtos</li>
+                                <li class="breadcrumb-item" aria-current="page">Lista de Produtos</li>
                             </ol>
                         </nav>
 
                         <div>
-                            <img th:src="@{/images/user_default.png}"
-                                 alt="Imagem do usuário"
-                                 title="Imagem do usuário"
-                                 width="60px">
+                            <img th:src="@{/images/user_default.png}" alt="Imagem do usuário" title="Imagem do usuário" width="60px">
                         </div>
                     </div>
                 </div>
@@ -50,8 +50,8 @@
                             <h2 class="h2 text-black-50">Lista de Produtos</h2>
                         </div>
                     </div>
-                    <div class="col-8">
-                        <table class="table">
+                    <div class="col-12">
+                        <table class="table" id="productTable">
                             <thead>
                             <tr>
                                 <th scope="col">Nome</th>
@@ -62,14 +62,14 @@
                             </thead>
                             <tbody>
                             <tr th:each="produto : ${produtos}">
-                                <td th:text="${produto.nome}">Nome do Produto</td>
-                                <td th:text="${produto.quantidadeUtilizada}">Quantidade Utilizada</td>
-                                <td th:text="${produto.preco}">Preço</td>
+                                <td th:text="${produto.nome}"></td>
+                                <td th:text="${produto.quantidadeUtilizada}"></td>
+                                <td th:text="${produto.preco}"></td>
                                 <td>
                                     <a class="btn btn-success" th:href="@{/administrator/products/update(id=${produto.id})}">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <a th:href="@{/administrator/products/delete/{id}(id=${produto.id})}"  class="btn btn-danger" th:id="${produto.id}">
+                                    <a th:href="@{/administrator/products/delete/{id}(id=${produto.id})}" class="btn btn-danger" th:id="${produto.id}">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
@@ -78,7 +78,7 @@
                         </table>
                     </div>
                 </div>
-                <!-- RODAPÉ -->
+                <!--                 RODAPÉ -->
                 <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
         </div>
@@ -86,7 +86,18 @@
 </div>
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js"
-        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('#productTable').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+            },
+            "pageLength": 6,  // Define o número de registros por página para 7
+            "lengthMenu": [6, 12, 18, 24]  // Opções no seletor de "exibir por página"
+        });
+    });
+</script>
+
 </body>
 </html>
