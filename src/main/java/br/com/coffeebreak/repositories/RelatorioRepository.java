@@ -20,11 +20,8 @@ List<String> getAllProdutosNames();
 Produto getByName(String nome);
 
 
-    @Query(value = "SELECT itemProduto FROM item_produto itemProduto WHERE itemProduto.id = :id AND itemProduto.pedido.createdAt BETWEEN :inicio AND CURRENT_TIMESTAMP")
-    List<ItemProduto> getAllByPeriod(@Param("id") String id, @Param("inicio") LocalDateTime inicio);
-
-
-
+    @Query(value = "SELECT pedido.itemProdutos FROM pedido pedido where pedido.createdAt BETWEEN ?1 AND ?2" )
+    List<ItemProduto> getAllByPeriod(@Param("inicio") LocalDateTime inicio, @Param("fim") LocalDateTime fim);
 
 
 

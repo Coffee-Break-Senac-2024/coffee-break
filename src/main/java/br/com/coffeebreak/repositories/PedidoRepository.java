@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, String> {
@@ -17,4 +18,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, String> {
     @Transactional
     @Query("UPDATE pedido p SET p.situacao = :novaSituacao WHERE p.id = :id")
     void atualizarSituacaoPedido(String id, String novaSituacao);
+
+    @Query(value= "SELECT p FROM pedido p where p.createdAt BETWEEN ?1 AND ?2")
+    List<Pedido> getPedidosByTime(LocalDateTime inicio,LocalDateTime fim);
+
 }
