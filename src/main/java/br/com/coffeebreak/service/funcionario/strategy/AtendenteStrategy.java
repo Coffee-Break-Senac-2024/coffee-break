@@ -1,6 +1,6 @@
 package br.com.coffeebreak.service.funcionario.strategy;
 
-import br.com.coffeebreak.config.UsernamePasswordWrongException;
+import br.com.coffeebreak.security.UsernamePasswordWrongException;
 import br.com.coffeebreak.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
