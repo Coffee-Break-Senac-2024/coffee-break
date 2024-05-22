@@ -7,7 +7,6 @@
 </head>
 <body>
     <div class="container">
-
         <div class="form-container">
             <form action="/auth/" method="post" th:object="${user}">
            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
@@ -27,6 +26,9 @@
                      name="senha"
             />
 
+                <div th:if="${message}">
+                    <span th:text="${message}"></span>
+                </div>
             <div>
                 <span>ou</span>
                 <a th:href="@{/cadastro}"> cadastre-se</a>
@@ -36,11 +38,15 @@
                 </form>
             </div>
         </form>
+
+
         </div>
 
         <div class="img-container">
             <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break" width="150px"/>
         </div>
+
+
 
     </div>
 
