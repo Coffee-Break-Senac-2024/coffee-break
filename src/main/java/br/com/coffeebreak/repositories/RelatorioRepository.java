@@ -13,11 +13,7 @@ import java.util.List;
 
 @Repository
 public interface RelatorioRepository extends JpaRepository<Relatorio, String> {
-@Query(value = "SELECT DISTINCT p.nome FROM produto p")
-List<String> getAllProdutosNames();
 
-@Query(value = "SELECT p FROM produto p WHERE p.nome = ?1")
-Produto getByName(String nome);
 
 
     @Query(value = "SELECT pedido.itemProdutos FROM pedido pedido where pedido.createdAt BETWEEN ?1 AND ?2" )
