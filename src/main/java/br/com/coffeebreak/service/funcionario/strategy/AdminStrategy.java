@@ -1,6 +1,7 @@
 package br.com.coffeebreak.service.funcionario.strategy;
 
 
+import br.com.coffeebreak.config.UsernamePasswordWrongException;
 import br.com.coffeebreak.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class AdminStrategy implements LoginStrategy {
         UserDetails funcionario = this.authService.loadUserByUsername(email);
 
         if (funcionario ==  null) {
-            throw new RuntimeException("Email/Senha errados.");
+            throw new UsernamePasswordWrongException("Email/Senha errados.");
         }
 
         boolean matches = passwordEncoder.matches(password, funcionario.getPassword());
 
         if (!matches) {
-            throw new RuntimeException("Email/Senha errados.");
+            throw new UsernamePasswordWrongException("Email/Senha errados.");
         }
 
         Authentication auth = new UsernamePasswordAuthenticationToken(email, password);
