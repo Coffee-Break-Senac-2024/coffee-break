@@ -1,7 +1,6 @@
 package br.com.coffeebreak.repositories;
 
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
-import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.model.relatorio.Relatorio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
