@@ -64,7 +64,12 @@ h1 {
 }
 
 .main_products_finish_actions {
-    text-align: end;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.main_products_finish_actions_content {
+    display: flex;
 }
 
 .main_products_finish_actions_cancelled {
@@ -74,11 +79,25 @@ h1 {
     font-size: 1.4em;
 }
 
+.main_products_finish_actions_cancelled:hover {
+    background-color: red;
+    cursor:pointer;
+}
+
+
 .main_products_finish_actions_active {
     background-color: #28AA63;
     padding: 5px;
     border-radius: 5px;
     font-size: 1.4em;
+    color:#FFF;
+    margin: 0 5px;
+}
+
+.main_products_finish_actions_active:hover {
+    background-color:#FFF ;
+    color:#28AA63;
+    cursor:pointer;
 }
 
 .not_products {
