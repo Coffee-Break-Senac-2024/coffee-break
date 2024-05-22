@@ -1,55 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Login Coffee Break</title>
     <link th:href="@{/css/login/login.css}" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <form action="/auth/" method="post" th:object="${user}">
-           <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
+<header>
+    <div>
+
+    </div>
+</header>
+<div class="container">
+    <div class="form-container">
+        <form action="/auth/" method="post" th:object="${user}">
+            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
+
+            <div class="password-invalid" th:if="${message}">
+                <span class="message-input" th:text="${message}"></span>
+            </div>
 
             <div class="form">
+                <span class="title">Email</span>
+                <input type="text" placeholder="Email" th:field="*{email}"
+                       th:value="${user.email}"
+                       name="email"
+                />
 
-            <span class="title">Email</span>
-            <input type="text" placeholder="Email" th:field="*{email}"
-            th:value="${user.email}"
-                   name="email"
-            />
-
-            <span class="title">Senha</span>
-            <input type="password" placeholder="Senha"
-            th:field="*{senha}"
-            th:value="${user.senha}"
-                     name="senha"
-            />
-
-                <div th:if="${message}">
-                    <span th:text="${message}"></span>
+                <span class="title">Senha</span>
+                <input type="password" placeholder="Senha"
+                       th:field="*{senha}"
+                       th:value="${user.senha}"
+                       name="senha"
+                />
+                <div class="form-cadastro">
+                    <span>ou</span>
+                    <a th:href="@{/cadastro}"> cadastre-se.</a>
                 </div>
-            <div>
-                <span>ou</span>
-                <a th:href="@{/cadastro}"> cadastre-se</a>
-            </div>
                 <form>
-                <button type="submit">Entrar</button>
+                    <button type="submit">Entrar</button>
                 </form>
             </div>
         </form>
-
-
-        </div>
-
-        <div class="img-container">
-            <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break" width="150px"/>
-        </div>
-
-
-
     </div>
 
-
+    <div class="img-container">
+        <img th:src="@{/images/login/imgcoffee.jpg}"
+             alt="Imagem café"
+             title="Logo coffee break"
+             width="150px"/>
+    </div>
+</div>
 </body>
 </html>
