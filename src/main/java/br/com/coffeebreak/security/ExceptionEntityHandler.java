@@ -1,4 +1,4 @@
-package br.com.coffeebreak.config;
+package br.com.coffeebreak.security;
 
 
 import br.com.coffeebreak.model.cliente.exceptions.ClientAlreadyRegistered;

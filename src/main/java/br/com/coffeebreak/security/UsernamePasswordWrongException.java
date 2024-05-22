@@ -1,4 +1,4 @@
-package br.com.coffeebreak.config;
+package br.com.coffeebreak.security;
 
 public class UsernamePasswordWrongException extends RuntimeException{
     public UsernamePasswordWrongException(String message) {
