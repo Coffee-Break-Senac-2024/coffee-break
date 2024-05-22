@@ -35,15 +35,8 @@ public class ClienteController {
             //tratativa de erro
             return new ModelAndView("redirect:/cadastro");
         }
-
-        try{
+        
             clienteService.insertCliente(cliente);
-        } catch (Exception e){
-            System.out.println(e);
-          return new ModelAndView("redirect:/cadastro");
-        }
-
-
         //AddFlashAttribute adiciona um atributo flash
         //Um atributo flash dura apenas duas requisições, permitindo a utilização do
         //Post-Redirect-Get que redireciona a aplicação após realizar o Post.
