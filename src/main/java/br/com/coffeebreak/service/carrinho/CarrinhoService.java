@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +79,8 @@ public class CarrinhoService {
                 total += item.getPrecoProduto() * item.getQuantidade();
             }
         }
-        return total;
+
+        return formatarValor(total);
     }
 
     public int getQuantidadeCarrinho() {
@@ -133,5 +136,12 @@ public class CarrinhoService {
             item.setPedido(pedido);
             itemProdutoService.salvar(item);
         }
+    }
+
+    private double formatarValor(Double valor) {
+        NumberFormat formatter = new DecimalFormat("#,###.00");
+        String valorFormatado = formatter.format(valor);
+        valorFormatado = valorFormatado.replace(",", ".");
+        return Double.parseDouble(valorFormatado);
     }
 }

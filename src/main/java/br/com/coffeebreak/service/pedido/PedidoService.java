@@ -21,7 +21,7 @@ public class PedidoService {
 
     @Transactional
     public List<Pedido> getPedidos(){
-        return repository.findAll();
+        return repository.getPedidosPorAndamento(SituacaoPedido.EM_ANDAMENTO.toString());
     }
 
     @Transactional
