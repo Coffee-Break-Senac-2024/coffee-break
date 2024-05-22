@@ -27,17 +27,21 @@
                 </div>
                 <div class="collapse" id="collapseHome">
                     <ul class="list-group">
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                   m-1">
-                            Lista de Pedidos
+                                   m-1" th:href="@{/administrator}">
+                                Lista de Pedidos
+                            </a>
                         </li>
-                        <li class="list-group-item
+                        <li>
+                            <a class="list-group-item
                                    text-start
                                    btn btn-light
-                                   m-1">
-                            Cadastrar novo pedido
+                                   m-1" th:href="@{/administrator/novo-pedido}">
+                                Cadastrar novo pedido
+                            </a>
                         </li>
                     </ul>
                 </div>
