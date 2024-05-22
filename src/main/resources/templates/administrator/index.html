@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,7 +35,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="d-flex justify-content-start">
+                    <div class="d-flex justify-content-start align-itens-center">
                         <th:block th:each="pedido : ${pedidos}">
                             <div class="card me-2 mb-3">
                                 <div class="card-body">
@@ -65,17 +63,21 @@
                                     <div class="d-flex justify-content-start">
                                         <button class="btn btn-primary  me-1"
                                                 type="button"
-                                                th:data-bs-toggle="collapse"
+                                                data-bs-toggle="collapse"
                                                 th:data-bs-target="'#'+${pedido.getId()}"
                                                 aria-expanded="false"
                                                 th:aria-controls="${pedido.getId()}">
                                             Detalhes
                                         </button>
 
-                                        <form th:action="@{/administrator/finalizar-pedido}" method="post">
-                                            <input type="hidden" th:value="${pedido.getId()}" name="id">
-                                            <button class="btn btn-success" type="submit">Finalizar Pedido</button>
-                                        </form>
+                                        <button class="actionForm btn btn-success finalizar"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                th:attr="data-id=''+${pedido.id},
+                                                         data-nome=''+${pedido.getCliente().getNome()},
+                                                         data-url='/administrator/finalizar-pedido'">
+                                           Finalizar Pedido
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -100,9 +102,7 @@
         </div>
     </div>
 </div>
-
-<script th:src="@{webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js"
-        crossorigin="anonymous"></script>
+<div th:replace="~{layout/fragmentos/administrator/modal :: modal (' Deseja finalizar o pedido de ', 'Finalizar Pedido', 'btn-primary')}"></div>
+<div th:replace="~{layout/fragmentos/administrator/scripts :: scripts}"></div>
 </body>
 </html>
