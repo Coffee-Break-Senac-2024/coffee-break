@@ -59,7 +59,10 @@ public class CoffeeBreakController {
 
     @GetMapping("/historicoPedidos")
     public ModelAndView historicoPedidos() {
-        return new ModelAndView("coffeebreak/historicoPedidos");
+        ModelAndView mv = new ModelAndView("coffeebreak/historicoPedidos");
+        List<Pedido> pedidos = clienteService.getPedidosCliente(SituacaoPedido.FINALIZADO);
+        mv.addObject("pedidos", pedidos);
+        return mv;
     }
 
     @GetMapping("/descricao")
