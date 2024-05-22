@@ -51,6 +51,13 @@ a {
     align-items: center;
 }
 
+.container1-content {
+    margin: 10px 0;
+    border: solid 2px green;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 
 
 .order-header {

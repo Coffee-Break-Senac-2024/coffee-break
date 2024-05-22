@@ -18,31 +18,35 @@
  </div>
 
     <div class="container1">
-        
-            <div class="order-header">
-                <div class="order-image">
-				    <img src="/images/home/prod-01.png" alt="Mocha">
-				    <p class="product-name">Mocha</p>
-				</div>
+        <th:block th:each="pedido : ${pedidos}">
+            <div class="container1-content">
+                <div class="order-header">
+                    <div class="order-image">
+                        <img src="/images/home/prod-01.png" alt="Mocha">
+                        <p class="product-name">Mocha</p>
+                    </div>
 
-                <div class="order-details">
-                    <p class="order-date">Data: 16/02/2024</p>
-                    <p class="order-items">Total de Itens: 7</p>
-                    <p class="order-total">Total do Pedido: R$ 250,00</p>
-                </div>
-                <div class="order-status-container">
-				    <p class="order-status">Status</p>
-				    <span class="status-sucesso">
+                    <div class="order-details">
+                        <p class="order-date">Data:
+                            <span th:text="${#temporals.format(pedido.createdAt, 'dd-MM-yyyy HH:mm:ss')}"></span>
+                        </p>
+                        <p class="order-items">Total de Itens: <span th:text="*{pedido.getItemProdutos.size()}"></span></p>
+                        <p class="order-total">Total do Pedido: R$ <span th:text="*{pedido.getPrecoTotal()}"></span></p>
+                    </div>
+                    <div class="order-status-container">
+                        <p class="order-status">Status</p>
+                        <span class="status-sucesso">
 				        <i class="fa fa-check"></i>
 				    </span>
-				    <p class="order-sucesso">Finalizado</p>
-				</div>
+                        <p class="order-sucesso">Finalizado</p>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="action-btn reorder-btn">Compre de Novo</button>
+                    <button class="action-btn1 details-btn">Ver Detalhes</button>
+                </div>
             </div>
-            <div class="order-actions">
-                <button class="action-btn reorder-btn">Compre de Novo</button>
-                <button class="action-btn1 details-btn">Ver Detalhes</button>
-            </div>
-        
+        </th:block>
     </div>
 </main>
 <div th:replace="~{layout/coffeebreak/footer :: footer}"></div>

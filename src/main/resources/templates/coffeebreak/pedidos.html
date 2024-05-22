@@ -25,7 +25,9 @@
                     </div>
 
                     <div class="order-details">
-                        <p class="order-date">Data: <span th:text="*{pedido.getCreatedAt()}"></span></p>
+                        <p class="order-date">Data:
+                            <span th:text="${#temporals.format(pedido.createdAt, 'dd-MM-yyyy HH:mm:ss')}"></span>
+                        </p>
                         <p class="order-items">Total de Itens: <span th:text="*{pedido.getItemProdutos.size()}"></span></p>
                         <p class="order-total">Total do Pedido: R$ <span th:text="*{pedido.getPrecoTotal()}"></span></p>
                     </div>
