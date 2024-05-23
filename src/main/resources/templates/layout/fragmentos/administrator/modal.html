@@ -1,4 +1,4 @@
-<div th:fragment="modal (nome)" class="modal fade" id="exampleModal"
+<div th:fragment="modal (frase, fraseBotao, corBotao)" class="modal fade" id="exampleModal"
      tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <p class="text-warning">Essa ação não poderá ser desfeita!</p>
-                <p>Deseja excluir o <span th:text="*{nome}"></span> <span class="fw-bold text-uppercase" id="nome"></span>?</p>
+                <p><span th:text="*{frase}"></span> <span class="fw-bold text-uppercase" id="nome"></span>?</p>
             </div>
             <div class="modal-footer">
                 <button type="button"
@@ -19,9 +19,9 @@
                     Cancelar
                 </button>
 
-                <form id="formularioExcluir" method="post">
-                    <button class="btn btn-danger btnConfirmarDelecao">
-                        Deletar
+                <form id="formulario" method="post">
+                    <button  th:class="'btnConfirmar btn '+ ${corBotao}">
+                        <span th:text="*{fraseBotao}"></span>
                     </button>
                 </form>
             </div>

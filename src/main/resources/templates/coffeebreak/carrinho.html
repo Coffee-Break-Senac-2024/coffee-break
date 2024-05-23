@@ -7,7 +7,7 @@
     <th:block th:replace="~{ layout/fragmentos/coffebreak/links :: links }"></th:block>
     <link rel="stylesheet" th:href="@{/css/carrinho/carrinho.css}">
 </head>
-<body>
+<body class="container">
 <div th:replace="~{ layout/coffeebreak/header :: header }"></div>
 
 <h1>Carrinho de Compras</h1>
@@ -44,10 +44,12 @@
         <p th:if="${pedidos != null}">Preço Total:R$ <span th:text="*{precoTotal}"></span></p>
 
         <div class="main_products_finish_actions">
-            <form th:action="@{/meu-carrinho/salvar}" method="post">
-                <button class="main_products_finish_actions_active" href="">Finalizar Pedido</button>
-            </form>
-            <a class="main_products_finish_actions_cancelled" href="">Cancelar Pedido</a>
+           <div class="main_products_finish_actions_content">
+               <form th:action="@{/meu-carrinho/salvar}" method="post">
+                   <button class="main_products_finish_actions_active" href="">Finalizar Pedido</button>
+               </form>
+               <a class="main_products_finish_actions_cancelled" th:href="@{'/'}">Cancelar Pedido</a>
+           </div>
         </div>
     </div>
 </main>

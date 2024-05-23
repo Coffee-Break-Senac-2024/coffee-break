@@ -4,66 +4,64 @@
     <meta charset="UTF-8">
     <title>Cadastro</title>
     <link th:href="@{/css/cadastro/cadastro.css}" rel="stylesheet">
+    <th:block th:replace="~{ layout/fragmentos/coffebreak/links :: links }"></th:block>
 </head>
-<body>
-    <div class="container">
-        <div class="form-container">
-            <img th:src="@{/images/logocoffeebreak.png}" alt="Logo coffee break">
+<body class="container">
+<div th:replace="~{layout/coffeebreak/header :: header}"></div>
+<div class="container_content">
+    <div class="form-container">
+        <form th:action="@{/cadastro/create}" th:object="${cliente}" method="post" class="mt-3">
+            <input type="hidden" name="id" th:if="${cliente.id != null}"
+                   th:value="${cliente.id}">
+            <span class="span-title">Nome</span>
+            <input type="text"
+                   class="input-group"
+                   id="nome"
+                   th:field="*{nome}"
+                   th:value="${cliente.nome}">
+            <span class="span-title">Email</span>
+            <input type="email"
+                   class="input-group"
+                   id="email"
+                   th:field="*{email}"
+                   th:value="${cliente.email}">
+            <span class="span-title">Senha</span>
+            <input type="password"
+                   class="input-group"
+                   id="senha"
+                   th:field="*{senha}"
+                   th:value="${cliente.senha}">
+            <span class="span-title">Celular</span>
+            <input type="text"
+                   class="input-group"
+                   id="telefone"
+                   th:field="*{telefone}"
+                   th:value="${cliente.telefone}">
+            <span class="span-title">Endereço</span>
+            <input type="text"
+                   class="input-group"
+                   id="endereco"
+                   th:field="*{endereco}"
+                   th:value="${cliente.endereco}">
 
-            <div>
-            <form th:action="@{/cadastro/create}" th:object="${cliente}" method="post" class="mt-3">
-                <input type="hidden" name="id" th:if="${cliente.id != null}"
-                       th:value="${cliente.id}">
-                <span class="span-title">Nome</span>
-                <input type="text"
-                       class="input-group"
-                       id="nome"
-                       th:field="*{nome}"
-                       th:value="${cliente.nome}">
-                <span class="span-title">Email</span>
-                <input type="email"
-                       class="input-group"
-                       id="email"
-                       th:field="*{email}"
-                       th:value="${cliente.email}">
-                <span class="span-title">Senha</span>
-                <input type="password"
-                       class="input-group"
-                       id="senha"
-                       th:field="*{senha}"
-                       th:value="${cliente.senha}">
-                <span class="span-title">Celular</span>
-                <input type="text"
-                       class="input-group"
-                       id="telefone"
-                       th:field="*{telefone}"
-                       th:value="${cliente.telefone}">
-                <span class="span-title">Endereço</span>
-                <input type="text"
-                       class="input-group"
-                       id="endereco"
-                       th:field="*{endereco}"
-                       th:value="${cliente.endereco}">
+            <span class="span-title">CPF</span>
+            <input type="text"
+                   class="input-group"
+                   id="cpf"
+                   th:field="*{cpf}"
+                   th:value="${cliente.cpf}">
+            <button type="submit">Cadastre-se</button>
 
-                <span class="span-title">CPF</span>
-                <input type="text"
-                       class="input-group"
-                       id="cpf"
-                       th:field="*{cpf}"
-                       th:value="${cliente.cpf}">
-                <button type="submit">Cadastre-se</button>
-
-
-            </form>
-                <div th:if="${errorCliente}">
-                    <span th:text="${errorCliente}"></span>
-                </div>
-            </div>
-        </div>
-        <div class="img-container">
-            <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break"/>
+        </form>
+        <div th:if="${errorCliente}">
+            <span th:text="${errorCliente}"></span>
         </div>
     </div>
-
+    <div class="img-container">
+        <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break"/>
+    </div>
+</div>
+<div th:replace="~{layout/coffeebreak/footer :: footer}"></div>
+<div th:replace="~{layout/fragmentos/coffebreak/scripts :: scripts}"></div>
 </body>
 </html>

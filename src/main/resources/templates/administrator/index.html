@@ -1,108 +1,91 @@
-
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Pedidos - Lista de Pedidos</title>
     <link rel="stylesheet"
           th:href="@{webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
 </head>
 <body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div th:replace="~{layout/administrator/menu :: menu }"></div>
-            <!-- CONTEÚDO PRINCIPAL-->
-            <div class="col-12 col-sm-10">
-                <main class="bg-white  p-3">
-                    <div class="card p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                                <ol class="breadcrumb mt-2">
-                                    <li class="breadcrumb-item">Pedidos</li>
-                                    <li class="breadcrumb-item" aria-current="page">Lista de Pedidos</li>
-                                </ol>
-                            </nav>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{layout/administrator/menu :: menu }"></div>
+        <!-- CONTEÚDO PRINCIPAL-->
+        <div class="col-12 col-sm-10">
+            <main class="bg-white  p-3">
+                <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Pedidos', 'Lista de Pedidos') }"></div>
+                
+                <div class="card p-3 vh-100 shadow">
+                    <div class="mb-3">
+                        <div class="d-flex flex-row-reverse">
+                            <a class="btn btn-primary"
+                               th:href="@{/administrator/novo-pedido}">Cadastrar pedido</a>
+                        </div>
 
-                            <div>
-                                <img th:src="@{/images/user_default.png}"
-                                     alt="Imagem do usuário"
-                                     title="Imagem do usuário"
-                                     width="60px">
-                            </div>
+                        <div class="mb-3">
+                            <h2 class="h2 text-black-50">Lista de Pedidos</h2>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="d-flex justify-content-start">
-                            <th:block th:each="pedido : ${pedidos}">
-                                <div class="card me-2 mb-3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Pedido</h5>
-                                        <p class="card-text">
-                                            Itens: <span th:text="*{pedido.getItemProdutos().size()}"></span></p>
-                                        <p class="card-text"></p>
-                                        <p class="card-text">Status:
-                                            <span class="badge bg-warning text-dark" th:text="*{pedido.getSituacao()}"></span>
-                                        </p>
-                                        <p class="card-text">Cliente:
-                                            <span th:text="*{pedido.getCliente().getNome()}"></span>
-                                        </p>
 
-                                        <div class="collapse" th:id="${pedido.getId()}">
-                                            <th:block th:each="items : ${pedido.getItemProdutos()}">
-                                                <div class="d-flex justify-content-around align-items-center">
-                                                    <p class="text-uppercase fw-bold" th:text="${items.getProduto().getNome()}"></p>
-                                                    <p class="fs-4 text-primary fw-bold" th:text="*{items.getQuantidade()}"></p>
-                                                </div>
-                                            </th:block>
-                                        </div>
+                    <div class="d-flex justify-content-start align-itens-center">
+                        <th:block th:each="pedido : ${pedidos}">
+                            <div class="card me-2 mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pedido</h5>
+                                    <p class="card-text">
+                                        Itens: <span th:text="*{pedido.getItemProdutos().size()}"></span></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text">Status:
+                                        <span class="badge bg-warning text-dark" th:text="*{pedido.getSituacao()}"></span>
+                                    </p>
+                                    <p class="card-text">Cliente:
+                                        <span th:text="*{pedido.getCliente().getNome()}"></span>
+                                    </p>
 
-                                        <p>Preço Total: R$<span th:text="*{pedido.getPrecoTotal()}"></span></p>
-                                        <div class="d-flex justify-content-start">
-                                            <button class="btn btn-primary  me-1"
-                                                    type="button"
-                                                    th:data-bs-toggle="collapse"
-                                                    th:data-bs-target="'#'+${pedido.getId()}"
-                                                    aria-expanded="false"
-                                                    th:aria-controls="${pedido.getId()}">
-                                                Detalhes
-                                            </button>
+                                    <div class="collapse" th:id="${pedido.getId()}">
+                                        <th:block th:each="items : ${pedido.getItemProdutos()}">
+                                            <div class="d-flex justify-content-around align-items-center">
+                                                <p class="text-uppercase fw-bold" th:text="${items.getProduto().getNome()}"></p>
+                                                <p class="fs-4 text-primary fw-bold" th:text="*{items.getQuantidade()}"></p>
+                                            </div>
+                                        </th:block>
+                                    </div>
 
-                                            <form th:action="@{/administrator/finalizar-pedido}" method="post">
-                                                <input type="hidden" th:value="${pedido.getId()}" name="id">
-                                                <button class="btn btn-success" type="submit">Finalizar Pedido</button>
-                                            </form>
-                                        </div>
+                                    <p>Preço Total: R$<span th:text="*{pedido.getPrecoTotal()}"></span></p>
+                                    <div class="d-flex justify-content-start">
+                                        <button class="btn btn-primary  me-1"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                th:data-bs-target="'#'+${pedido.getId()}"
+                                                aria-expanded="false"
+                                                th:aria-controls="${pedido.getId()}">
+                                            Detalhes
+                                        </button>
+
+                                        <button class="actionForm btn btn-success finalizar"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                th:attr="data-id=''+${pedido.id},
+                                                         data-nome=''+${pedido.getCliente().getNome()},
+                                                         data-url='/administrator/finalizar-pedido'">
+                                            Finalizar Pedido
+                                        </button>
                                     </div>
                                 </div>
-                            </th:block>
-                        </div>
-                    </div>
-                </main>
-                <!-- RODAPÉ -->
-                <div class="p-3">
-                    <div class="card p-3">
-                        <div class="row">
-                            <div class="col text-start p-0">
-                                <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script>
-                                    Coffee Break. Todos os Direitos Reservados</p>
                             </div>
-                            <div class="col text-end p-0">
-                                <p>Portal Coffee Break</p>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
-            </div>
+
+                <div th:replace="~{layout/administrator/footer :: footer }"></div>
+            </main>
         </div>
     </div>
-
-<script th:src="@{webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js"
-        crossorigin="anonymous"></script>
+</div>
+<div th:replace="~{layout/fragmentos/administrator/modal :: modal (' Deseja finalizar o pedido de ', 'Finalizar Pedido', 'btn-primary')}"></div>
+<div th:replace="~{layout/fragmentos/administrator/scripts :: scripts}"></div>
 </body>
 </html>

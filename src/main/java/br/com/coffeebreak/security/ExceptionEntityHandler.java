@@ -1,16 +1,12 @@
-package br.com.coffeebreak.config;
+package br.com.coffeebreak.security;
 
 
 import br.com.coffeebreak.model.cliente.exceptions.ClientAlreadyRegistered;
-import br.com.coffeebreak.model.funcionario.exceptions.AcessDeniedException;
-import br.com.coffeebreak.service.exception.EmailCadastradoException;
-import org.springframework.expression.AccessException;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ControllerAdvice
 public class ExceptionEntityHandler {
@@ -23,10 +19,15 @@ public class ExceptionEntityHandler {
     }
 
     @ExceptionHandler(ClientAlreadyRegistered.class)
-    public ModelMap handleClientAlreadyRegistered(ClientAlreadyRegistered clientAlreadyRegistered) {
-        System.out.println("caiu aqui");
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("errorCliente", clientAlreadyRegistered.getMessage());
-        return modelMap;
+    public String handleClientAlreadyRegistered(ClientAlreadyRegistered clientAlreadyRegistered, RedirectAttributes redirectAttributes) {
+        System.out.println("chegou aqui no client already");
+        redirectAttributes.addFlashAttribute("errorCliente", clientAlreadyRegistered.getMessage());
+        return "redirect:/cadastro";
+    }
+
+    @ExceptionHandler(UsernamePasswordWrongException.class)
+    public String handleUsernamePasswordException(UsernamePasswordWrongException exception, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", exception.getMessage());
+        return "redirect:/login";
     }
 }

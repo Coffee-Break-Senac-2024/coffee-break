@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock - List</title>
+    <title>Ingredientes - Lista de Ingredientes</title>
     <link rel="stylesheet"
           th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css">
@@ -12,33 +12,15 @@
 <div class="container-fluid">
     <div class="row">
         <div th:replace="~{layout/administrator/menu :: menu }"></div>
-        <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
-            <!-- CONTEÙDO -->
             <main class="bg-white  p-3">
-                <div class="card mb-3">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-2 p-2">
-                                <li class="breadcrumb-item">Estoque</li>
-                                <li class="breadcrumb-item" aria-current="page">Lista de Ingredientes</li>
-                            </ol>
-                        </nav>
-                        <div>
-                            <img th:src="@{/images/user_default.png}"
-                                 alt="Imagem do usuário"
-                                 title="Imagem do usuário"
-                                 width="60px">
-                        </div>
-                    </div>
-                </div>
+                <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Ingredientes', 'Lista de Ingredientes') }"></div>
 
                 <div class="card p-3 vh-100">
-
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">
-                            <a class="btn btn-primary" th:href="@{/administrator/stock/create}">Cadastrar
-                                Ingrediente</a>
+                            <a class="btn btn-primary" th:href="@{/administrator/stock/create}">
+                                Cadastrar Ingrediente</a>
                         </div>
 
                         <div class="mb-3">
@@ -88,7 +70,7 @@
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
                                         <button type="button"
-                                                class="deletar btn btn-danger mx-1"
+                                                class="actionForm btn btn-danger mx-1"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal"
                                                 th:attr="data-id=''+${ingrediente.id},
@@ -130,13 +112,12 @@
                         </nav>
                     </div>
                 </div>
-                <!-- RODAPÉ -->
                 <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
         </div>
     </div>
 </div>
-<div th:replace="~{layout/fragmentos/administrator/modal :: modal ('ingrediente')}"></div>
+<div th:replace="~{layout/fragmentos/administrator/modal :: modal (' Deseja excluir o ingrediente ', 'Deletar', 'btn-danger')}"></div>
 <div th:replace="~{layout/fragmentos/administrator/scripts :: scripts}"></div>
 </body>
 </html>

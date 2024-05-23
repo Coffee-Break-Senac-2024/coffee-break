@@ -107,6 +107,13 @@
 			<version>5.0.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.7.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

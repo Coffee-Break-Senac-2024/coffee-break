@@ -19,18 +19,13 @@ body {
 }
 
 .form-container span {
-    color: #7A5955;
     font-family: "Playfair Display", serif;
     display: inline-block;
 }
 
 .title {
-<<<<<<< HEAD
     font-size: 20px;
     margin-top: 16px;
-=======
-    font-size: 40px;
->>>>>>> b41b2dd54ddd582842491f28ffb082201e43b970
 }
 
 
@@ -54,7 +49,6 @@ body {
 .form {
     display: flex;
     flex-direction: column;
-
 }
 
 .form div span {
@@ -68,14 +62,18 @@ body {
 
 .form div span:last-child {
     font-size: 20px;
-    color: #28AA63;
-
-
 }
-.form a{
+
+.form a {
     font-size: 20px;
-    color: #28AA63;
     margin-top: 10px;
+    color: #28AA63;
+    text-decoration:none;
+}
+
+.form a:hover {
+    text-decoration: underline;
+    color: #28bf62;
 }
 
 .form-container button {
@@ -85,8 +83,14 @@ body {
     border: none;
     height: 40px;
     background-color: #28AA63;
+    color: #FFF;
     font-size: 20px;
     font-weight: 700;
+}
+
+.form-container button:hover {
+    background-color: #FFF;
+    color: #28AA63;
     cursor: pointer;
 }
 
@@ -99,4 +103,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.message-input {
+    color: red;
 }

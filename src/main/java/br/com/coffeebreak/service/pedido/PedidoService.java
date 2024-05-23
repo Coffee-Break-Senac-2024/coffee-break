@@ -21,11 +21,17 @@ public class PedidoService {
 
     @Transactional
     public List<Pedido> getPedidos(){
-        return repository.getPedidos();
+        return repository.getPedidosPorAndamento(SituacaoPedido.EM_ANDAMENTO.toString());
     }
 
     @Transactional
-    public void  FinalizarPedido(String id){
-       repository.atualizarSituacaoPedido(id, SituacaoPedido.FINALIZADO.toString());
+    public void FinalizarPedido(String id) {
+        repository
+                .findById(id)
+                .ifPresent(pedidoUpdate -> {
+                    pedidoUpdate.setSituacao(SituacaoPedido.FINALIZADO.toString());
+
+                    repository.save(pedidoUpdate);
+                });
     }
 }

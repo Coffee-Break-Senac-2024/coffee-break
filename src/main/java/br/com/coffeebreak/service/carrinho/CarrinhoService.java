@@ -6,13 +6,16 @@ import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.cliente.Cliente;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
-import br.com.coffeebreak.repositories.ClienteRepository;
+import br.com.coffeebreak.service.cliente.ClienteLogadoService;
 import br.com.coffeebreak.service.itemproduto.ItemProdutoService;
 import br.com.coffeebreak.service.pedido.PedidoService;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +33,9 @@ public class CarrinhoService {
     @Autowired
     ItemProdutoService itemProdutoService;
 
+
     @Autowired
-    ClienteRepository clienteRepository;
+    private ClienteLogadoService clienteLogadoService;
 
     private Pedido pedido;
     private int quantidadeCarrinho = 1;
@@ -75,7 +79,8 @@ public class CarrinhoService {
                 total += item.getPrecoProduto() * item.getQuantidade();
             }
         }
-        return total;
+
+        return formatarValor(total);
     }
 
     public int getQuantidadeCarrinho() {
@@ -87,20 +92,24 @@ public class CarrinhoService {
     }
 
     public Pedido salvarPedido(){
+       try {
+           novoPedido();
+       }catch (UsernameNotFoundException e){
+           throw new UsernameNotFoundException("Usuário não encontrado");
+       }
+        return this.pedido = new Pedido();
+    }
+
+    public void novoPedido(){
+        Cliente cliente = clienteLogadoService.getLoggedInCliente();
+        pedido.setCliente(cliente);
         pedido.setCreatedAt(LocalDateTime.now());
         pedido.setTipoPedido(TipoPedido.ENTREGA);
-        Cliente cliente = clienteRepository.findClienteByEmailIgnoreCase("clienteteste@gmail.com");
-        pedido.setCliente(cliente);
         pedido.setSituacao(SituacaoPedido.EM_ANDAMENTO.toString());
         pedido.setFuncionario(null);
         pedido.setPrecoTotal(calcularTotalCarrinho());
         pedidoService.salvarPedido(pedido);
         salvarItemProdutos(pedido.getItemProdutos());
-
-
-        Pedido pedidoSalvo = this.pedido;
-        this.pedido = new Pedido();
-        return pedidoSalvo;
     }
 
     private boolean validarItemCarrinho(Produto produto){
@@ -127,5 +136,12 @@ public class CarrinhoService {
             item.setPedido(pedido);
             itemProdutoService.salvar(item);
         }
+    }
+
+    private double formatarValor(Double valor) {
+        NumberFormat formatter = new DecimalFormat("#,###.00");
+        String valorFormatado = formatter.format(valor);
+        valorFormatado = valorFormatado.replace(",", ".");
+        return Double.parseDouble(valorFormatado);
     }
 }
