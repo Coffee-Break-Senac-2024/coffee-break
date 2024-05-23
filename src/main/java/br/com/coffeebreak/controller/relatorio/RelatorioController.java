@@ -29,20 +29,17 @@ public class RelatorioController {
     @GetMapping("/create-excel")
     public ModelAndView gerarRelatorio(@RequestParam("tipoRelatorio") String tipoRelatorioString) {
         ModelAndView mv = new ModelAndView("administrator/relatorio/generate");
-
+        TipoRelatorio tipoRelatorio = TipoRelatorio.valueOf(tipoRelatorioString);
         try {
-            TipoRelatorio tipoRelatorio = TipoRelatorio.valueOf(tipoRelatorioString);
-            mv.addObject("tipoRelatorio", tipoRelatorio);
             relatorioService.exportPedidosToExcel(tipoRelatorio);
             mv.addObject("successMessage", "Planilha criada na pasta C:Relatorios");
-
         } catch (IllegalArgumentException e) {
             mv.addObject("errorMessage", "Valor inválido para TipoRelatorio " + tipoRelatorioString);
-
         } catch (Exception e) {
             mv.addObject("errorMessage", "Erro ao gerar planilha");
-
         }
+        mv.addObject("tipoRelatorio", relatorioService.getTiposRelatorio());
+
         return mv;
 
     }
