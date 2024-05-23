@@ -1,10 +1,12 @@
 package br.com.coffeebreak.controller.produto;
 
 import br.com.coffeebreak.model.produto.Produto;
-import br.com.coffeebreak.service.stock.EstoqueService;
 import br.com.coffeebreak.service.produto.ProdutoService;
+import br.com.coffeebreak.service.stock.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +33,16 @@ public class ProductController {
 
     @GetMapping
     @PreAuthorize("!hasAuthority('ATENDENTE')")
-    public ModelAndView index(){
+    public ModelAndView index( @RequestParam(required = false) String nome,
+                               @PageableDefault(size = 6) Pageable pageable){
         ModelAndView mv = new ModelAndView("administrator/product/index");
 
-        List<Produto> produtos = this.produtoService.getAllProducts();
+        Page<Produto> produtos;
+        if (nome != null && !nome.isEmpty()) {
+            produtos = produtoService.getAllProducts(nome, pageable);
+        }else{
+            produtos = produtoService.getAllProducts(pageable);
+        }
 
         mv.addObject("produtos", produtos);
         return mv;
@@ -78,7 +86,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     @PreAuthorize("!hasAuthority('ATENDENTE')")
     public ModelAndView deleteProduct(@PathVariable String id, RedirectAttributes redirectAttributes) {
         boolean isDeleted = this.produtoService.excluirProduto(id);
@@ -93,9 +101,9 @@ public class ProductController {
         return new ModelAndView("redirect:/administrator/products");
     }
 
-    @GetMapping("/update")
+    @GetMapping("/update/{id}")
     @PreAuthorize("!hasAuthority('ATENDENTE')")
-    public ModelAndView updateProduct(@RequestParam("id") String id, Produto produto, RedirectAttributes redirectAttributes) {
+    public ModelAndView updateProduct(@PathVariable("id") String id, Produto produto, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView("administrator/product/create");
         try {
             produto = this.produtoService.getProductById(id);

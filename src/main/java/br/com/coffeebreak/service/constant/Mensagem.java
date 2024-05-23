@@ -10,7 +10,6 @@ public class Mensagem {
 
     /* ESTOUE */
     public static final String ESTOQUE_CRIADO_SUCESSO = "Ingrediente criado com sucesso!";
-    public static final String ESTOQUE_CRIADO_ERROR = "Error ao tentar criar Ingrediente!";
     public static final String ESTOQUE_UPDATE_SUCESSO = "Ingrediente atualizado com sucesso!";
     public static final String ESTOQUE_DELETADO_SUCESSO = "Ingrediente deletado com sucesso!";
 
@@ -24,8 +23,10 @@ public class Mensagem {
     public static final String FORMULARIO_VALIDACAO_PRICE = "O campo preço é obrigatório.";
     public static final String FORMULARIO_VALIDACAO_IMAGEM = "O campo imagem é obrigatório.";
     public static final String FORMULARIO_VALIDACAO_DATA = "O campo data é obrigatório.";
-    public static final String FORMULARIO_VALIDACAO_EMAIL = "O campo email é obrigatótio.";
-    public static final String FORMULARIO_VALIDACAO_SENHA = "O campo senha é obrigatótio.";
-    public static final String FORMULARIO_VALIDACAO_SENHA_TAMANHO = "O campo senha dever ter no minímo 8 e no maxímo 14 caracteres.";
-    public static final String FORMULARIO_VALIDACAO_TIPO_FUNCIONARIO = "O campo tipo de funcionário é obrigatótio.";
+    public static final String FORMULARIO_VALIDACAO_CPF = "O campo CPF é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_EMAIL = "O campo email é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_TELEFONE = "O campo telefone é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_SENHA = "O campo senha é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_ENDERECO = "O campo senha é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_TIPO_FUNCIONARIO = "O campo tipo de funcionário é obrigatório.";
 }
