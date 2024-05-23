@@ -45,7 +45,7 @@
                                 name="tipoRelatorio">
                         <option value="">Selecione o tipo</option>
                             <th:block th:each="tipo : ${tipoRelatorio}">
-                                <option th:value="${tipo}" th:text="${tipo.name()}"></option>
+                                <option th:value="${tipo.name()}" th:text="${tipo.name()}"></option>
                             </th:block>
                         </select>
 
