@@ -48,12 +48,12 @@ public class ProdutoService {
         }
     }
 
-    public List<Produto> getAllProducts() {
-        return this.produtoRepository.findAll();
-    }
-
     public Page<Produto> getAllProducts(Pageable pageable) {
         return produtoRepository.findAll(pageable);
+    }
+
+    public Page<Produto> getAllProducts(String nome, Pageable pageable) {
+        return produtoRepository.findAllByNomeIgnoreCase(nome, pageable);
     }
 
 

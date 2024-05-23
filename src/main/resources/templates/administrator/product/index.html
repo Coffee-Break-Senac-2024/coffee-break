@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Lista de Produtos</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" type="text/css">
-    <!-- Incluir CSS para DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Incluir JS para DataTables -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
+          type="text/css">
 </head>
 <body>
 <div class="container-fluid">
@@ -20,22 +16,42 @@
             <main class="bg-white  p-3">
                 <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Produtos', 'Lista de Produtos') }"></div>
 
-                <div class="alert alert-success" th:if="${success}">
-                    <p th:text="${success}"></p>
-                </div>
+                <div class="card p-3 mb-4 vh-100 shadow">
+                    <div class="alert alert-success" th:if="${success}">
+                        <p th:text="${success}"></p>
+                    </div>
 
-                <div class="card p-3 vh-100">
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">
-                            <a class="btn btn-primary" th:href="@{/administrator/products/create}">Cadastrar Produto</a>
+                            <a class="btn btn-primary"
+                               th:href="@{/administrator/employees/create}">
+                                Cadastrar Produto
+                            </a>
                         </div>
 
                         <div class="mb-3">
                             <h2 class="h2 text-black-50">Lista de Produtos</h2>
                         </div>
+
+                        <form class="row g-3 col-4" th:action="@{/administrator/products}">
+                            <div class="col-auto">
+                                <input id="buscar-nome"
+                                       type="search"
+                                       name="nome"
+                                       class="form-control"
+                                       placeholder="Buscar por nome"
+                                       aria-label="Buscar por nome">
+                            </div>
+                            <div class="col-auto">
+                                <button id="search-button" class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
+
                     <div class="col-12">
-                        <table class="table" id="productTable">
+                        <table class="table">
                             <thead>
                             <tr>
                                 <th scope="col">Nome</th>
@@ -45,41 +61,65 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="produto : ${produtos}">
+                            <tr th:each="produto : ${produtos.content}">
                                 <td th:text="${produto.nome}"></td>
                                 <td th:text="${produto.quantidadeUtilizada}"></td>
                                 <td th:text="${produto.preco}"></td>
                                 <td>
-                                    <a class="btn btn-success" th:href="@{/administrator/products/update(id=${produto.id})}">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                    <a th:href="@{/administrator/products/delete/{id}(id=${produto.id})}" class="btn btn-danger" th:id="${produto.id}">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                                    <div class="d-flex flex-row">
+                                        <div class="ms-0">
+                                            <a class="btn btn-primary"
+                                               th:href="@{/administrator/products/update/{id}(id=${produto.id})}">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                        </div>
+
+                                        <button type="button"
+                                                class="actionForm btn btn-danger mx-1"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                th:attr="data-id=''+${produto.id},
+                                                             data-nome=''+${produto.nome},
+                                                             data-url='/administrator/products/delete'">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(produtos.content)}">
+                                <td>Nenhum registro disponível</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-12 text-center" th:if="${not #lists.isEmpty(produtos.content)}">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li th:class="${produtos.first} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/employees(page=${produtos.number - 1})}">&laquo;</a>
+                                </li>
+
+                                <th:block th:each="p : ${#numbers.sequence(0, produtos.totalPages - 1)}"
+                                          th:with="paginaAtual=${produtos.number}">
+                                    <li th:class="${paginaAtual == p} ? 'active'">
+                                        <a class="page-link" th:href="@{/administrator/products(page=${p})}">[[${p + 1}]]</a>
+                                    </li>
+                                </th:block>
+
+                                <li th:class="${produtos.last} ? disabled">
+                                    <a class="page-link" th:href="@{/administrator/products(page=${produtos.number + 1})}">&raquo;</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
+
                 <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
         </div>
     </div>
 </div>
-<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
-<script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-        $('#productTable').DataTable({
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
-            },
-            "pageLength": 6,  // Define o número de registros por página para 7
-            "lengthMenu": [6, 12, 18, 24]  // Opções no seletor de "exibir por página"
-        });
-    });
-</script>
-
+<div th:replace="~{layout/fragmentos/administrator/modal :: modal (' Deseja excluir o produto ', 'Deletar', 'btn-danger')}"></div>
+<div th:replace="~{layout/fragmentos/administrator/scripts :: scripts}"></div>
 </body>
 </html>
