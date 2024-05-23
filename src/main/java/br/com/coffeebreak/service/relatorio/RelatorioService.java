@@ -2,7 +2,7 @@ package br.com.coffeebreak.service.relatorio;
 
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.pedido.Pedido;
-import br.com.coffeebreak.repositories.PedidoRepository;
+
 import br.com.coffeebreak.repositories.RelatorioRepository;
 import br.com.coffeebreak.service.relatorio.strategy.TipoRelatorio;
 import org.apache.poi.ss.usermodel.Row;
@@ -29,11 +29,10 @@ public class RelatorioService {
 
     @Autowired
     private RelatorioRepository relatorioRepository;
-    @Autowired
-    private PedidoRepository pedidoRepository;
+
 
     public void exportPedidosToExcel(TipoRelatorio tipoRelatorio) throws IOException {
-        List<Pedido> listaPedido = pedidoRepository.getPedidosByTime(tipoRelatorio.calcular(),LocalDateTime.now());
+        List<Pedido> listaPedido = relatorioRepository.getPedidosByTime(tipoRelatorio.calcular(),LocalDateTime.now());
         List<ItemProduto> aux = new ArrayList<>();
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Relatorio");
