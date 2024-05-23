@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Produtos</title>
+    <title>Produtos - Lista de Produtos</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" type="text/css">
     <!-- Incluir CSS para DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
@@ -16,25 +16,9 @@
 <div class="container-fluid">
     <div class="row">
         <div th:replace="~{layout/administrator/menu :: menu }"></div>
-        <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
-            <!-- CONTEÚDO -->
             <main class="bg-white  p-3">
-
-                <div class="card mb-3">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-2 p-2">
-                                <li class="breadcrumb-item">Produtos</li>
-                                <li class="breadcrumb-item" aria-current="page">Lista de Produtos</li>
-                            </ol>
-                        </nav>
-
-                        <div>
-                            <img th:src="@{/images/user_default.png}" alt="Imagem do usuário" title="Imagem do usuário" width="60px">
-                        </div>
-                    </div>
-                </div>
+                <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Produtos', 'Lista de Produtos') }"></div>
 
                 <div class="alert alert-success" th:if="${success}">
                     <p th:text="${success}"></p>
@@ -78,13 +62,11 @@
                         </table>
                     </div>
                 </div>
-                <!--                 RODAPÉ -->
                 <div th:replace="~{layout/administrator/footer :: footer }"></div>
             </main>
         </div>
     </div>
 </div>
-
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
 <script src="https://kit.fontawesome.com/f6b0e6c728.js" crossorigin="anonymous"></script>
 <script>

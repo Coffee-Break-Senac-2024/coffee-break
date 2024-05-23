@@ -7,16 +7,13 @@
     <th:block th:replace="~{ layout/fragmentos/coffebreak/links :: links }"></th:block>
     <link rel="stylesheet" th:href="@{/css/pedidos/pedidos.css}">
 </head>
-<body>
-
+<body class="container">
 <div th:replace="~{layout/coffeebreak/header :: header}"></div>
-
 <main class="container1">
     <div class="buttons-container">
         <a class="button" th:href="@{/pedidos}">Pedidos</a>
-    	<a class="button button-active" th:href="@{/historicoPedidos}">Últimos Pedidos</a>
- </div>
-
+        <a class="button button-active" th:href="@{/historicoPedidos}">Últimos Pedidos</a>
+    </div>
     <div class="container1">
         <th:block th:each="pedido : ${pedidos}">
             <div class="container1-content">
@@ -30,7 +27,8 @@
                         <p class="order-date">Data:
                             <span th:text="${#temporals.format(pedido.createdAt, 'dd-MM-yyyy HH:mm:ss')}"></span>
                         </p>
-                        <p class="order-items">Total de Itens: <span th:text="*{pedido.getItemProdutos.size()}"></span></p>
+                        <p class="order-items">Total de Itens: <span th:text="*{pedido.getItemProdutos.size()}"></span>
+                        </p>
                         <p class="order-total">Total do Pedido: R$ <span th:text="*{pedido.getPrecoTotal()}"></span></p>
                     </div>
                     <div class="order-status-container">

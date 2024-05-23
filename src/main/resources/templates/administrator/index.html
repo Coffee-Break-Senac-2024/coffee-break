@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Pedidos - Lista de Pedidos</title>
     <link rel="stylesheet"
           th:href="@{webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
           type="text/css" >
@@ -16,38 +16,8 @@
         <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
             <main class="bg-white  p-3">
-                <div class="card mb-3 shadow">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-2 p-2">
-                                <li class="breadcrumb-item">Pedidos</li>
-                                <li class="breadcrumb-item" aria-current="page">Lista de Pedidos</li>
-                            </ol>
-                        </nav>
-
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="d-grid gap-2">
-                                <button class="btn"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseLogout"
-                                        aria-expanded="false"
-                                        aria-controls="collapseLogout">
-                                        <span class="btn btn-outline-secondary">
-                                           <i class="fs-3 fa-solid fa-user"></i>
-                                        </span>
-                                </button>
-                            </div>
-                            <div class="collapse" id="collapseLogout">
-                                <a class="mt-2 text-start btn btn-danger" th:href="@{/logout}">
-                                    Sair
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Pedidos', 'Lista de Pedidos') }"></div>
+                
                 <div class="card p-3 vh-100 shadow">
                     <div class="mb-3">
                         <div class="d-flex flex-row-reverse">

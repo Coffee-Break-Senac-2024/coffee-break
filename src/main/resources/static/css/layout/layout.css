@@ -6,6 +6,11 @@
     --secondary:#FFF ;
 }
 
+.container {
+    max-width: 1624px;
+    margin: 0 auto;
+}
+
 /* HEADER */
 
 .header_menu {
