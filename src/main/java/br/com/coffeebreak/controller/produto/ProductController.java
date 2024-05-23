@@ -3,12 +3,15 @@ package br.com.coffeebreak.controller.produto;
 import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.service.produto.ProdutoService;
 import br.com.coffeebreak.service.stock.EstoqueService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,8 +62,21 @@ public class ProductController {
 
     @PostMapping("/create")
     @PreAuthorize("!hasAuthority('ATENDENTE')")
-    public ModelAndView createProduct(@ModelAttribute("produto") Produto produto, @RequestParam(name = "ingredientes") List<String> ingredientes, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile arquivo) {
-        System.out.println("entrou aqui por aquele motivo");
+    public String createProduct(
+                                @Valid @ModelAttribute("produto") Produto produto,
+                                BindingResult bindingResult,
+                                @RequestParam(name = "ingredientes") List<String> ingredientes,
+                                RedirectAttributes redirectAttributes,
+                                @RequestParam("file") MultipartFile arquivo,
+                                Model model) {
+
+        if (bindingResult.hasErrors()){
+            model.addAttribute("ingredientes", this.estoqueService.getAllIngredientes());
+            redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors());
+            return "administrator/product/create";
+        }
+
+
        produto.setEstoqueList(this.produtoService.getIngredientsToBeUsed(ingredientes));
 
        try {
@@ -78,11 +94,11 @@ public class ProductController {
 
         if (this.produtoService.cadastrarProduto(produto)) {
             redirectAttributes.addFlashAttribute("success", "Produto cadastrado com sucesso!");
-            return new ModelAndView("redirect:/administrator/products");
+            return "redirect:/administrator/products";
         }
 
         redirectAttributes.addFlashAttribute("error", "Não foi possível cadastrar este produto.");
-        return new ModelAndView("redirect:/administrator/products/create");
+        return "redirect:/administrator/products/create";
     }
 
 

@@ -29,4 +29,5 @@ public class Mensagem {
     public static final String FORMULARIO_VALIDACAO_SENHA = "O campo senha é obrigatório.";
     public static final String FORMULARIO_VALIDACAO_ENDERECO = "O campo senha é obrigatório.";
     public static final String FORMULARIO_VALIDACAO_TIPO_FUNCIONARIO = "O campo tipo de funcionário é obrigatório.";
+    public static final String FORMULARIO_VALIDACAO_TIPO_LISTA_INGREDIENTES = "O campo Lista de ingredientes é obrigatório.";
 }

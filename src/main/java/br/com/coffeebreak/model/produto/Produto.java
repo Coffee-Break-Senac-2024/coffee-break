@@ -38,11 +38,10 @@ public class Produto {
     private Integer quantidadeUtilizada;
 
     @Column(nullable = false)
-    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_PRICE)
+    @NotNull(message = Mensagem.FORMULARIO_VALIDACAO_PRICE)
     private Double preco;
 
     @Column(nullable = false)
-    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_IMAGEM)
     private String nomeImagem;
 
     @OneToMany()
