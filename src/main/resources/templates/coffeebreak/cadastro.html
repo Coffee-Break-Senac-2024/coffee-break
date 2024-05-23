@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Cadastro</title>
@@ -10,6 +10,10 @@
 <div th:replace="~{layout/coffeebreak/header :: header}"></div>
 <div class="container_content">
     <div class="form-container">
+        <div th:if="${errorCliente}">
+            <span th:text="${errorCliente}"></span>
+        </div>
+
         <form th:action="@{/cadastro/create}" th:object="${cliente}" method="post">
             <input type="hidden" name="id" th:if="${cliente.id != null}"
                    th:value="${cliente.id}">
@@ -88,15 +92,10 @@
             </span>
 
             <button type="submit">Cadastre-se</button>
-
         </form>
-        <div th:if="${errorCliente}">
-            <span th:text="${errorCliente}"></span>
-        </div>
     </div>
-    <div class="img-container">
-        <img th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break"/>
-    </div>
+
+    <img class="img-container" th:src="@{/images/login/imgcoffee.jpg}" alt="Imagem café" title="Logo coffee break"/>
 </div>
 <div th:replace="~{layout/coffeebreak/footer :: footer}"></div>
 <div th:replace="~{layout/fragmentos/coffebreak/scripts :: scripts}"></div>

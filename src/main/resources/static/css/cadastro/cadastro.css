@@ -6,26 +6,20 @@ body {
 
 .container_content {
     display: flex;
-    align-items: center;
+    justify-content: space-around;
     margin-top:10px;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    align-items: center;
     margin-bottom: 40px
+    padding: 20px;
+    margin: 10px;
 }
 .form-container form {
     flex-direction: column;
     display: flex;
-}
-.form-container img {
-    width: 100px;
-    height: 100px;
-    margin-top: 20px;
-    margin-bottom: 15px;
 }
 
 .text-danger {
@@ -36,8 +30,9 @@ body {
 
 
 
-.img-container img {
-    max-width:500px
+.img-container {
+    margin-left: auto;
+    max-width: 45%;
 }
 
 .span-title {
