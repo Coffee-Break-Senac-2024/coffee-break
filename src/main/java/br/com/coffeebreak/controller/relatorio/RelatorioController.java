@@ -29,7 +29,7 @@ public class RelatorioController {
         return mv;
     }
     @GetMapping("/create-excel")
-    public ModelAndView gerarRelatorio(@RequestParam("tipoRelatorio") String tipoRelatorioString) throws IOException {
+    public ModelAndView gerarRelatorio(@RequestParam("tipoRelatorio") String tipoRelatorioString) {
         ModelAndView mv = new ModelAndView("administrator/relatorio/generate");
 
         try {

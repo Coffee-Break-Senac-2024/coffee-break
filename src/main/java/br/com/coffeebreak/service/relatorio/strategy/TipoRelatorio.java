@@ -1,8 +1,6 @@
 package br.com.coffeebreak.service.relatorio.strategy;
 
-import br.com.coffeebreak.model.relatorio.Relatorio;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public enum TipoRelatorio implements RelatorioStrategy {
@@ -32,7 +30,7 @@ public enum TipoRelatorio implements RelatorioStrategy {
             LocalDateTime inicio = LocalDateTime.now();
             return inicio.minusMonths(1);
         }
-    };
+    }
 
 
 }
