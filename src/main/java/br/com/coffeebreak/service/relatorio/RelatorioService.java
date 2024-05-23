@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -113,6 +114,10 @@ public class RelatorioService {
         }
          System.out.println("Relatório gerado com sucesso em: " + filePath);
     }
+
+        public List<TipoRelatorio> getTiposRelatorio(){
+            return Arrays.asList(TipoRelatorio.values());
+        }
 
     }
 
