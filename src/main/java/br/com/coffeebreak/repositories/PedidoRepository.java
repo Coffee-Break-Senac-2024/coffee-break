@@ -4,6 +4,7 @@ import br.com.coffeebreak.model.pedido.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, String> {
@@ -13,5 +14,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, String> {
 
     @Query("SELECT p FROM pedido p WHERE  p.situacao = :situacao")
     List<Pedido> getPedidosPorAndamento(String situacao);
+
+    @Query(value= "SELECT p FROM pedido p where p.createdAt BETWEEN ?1 AND ?2")
+    List<Pedido> getPedidosByTime(LocalDateTime inicio, LocalDateTime fim);
 
 }
