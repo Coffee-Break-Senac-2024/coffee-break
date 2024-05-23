@@ -33,7 +33,7 @@ public class ClienteController {
         //Verifica se tem erros
         if(bindingResult.hasErrors())     {
             //tratativa de erro
-            return new ModelAndView("redirect:/cadastro");
+            return new ModelAndView("coffeebreak/cadastro");
         }
         
             clienteService.insertCliente(cliente);

@@ -1,24 +1,21 @@
 package br.com.coffeebreak.model.cliente;
 
 import br.com.coffeebreak.model.pedido.Pedido;
+import br.com.coffeebreak.service.constant.Mensagem;
 import jakarta.persistence.*;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,26 +29,27 @@ public class Cliente implements UserDetails {
     private String id;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_NOME)
     private String nome;
 
     @Column(nullable = false, unique = true)
-    @Email
-    @NotBlank
+    @Email(message = Mensagem.FORMULARIO_VALIDACAO_EMAIL)
     private String email;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_SENHA)
     private String senha;
 
     @Column(nullable = false, unique = true)
-    @NotBlank
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_CPF)
     private String cpf;
+
     @Column(nullable = false)
-    @NotBlank
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_ENDERECO)
     private String endereco;
+
     @Column(nullable = false)
-    @NotBlank
+    @NotEmpty(message = Mensagem.FORMULARIO_VALIDACAO_TELEFONE)
     private String telefone;
 
 

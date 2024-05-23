@@ -14,8 +14,8 @@ body {
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 100vh;
     align-items: center;
+    margin-bottom: 40px
 }
 .form-container form {
     flex-direction: column;
@@ -27,6 +27,13 @@ body {
     margin-top: 20px;
     margin-bottom: 15px;
 }
+
+.text-danger {
+    padding: 4px 0;
+    color: red;
+    font-size: 1.2em;
+}
+
 
 
 .img-container img {
@@ -64,3 +71,10 @@ button {
     font-size: 16px;
     font-weight: 500;
 }
+
+button:hover {
+    background-color: #28BC89;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
