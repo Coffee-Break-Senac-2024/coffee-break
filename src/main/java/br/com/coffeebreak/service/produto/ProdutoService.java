@@ -53,6 +53,10 @@ public class ProdutoService {
         }
     }
 
+    public List<Produto> getAllProducts() {
+        return produtoRepository.findAll();
+    }
+
     public Page<Produto> getAllProducts(Pageable pageable) {
         return produtoRepository.findAll(pageable);
     }

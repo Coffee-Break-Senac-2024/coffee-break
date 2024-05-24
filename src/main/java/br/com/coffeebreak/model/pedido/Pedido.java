@@ -33,6 +33,7 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = true)
     private Cliente cliente;
+    private String nomeCliente;
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemProduto> itemProdutos;

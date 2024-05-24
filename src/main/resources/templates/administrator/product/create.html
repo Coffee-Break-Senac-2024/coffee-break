@@ -18,7 +18,7 @@
             <main class="bg-white  p-3">
                 <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Produtos', 'Cadastrar Produto') }"></div>
 
-                <div class="card p-3 mb-3">
+                <div class="card p-3 mb-5">
                     <div class="mb-3">
                         <h2 class="h3 text-black-50">Cadastrar Produto</h2>
                     </div>
@@ -28,45 +28,64 @@
                               enctype="multipart/form-data"
                               th:object="${produto}">
 
-                            <input type="hidden" th:value="${produto.id}" th:field="*{id}"/>
+                            <input type="hidden" name="id" th:if="${produto.id != null}"
+                                   th:value="${produto.id}">
+
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text"
                                        class="form-control"
                                        id="nome"
                                        th:field="*{nome}"
-                                       th:value="${produto.nome}"
-                                       required>
+                                       th:value="${produto.nome}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('nome')}"
+                                      th:errors="*{nome}">
+                                </span>
                             </div>
+
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>
                                 <input type="text"
                                        class="form-control"
                                        id="descricao"
                                        th:field="*{descricao}"
-                                       th:value="${produto.descricao}"
-                                       required>
+                                       th:value="${produto.descricao}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('descricao')}"
+                                      th:errors="*{descricao}">
+                                </span>
                             </div>
+
                             <div class="mb-3">
                                 <label for="quantidadeUtilizada" class="form-label">Quantidade Utilizada</label>
                                 <input type="number"
                                        class="form-control"
                                        id="quantidadeUtilizada"
                                        th:field="*{quantidadeUtilizada}"
-                                       th:value="${produto.quantidadeUtilizada}"
-                                       required>
+                                       th:value="${produto.quantidadeUtilizada}">
+
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('quantidadeUtilizada')}"
+                                      th:errors="*{quantidadeUtilizada}">
+                                </span>
                             </div>
+
                             <div class="mb-3">
                                 <label for="preco" class="form-label">Preço</label>
                                 <input type="number"
-                                       step="0.01"
                                        class="form-control"
                                        id="preco"
-                                      th:field="*{preco}"
-                                       th:value="${produto.preco}"
-                                       required>
-                            </div>
+                                       th:field="*{preco}"
+                                       th:value="${produto.preco}">
 
+                                <span class="text-danger"
+                                      th:if="${#fields.hasErrors('preco')}"
+                                      th:errors="*{preco}">
+                                </span>
+                            </div>
 
                             <div class="mb-3">
                                 <label for="imagem" class="form-label">Imagem do Produto</label>
@@ -82,7 +101,8 @@
                                         id="multiple-select-field"
                                         name="ingredientes"
                                         data-placeholder="Escolha os ingredientes"
-                                        multiple >
+                                        multiple
+                                        required>
 
                                     <option th:each="ingrediente : ${ingredientes}"
                                             th:value="${ingrediente.id}"
@@ -92,6 +112,7 @@
                                     </option>
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-success">Cadastrar</button>
                                 <a class="btn btn-danger" href="/administrator/products">Cancelar</a>
