@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EstoqueServiceImpl {
+public class EstoqueService {
 
     @Autowired
     private final EstoqueRepository repository;
 
-    public EstoqueServiceImpl(EstoqueRepository repository) {
+    public EstoqueService(EstoqueRepository repository) {
         this.repository = repository;
     }
 

@@ -26,16 +26,23 @@ import java.util.Optional;
 public class FuncionarioService {
 
     @Autowired
-    private FuncionarioRepository repository;
+    private final FuncionarioRepository repository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public FuncionarioService(FuncionarioRepository repository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, AuthService authService) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.authService = authService;
+    }
 
     /**
      * Retorna uma paginação de funcionarios.
@@ -51,7 +58,6 @@ public class FuncionarioService {
 
         if (funcionario.getTipoFuncionario().equals(TipoFuncionario.ADMIN)) {
             loginStrategy = new AdminStrategy(passwordEncoder, authenticationManager, authService);
-            System.out.println("Chegou aqui no strategy");
             loginStrategy.login(funcionario.getEmail(), senha);
         }
         else if (funcionario.getTipoFuncionario().equals(TipoFuncionario.GERENTE)) {

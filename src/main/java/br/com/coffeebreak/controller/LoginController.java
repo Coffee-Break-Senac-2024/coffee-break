@@ -23,15 +23,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
     @Autowired
-    private FuncionarioService funcionarioService;
+    private final FuncionarioService funcionarioService;
 
     @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
-    private SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+    private final SecurityContextRepository securityContextRepository;
+
+    public LoginController(AuthService authService, FuncionarioService funcionarioService, ClienteService clienteService) {
+        this.authService = authService;
+        this.funcionarioService = funcionarioService;
+        this.clienteService = clienteService;
+        this.securityContextRepository = new HttpSessionSecurityContextRepository();
+    }
+
+
 
     @PostMapping("/")
     public String login(@ModelAttribute("user") UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
@@ -43,8 +52,6 @@ public class LoginController {
             funcionarioService.authenticate(funcionario, userDTO.getSenha());
 
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-            System.out.println(auth.getAuthorities());
 
             securityContextRepository.saveContext(SecurityContextHolder.getContext(), request, response);
 
