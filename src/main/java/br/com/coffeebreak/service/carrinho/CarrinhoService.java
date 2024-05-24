@@ -103,6 +103,7 @@ public class CarrinhoService {
     public void novoPedido(){
         Cliente cliente = clienteLogadoService.getLoggedInCliente();
         pedido.setCliente(cliente);
+        pedido.setNomeCliente(cliente.getNome());
         pedido.setCreatedAt(LocalDateTime.now());
         pedido.setTipoPedido(TipoPedido.ENTREGA);
         pedido.setSituacao(SituacaoPedido.EM_ANDAMENTO.toString());

@@ -3,8 +3,10 @@ package br.com.coffeebreak.service.administrator;
 import br.com.coffeebreak.enums.SituacaoPedido;
 import br.com.coffeebreak.enums.TipoPedido;
 import br.com.coffeebreak.model.ItemProduto.ItemProduto;
+import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
+import br.com.coffeebreak.service.funcionario.FuncionarioLogadoService;
 import br.com.coffeebreak.service.itemproduto.ItemProdutoService;
 import br.com.coffeebreak.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,9 @@ public class AdministratorService {
 
     @Autowired
     private ItemProdutoService itemProdutoService;
-
-    private Pedido pedido;
+    
+    @Autowired
+    private FuncionarioLogadoService funcionarioLgdService;
 
     public void criarPedido(String nome, String tipo, List<Produto> produtos) {
 
@@ -35,6 +38,9 @@ public class AdministratorService {
         pedido.setPrecoTotal(calcularTotalCarrinho(produtos));
         pedido.setSituacao(SituacaoPedido.EM_ANDAMENTO.toString());
         pedido.setCreatedAt(LocalDateTime.now());
+
+        Funcionario funcionario = funcionarioLgdService.getLoggedInFuncionario();
+        pedido.setFuncionario(funcionario);
 
         List<ItemProduto> itensPedido = new ArrayList<>();
         for (Produto produto : produtos) {
