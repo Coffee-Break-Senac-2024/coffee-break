@@ -30,10 +30,11 @@ public class Pedido {
 
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    private String nomeCliente;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = true)
+    private Cliente cliente;
     @OneToMany(mappedBy = "pedido")
     private List<ItemProduto> itemProdutos;
 

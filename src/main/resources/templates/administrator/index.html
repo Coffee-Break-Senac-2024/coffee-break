@@ -13,7 +13,6 @@
 <div class="container-fluid">
     <div class="row">
         <div th:replace="~{layout/administrator/menu :: menu }"></div>
-        <!-- CONTEÚDO PRINCIPAL-->
         <div class="col-12 col-sm-10">
             <main class="bg-white  p-3">
                 <div th:replace="~{layout/administrator/breadcrumb :: breadcrumb ('Pedidos', 'Lista de Pedidos') }"></div>
@@ -42,7 +41,11 @@
                                         <span class="badge bg-warning text-dark" th:text="*{pedido.getSituacao()}"></span>
                                     </p>
                                     <p class="card-text">Cliente:
-                                        <span th:text="*{pedido.getCliente().getNome()}"></span>
+                                        <span th:text="*{pedido.nomeCliente}"></span>
+                                    </p>
+
+                                    <p class="card-text">Tipo do Pedido:
+                                        <span th:text="*{pedido.tipoPedido}"></span>
                                     </p>
 
                                     <div class="collapse" th:id="${pedido.getId()}">
@@ -69,7 +72,7 @@
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal"
                                                 th:attr="data-id=''+${pedido.id},
-                                                         data-nome=''+${pedido.getCliente().getNome()},
+                                                         data-nome=''+${pedido.nomeCliente},
                                                          data-url='/administrator/finalizar-pedido'">
                                             Finalizar Pedido
                                         </button>
