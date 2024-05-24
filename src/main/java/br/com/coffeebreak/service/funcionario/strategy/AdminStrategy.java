@@ -21,14 +21,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminStrategy implements LoginStrategy {
 
-    @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    @Qualifier("authenticationManager")
     private final AuthenticationManager authenticationManager;
-
-
 
     private final AuthService authService;
 
