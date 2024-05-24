@@ -31,7 +31,7 @@ public class Pedido {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "id_cliente", nullable = true)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido")

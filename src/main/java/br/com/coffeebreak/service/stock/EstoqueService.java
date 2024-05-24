@@ -13,10 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EstoqueService {
+public class EstoqueServiceImpl {
 
     @Autowired
-    private EstoqueRepository repository;
+    private final EstoqueRepository repository;
+
+    public EstoqueServiceImpl(EstoqueRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Cadastra um Ingrediente no banco de dados

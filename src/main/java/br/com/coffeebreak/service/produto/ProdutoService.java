@@ -16,10 +16,15 @@ import java.util.List;
 public class ProdutoService {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
 
     @Autowired
-    private EstoqueService estoqueService;
+    private final EstoqueService estoqueService;
+
+    public ProdutoService(ProdutoRepository produtoRepository, EstoqueService estoqueService) {
+        this.produtoRepository = produtoRepository;
+        this.estoqueService = estoqueService;
+    }
 
     public boolean cadastrarProduto(Produto produto) {
         try {
