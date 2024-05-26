@@ -6,29 +6,24 @@ import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.funcionario.Funcionario;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.model.produto.Produto;
+import br.com.coffeebreak.service.Helpers;
 import br.com.coffeebreak.service.funcionario.FuncionarioLogadoService;
 import br.com.coffeebreak.service.itemproduto.ItemProdutoService;
 import br.com.coffeebreak.service.pedido.PedidoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AdministratorService {
 
-    @Autowired
-    private PedidoService pedidoService;
-
-    @Autowired
-    private ItemProdutoService itemProdutoService;
-    
-    @Autowired
-    private FuncionarioLogadoService funcionarioLgdService;
+    private final PedidoService pedidoService;
+    private final ItemProdutoService itemProdutoService;
+    private final FuncionarioLogadoService funcionarioLgdService;
 
     public void criarPedido(String nome, String tipo, List<Produto> produtos) {
 
@@ -43,18 +38,11 @@ public class AdministratorService {
         pedido.setFuncionario(funcionario);
 
         List<ItemProduto> itensPedido = new ArrayList<>();
-        for (Produto produto : produtos) {
-            ItemProduto itemProduto = new ItemProduto();
-            itemProduto.setPedido(pedido);
-            itemProduto.setProduto(produto);
-            itemProduto.setQuantidade(1);
-            itemProduto.setPrecoProduto(produto.getPreco());
-            itensPedido.add(itemProduto);
-        }
+        setItemProduto(produtos, pedido, itensPedido);
         pedido.setItemProdutos(itensPedido);
 
         pedidoService.salvarPedido(pedido);
-        salvarItemProdutos(pedido);
+        itemProdutoService.salvarItemProdutos(itensPedido, pedido);
     }
 
     public double calcularTotalCarrinho(List<Produto> produtos) {
@@ -65,20 +53,17 @@ public class AdministratorService {
             }
         }
 
-        return formatarValor(total);
+        return Helpers.formatarValor(total);
     }
 
-    private void salvarItemProdutos(Pedido pedido){
-        for(ItemProduto  item : pedido.getItemProdutos()){
-            item.setPedido(pedido);
-            itemProdutoService.salvar(item);
+    private static void setItemProduto(List<Produto> produtos, Pedido pedido, List<ItemProduto> itensPedido) {
+        for (Produto produto : produtos) {
+            ItemProduto itemProduto = new ItemProduto();
+            itemProduto.setPedido(pedido);
+            itemProduto.setProduto(produto);
+            itemProduto.setQuantidade(1);
+            itemProduto.setPrecoProduto(produto.getPreco());
+            itensPedido.add(itemProduto);
         }
-    }
-
-    private double formatarValor(Double valor) {
-        NumberFormat formatter = new DecimalFormat("#,###.00");
-        String valorFormatado = formatter.format(valor);
-        valorFormatado = valorFormatado.replace(",", ".");
-        return Double.parseDouble(valorFormatado);
     }
 }
