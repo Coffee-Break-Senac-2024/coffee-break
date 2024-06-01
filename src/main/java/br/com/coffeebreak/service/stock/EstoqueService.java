@@ -1,6 +1,9 @@
 package br.com.coffeebreak.service.stock;
 
+import br.com.coffeebreak.model.ItemProduto.ItemProduto;
 import br.com.coffeebreak.model.estoque.Estoque;
+import br.com.coffeebreak.model.pedido.Pedido;
+import br.com.coffeebreak.model.produto.Produto;
 import br.com.coffeebreak.repositories.EstoqueRepository;
 import br.com.coffeebreak.service.exception.NomeCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,5 +99,28 @@ public class EstoqueService {
             throw new IllegalArgumentException("Não foi possivel encontrar um ingrediente com este id.");
         }
         repository.deleteById(id);
+    }
+
+    /**
+     * Atualiza quantidade do Estoque por Pedido
+     * @Return void
+     */
+    @Transactional
+    public void atualizarQuantidadeEstoque(Pedido pedido) {
+        for (ItemProduto produto : pedido.getItemProdutos()) {
+            if (produto.getProduto() != null && produto.getProduto().getEstoqueList() != null) {
+                List<Estoque> estoqueList = new ArrayList<>(produto.getProduto().getEstoqueList());
+                for (Estoque ingrediente : estoqueList) {
+                    Optional<Estoque> estoqueOptional = repository.findById(ingrediente.getId());
+
+                    if (estoqueOptional.isPresent()) {
+                        Estoque estoqueUpdate = estoqueOptional.get();
+                        estoqueUpdate.setQuantidade(ingrediente.getQuantidade() - produto.getProduto().getQuantidadeUtilizada());
+
+                        repository.save(estoqueUpdate);
+                    }
+                }
+            }
+        }
     }
 }

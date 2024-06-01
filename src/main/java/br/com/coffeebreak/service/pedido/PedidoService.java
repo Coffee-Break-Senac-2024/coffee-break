@@ -3,6 +3,7 @@ package br.com.coffeebreak.service.pedido;
 import br.com.coffeebreak.enums.SituacaoPedido;
 import br.com.coffeebreak.model.pedido.Pedido;
 import br.com.coffeebreak.repositories.PedidoRepository;
+import br.com.coffeebreak.service.stock.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,9 @@ import java.util.List;
 public class PedidoService {
     @Autowired
     private PedidoRepository repository;
+    @Autowired
+    private EstoqueService estoqueService;
+
 
     @Transactional
     public Pedido salvarPedido(Pedido pedido){
@@ -32,6 +36,7 @@ public class PedidoService {
                     pedidoUpdate.setSituacao(SituacaoPedido.FINALIZADO.toString());
 
                     repository.save(pedidoUpdate);
+                    estoqueService.atualizarQuantidadeEstoque(pedidoUpdate);
                 });
     }
 }
